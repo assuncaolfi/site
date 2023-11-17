@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.373">
+<meta name="generator" content="quarto-1.4.506">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -123,7 +123,7 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
@@ -229,6 +229,7 @@ div.csl-indent {
 
 
 </header>
+
 
 <p><a href="http://cartola.globo.com">Cartola FC</a> is a fantasy football league following the Brazilian Championship A Series.</p>
 <p>Cartola offers a public API to access data for the current round. A couple of years ago, I created a script to automate data retrieval to a <a href="https://github.com/assuncaolfi/tophat/tree/main">repository</a>, which now hosts comprehensive historical data since 2022.</p>
@@ -571,20 +572,32 @@ s_t
 <p>And we can plot out cumulative performance during the season:</p>
 <div id="cell-team-picking-backtest-score" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display" data-execution_count="16">
-<p><img src="index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="602" height="445"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="602" height="445" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This might seem like a perfect campaign at first, but it’s possible that, early in the season, we didn’t have enough budget to pick the best scoring teams. To test this hypothesis, we backtest the same strategy with unlimited budget from the start:</p>
 <div id="cell-team-picking-backtest-score-unlimited-budget" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display" data-execution_count="17">
-<p><img src="index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="602" height="445"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="602" height="445" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Both runs are nearly identical, which is evidence that focusing on appreciation is not so important if we have accurate predictions for the scores. If we predict scores perfectly, we get a near perfect run.</p>
 <p>To put our backtests into perspective, <a href="https://ge.globo.com/cartola/noticia/2022/12/03/cartola-2022-com-larga-vantagem-mosquito-bar-8-vence-liga-premiada-meliuz-e-fatura-r-20-mil.ghtml">the 2022 season champion had a total score of 3434.37</a>. This is very impressive and not very far from the near perfect run.</p>
 <div id="cell-team-picking-backtest-champion" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display" data-execution_count="18">
-<p><img src="index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="603" height="445"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="603" height="445" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -609,7 +622,11 @@ s_t
 <p>In this model, <span class="math inline">\(\mathbf{\beta}\)</span> is simply a vector of player averages. Let’s also consider that players that show up in the middle of the season have an average of zero before their first round. This will be our baseline model.</p>
 <div id="cell-score-prediction-player-average" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display" data-execution_count="19">
-<p><img src="index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="605" height="445"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="605" height="445" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -627,7 +644,11 @@ s_t
 <p>This model performs significantly better than the average model, possibly because of the partial pooling between the random effects, that pulls large effects towards the overall mean <span class="citation" data-cites="clark2019shrinkage">(<a href="#ref-clark2019shrinkage" role="doc-biblioref">Clark 2019</a>)</span>. In our dataset, it’s common for players that played one or two games to have large averages by chance.</p>
 <div id="cell-score-prediction-player-random-effects" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display" data-execution_count="20">
-<p><img src="index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="605" height="445"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="605" height="445" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1002,15 +1023,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -1019,6 +1070,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -1061,6 +1113,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1136,7 +1211,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);

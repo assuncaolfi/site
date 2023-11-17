@@ -1,6 +1,9 @@
 [
   {
     "listing": "/index.html",
-    "items": []
+    "items": [
+      "/blog/non-monotonic/index.html",
+      "/blog/fantasy-football/index.html"
+    ]
   }
 ]
