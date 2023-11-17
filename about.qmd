@@ -27,7 +27,7 @@ website](https://assuncaolfi.github.io/site/about.html) instead.
 [{{< fa envelope >}} Email](mailto:assuncaolfi@gmail.com)
 [{{< fa globe >}} Website](https://assuncaolfi.github.io/site)
 [{{< fa brands github >}} GitHub](https://github.com/assuncaolfi)
-[{{< fa brands linkedin >}} LinkedIn](https://linkedin.com/assuncaolfi)
+[{{< fa brands linkedin >}} LinkedIn](https://br.linkedin.com/in/assuncaolfi/en)
 
 # Curriculum Vitae
 
@@ -113,7 +113,7 @@ its full code. Common tools used in these posts: Python, `polars`, `pymc` and
 Mercado Libre Data Challenge 2020
 * [rstanbtm](https://github.com/assuncaolfi/rstanbtm): Biterm Topic Model
 implementation in Stan
-* [sqlm](https://github.com/assuncaolfi/qlm): Generate predictive SQL queries
+* [qlm](https://github.com/assuncaolfi/qlm): Generate predictive SQL queries
 from linear models in R
 * [tophat](https://github.com/assuncaolfi/tophat): Scheduled script to fetch and
 save fantasy football data
