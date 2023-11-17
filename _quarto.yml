@@ -1,0 +1,37 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Luís Assunção"
+  site-url: https://www.luisassuncao.com
+  repo-url: https://github.com/assuncaolfi/blog
+  description: "A blog about statistics"
+  navbar:
+    background: light
+    foreground: dark
+    left:
+      - about.qmd
+      - text: Blog
+        href: index.html
+      - icon: rss
+        href: index.xml
+      - references.qmd
+  search: false
+
+bibliography: references.bib
+
+format:
+  html:
+    css: styles.css
+    header-includes: |
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap" rel="stylesheet">    
+    mainfont: Fira Sans
+    monofont: Fira Code
+    repo-url: https://github.com/assuncaolfi/blog
+    theme:
+      light: sandstone
+      dark: sandstone
+    title-block-style: default # plain
