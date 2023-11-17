@@ -6,14 +6,14 @@
       version="2.0">
 <channel>
 <title>Luís Assunção</title>
-<link>https://www.luisassuncao.com/index.html</link>
-<atom:link href="https://www.luisassuncao.com/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://assuncaolfi.github.io/index.html</link>
+<atom:link href="https://assuncaolfi.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description>A blog about statistics</description>
 <generator>quarto-1.4.373</generator>
 <lastBuildDate>Fri, 17 Nov 2023 03:00:00 GMT</lastBuildDate>
 <item>
   <title>Non-monotonic models</title>
-  <link>https://www.luisassuncao.com/blog/non-monotonic/index.html</link>
+  <link>https://assuncaolfi.github.io/blog/non-monotonic/index.html</link>
   <description><![CDATA[ 
 
 
@@ -47,21 +47,21 @@ Hartshorne, Joshua K., and Laura T. Germine. 2015. <span>“When Does Cognitive 
   title = {Non-Monotonic Models},
   pages = {undefined},
   date = {2023-11-17},
-  url = {https://www.luisassuncao.com/blog/non-monotonic},
+  url = {https://assuncaolfi.github.io/blog/non-monotonic},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2023" class="csl-entry quarto-appendix-citeas">
 Assunção, Luís. 2023. <span>“Non-Monotonic Models.”</span> November 17,
-2023. <a href="https://www.luisassuncao.com/blog/non-monotonic">https://www.luisassuncao.com/blog/non-monotonic</a>.
+2023. <a href="https://assuncaolfi.github.io/blog/non-monotonic">https://assuncaolfi.github.io/blog/non-monotonic</a>.
 </div></div></section></div> ]]></description>
   <category>modeling</category>
   <category>inference</category>
-  <guid>https://www.luisassuncao.com/blog/non-monotonic/index.html</guid>
+  <guid>https://assuncaolfi.github.io/blog/non-monotonic/index.html</guid>
   <pubDate>Fri, 17 Nov 2023 03:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Picking a fantasy football team</title>
-  <link>https://www.luisassuncao.com/blog/fantasy-football/index.html</link>
+  <link>https://assuncaolfi.github.io/blog/fantasy-football/index.html</link>
   <description><![CDATA[ 
 
 
@@ -663,20 +663,20 @@ font-style: inherit;">return</span> teams</span></code></pre></div>
 <p>And we can plot out cumulative performance during the season:</p>
 <div id="cell-team-picking-backtest-score" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display" data-execution_count="16">
-<p><img src="https://www.luisassuncao.com/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="602" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="602" height="445"></p>
 </div>
 </div>
 <p>This might seem like a perfect campaign at first, but it’s possible that, early in the season, we didn’t have enough budget to pick the best scoring teams. To test this hypothesis, we backtest the same strategy with unlimited budget from the start:</p>
 <div id="cell-team-picking-backtest-score-unlimited-budget" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display" data-execution_count="17">
-<p><img src="https://www.luisassuncao.com/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="602" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="602" height="445"></p>
 </div>
 </div>
 <p>Both runs are nearly identical, which is evidence that focusing on appreciation is not so important if we have accurate predictions for the scores. If we predict scores perfectly, we get a near perfect run.</p>
 <p>To put our backtests into perspective, <a href="https://ge.globo.com/cartola/noticia/2022/12/03/cartola-2022-com-larga-vantagem-mosquito-bar-8-vence-liga-premiada-meliuz-e-fatura-r-20-mil.ghtml">the 2022 season champion had a total score of 3434.37</a>. This is very impressive and not very far from the near perfect run.</p>
 <div id="cell-team-picking-backtest-champion" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display" data-execution_count="18">
-<p><img src="https://www.luisassuncao.com/blog/fantasy-football/index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="603" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="603" height="445"></p>
 </div>
 </div>
 </section>
@@ -696,7 +696,7 @@ font-style: inherit;">return</span> teams</span></code></pre></div>
 <p>In this model, <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7B%5Cbeta%7D"> is simply a vector of player averages. Let’s also consider that players that show up in the middle of the season have an average of zero before their first round. This will be our baseline model.</p>
 <div id="cell-score-prediction-player-average" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display" data-execution_count="19">
-<p><img src="https://www.luisassuncao.com/blog/fantasy-football/index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="605" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="605" height="445"></p>
 </div>
 </div>
 </section>
@@ -709,7 +709,7 @@ font-style: inherit;">return</span> teams</span></code></pre></div>
 <p>This model performs significantly better than the average model, possibly because of the partial pooling between the random effects, that pulls large effects towards the overall mean <span class="citation" data-cites="clark2019shrinkage">(Clark 2019)</span>. In our dataset, it’s common for players that played one or two games to have large averages by chance.</p>
 <div id="cell-score-prediction-player-random-effects" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display" data-execution_count="20">
-<p><img src="https://www.luisassuncao.com/blog/fantasy-football/index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="605" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="605" height="445"></p>
 </div>
 </div>
 </section>
@@ -752,17 +752,17 @@ Clark, Michael. 2019. <span>“Michael Clark: Shrinkage in Mixed Effects Models.
   title = {Picking a Fantasy Football Team},
   pages = {undefined},
   date = {2023-09-21},
-  url = {https://www.luisassuncao.com/blog/fantasy-football},
+  url = {https://assuncaolfi.github.io/blog/fantasy-football},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2023" class="csl-entry quarto-appendix-citeas">
 Assunção, Luís. 2023. <span>“Picking a Fantasy Football Team.”</span>
-September 21, 2023. <a href="https://www.luisassuncao.com/blog/fantasy-football">https://www.luisassuncao.com/blog/fantasy-football</a>.
+September 21, 2023. <a href="https://assuncaolfi.github.io/blog/fantasy-football">https://assuncaolfi.github.io/blog/fantasy-football</a>.
 </div></div></section></div> ]]></description>
   <category>football</category>
   <category>optimization</category>
   <category>prediction</category>
-  <guid>https://www.luisassuncao.com/blog/fantasy-football/index.html</guid>
+  <guid>https://assuncaolfi.github.io/blog/fantasy-football/index.html</guid>
   <pubDate>Thu, 21 Sep 2023 03:00:00 GMT</pubDate>
 </item>
 </channel>
