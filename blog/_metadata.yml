@@ -1,10 +1,6 @@
 citation:
   author: Luís Assunção
 date-modified: today
-execute:
-  cache: true
-  echo: false
-  freeze: auto
 format:
   html:
     code-block-border-left:
