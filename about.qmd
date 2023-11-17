@@ -91,13 +91,13 @@ matters, I worked in:
 
 Some blog posts:
 
-* [Picking a fantasy football team](https://assuncaolfi.github.io/site/blog/fantasy-football.html):
+* [Picking a fantasy football team](https://assuncaolfi.github.io/site/blog/fantasy-football):
   In this post, I delve into the data for the 2022 season of a brazilian fantasy
   football league; formulate a mixed integer linear program to pick the optimal
   team; and present initial concepts for forecasting player scores using mixed
   effects linear models.
   
-* [Parametric non-monotonic models](https://assuncaolfi.github.io/site/blog/non-monotonic.html):
+* [Parametric non-monotonic models](https://assuncaolfi.github.io/site/blog/non-monotonic):
   In this post, I analyse some function alternatives for modeling non-monotonic
   relationships with interpretable parameters, and compare these models using a
 a cognitive decline dataset.
