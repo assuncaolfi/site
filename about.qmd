@@ -22,10 +22,10 @@ ginger cat in Belo Horizonte, Brazil.
 
 Reach me at [assuncaolfi@gmail.com](mailto:assuncaolfi@gmail.com). If you're
 reading the PDF version of this document, I encourge you to read it in [my
-website](https://assuncaolfi.github.io/about.html) instead.
+website](https://assuncaolfi.github.io/site/about.html) instead.
 
 [{{< fa envelope >}} Email](mailto:assuncaolfi@gmail.com)
-[{{< fa globe >}} Website](https://assuncaolfi.github.io)
+[{{< fa globe >}} Website](https://assuncaolfi.github.io/site)
 [{{< fa brands github >}} GitHub](https://github.com/assuncaolfi)
 [{{< fa brands linkedin >}} LinkedIn](https://linkedin.com/assuncaolfi)
 
@@ -91,13 +91,13 @@ matters, I worked in:
 
 Some blog posts:
 
-* [Picking a fantasy football team](https://assuncaolfi.github.io/blog/fantasy-football.html):
+* [Picking a fantasy football team](https://assuncaolfi.github.io/site/blog/fantasy-football.html):
   In this post, I delve into the data for the 2022 season of a brazilian fantasy
   football league; formulate a mixed integer linear program to pick the optimal
   team; and present initial concepts for forecasting player scores using mixed
   effects linear models.
   
-* [Parametric non-monotonic models](https://assuncaolfi.github.io/blog/non-monotonic.html):
+* [Parametric non-monotonic models](https://assuncaolfi.github.io/site/blog/non-monotonic.html):
   In this post, I analyse some function alternatives for modeling non-monotonic
   relationships with interpretable parameters, and compare these models using a
 a cognitive decline dataset.
