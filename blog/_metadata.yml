@@ -1,0 +1,14 @@
+citation:
+  author: Luís Assunção
+date-modified: today
+execute:
+  echo: false
+  cache: true
+format:
+  html:
+    code-block-border-left:
+      true
+    code-tools:
+      source:
+        repo
+    toc: true

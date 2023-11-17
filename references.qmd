@@ -1,0 +1,15 @@
+---
+title: "References"
+bibliography: references.bib
+citation: false
+format:
+  html:
+    code-tools: false
+nocite: |
+  @*
+---
+
+This is a list of texts I enjoyed reading and/or cited in my blog:
+
+::: {#refs}
+:::
