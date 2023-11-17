@@ -2,8 +2,9 @@ citation:
   author: Luís Assunção
 date-modified: today
 execute:
-  echo: false
   cache: true
+  echo: false
+  freeze: auto
 format:
   html:
     code-block-border-left:

@@ -1,4 +1,5 @@
-.DS_Store
+**/.DS_Store
+.jupyter_cache/
 /.quarto/
 /_site/
 todo.txt

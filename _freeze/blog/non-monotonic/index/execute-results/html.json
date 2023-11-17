@@ -1,0 +1,11 @@
+{
+  "hash": "26f94e465e70d777a5b9efbc9eb261ff",
+  "result": {
+    "markdown": "---\ntitle: Non-monotonic models\ndate: 2023-11-17\ncategories: [modeling, inference]\n---\n\n_This post is a work in progress._\n\nRecently, I helped design an experiment using a continuous treatment variable,\nwith a non-monotonic relationship with the response.\n\nI came across a 2018 blog post by Andrew Gelman on [additive models\nfor non-monotonic functions](https://statmodeling.stat.columbia.edu/2018/09/07/\nbothered-non-monotonicity-heres-one-quick-trick-make-happy/).\n\nIn this post, we will go over some of these models and test them on the Mind-in-\nEyes Task dataset [@Hartshorne2015].\n\n## Polynomials\n\n$$\ng(x) = ax^{-1} + bx + cx^2\n$$\n\n## Siler\n\n$$\ng(x) = a \\exp(-b x) + c + d \\exp(ex)\n$$\n\n## McElreath\n\n$$\ng(x) = \\exp(-ax) (1 - exp(-bx))^c\n$$\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

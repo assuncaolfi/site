@@ -4,7 +4,7 @@ project:
 
 website:
   title: "Luís Assunção"
-  site-url: https://www.luisassuncao.com
+  site-url: https://assuncaolfi.github.io
   repo-url: https://github.com/assuncaolfi/blog
   description: "A blog about statistics"
   navbar:
@@ -20,6 +20,11 @@ website:
   search: false
 
 bibliography: references.bib
+
+execute:
+  cache: true
+  echo: false
+  freeze: auto
 
 format:
   html:
