@@ -5,7 +5,7 @@ project:
 website:
   title: "Luís Assunção"
   site-url: https://assuncaolfi.github.io
-  repo-url: https://github.com/assuncaolfi/blog
+  repo-url: https://github.com/assuncaolfi/site
   description: "A blog about statistics"
   navbar:
     background: light
