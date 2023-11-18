@@ -671,9 +671,9 @@ predict_mixed_effects = partial(
     formula="score ~ home + (1 | versus) + (1 | player)",
     categorical=["versus", "player"],
 )
-# teams = backtest(players, predict_mixed_effects)
-# fig = add_backtest(fig, teams, "Mixed effects")
-# fig
+teams = backtest(players, predict_mixed_effects)
+fig = add_backtest(fig, teams, "Mixed effects")
+fig
 
 # %% [markdown]
 """
