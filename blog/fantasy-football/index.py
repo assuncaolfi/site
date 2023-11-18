@@ -656,7 +656,7 @@ $$
 $$
 
 where  
-$\mathbf{X}$ is a matrix of dummy-encoded team, versus and home variables;
+$\mathbf{X}$ is a matrix of the dummy-encoded versus team and home variables;  
 $\mathbf{\beta}$ is a vector of fixed effects.
 
 This brings more context to our predictions. It also provides a reasonable
@@ -666,14 +666,16 @@ effects).
 
 # %%
 # | label: score-prediction-fixture-mixed-effects
+# | message: false
+# | warning: false
 predict_mixed_effects = partial(
     predict_model,
     formula="score ~ home + (1 | versus) + (1 | player)",
     categorical=["versus", "player"],
 )
-teams = backtest(players, predict_mixed_effects)
-fig = add_backtest(fig, teams, "Mixed effects")
-fig
+# teams = backtest(players, predict_mixed_effects)
+# fig = add_backtest(fig, teams, "Mixed effects")
+# fig
 
 # %% [markdown]
 """

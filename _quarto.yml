@@ -6,16 +6,15 @@ website:
   title: "Luís Assunção"
   site-url: https://assuncaolfi.github.io
   repo-url: https://github.com/assuncaolfi/site
-  description: "A blog about statistics"
+  description: "My personal website"
   navbar:
     background: light
     foreground: dark
     left:
-      - about.qmd
-      - text: Blog
-        href: index.html
+      - index.qmd
+      - blog.qmd
       - icon: rss
-        href: index.xml
+        href: blog.xml
       - references.qmd
   search: false
 
@@ -35,8 +34,8 @@ format:
       <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap" rel="stylesheet">    
     mainfont: Fira Sans
     monofont: Fira Code
-    repo-url: https://github.com/assuncaolfi/blog
-    theme:
-      light: sandstone
-      dark: sandstone
+    # theme:
+    #   light: sandstone
+    #   dark: sandstone
+    theme: sandstone
     title-block-style: default # plain

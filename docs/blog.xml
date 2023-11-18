@@ -6,9 +6,9 @@
       version="2.0">
 <channel>
 <title>Luís Assunção</title>
-<link>https://assuncaolfi.github.io/index.html</link>
-<atom:link href="https://assuncaolfi.github.io/index.xml" rel="self" type="application/rss+xml"/>
-<description>A blog about statistics</description>
+<link>https://assuncaolfi.github.io/blog.html</link>
+<atom:link href="https://assuncaolfi.github.io/blog.xml" rel="self" type="application/rss+xml"/>
+<description>My personal website</description>
 <generator>quarto-1.4.373</generator>
 <lastBuildDate>Fri, 17 Nov 2023 03:00:00 GMT</lastBuildDate>
 <item>
@@ -717,7 +717,8 @@ font-style: inherit;">return</span> teams</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="fixture-mixed-effects">Fixture mixed effects</h3>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbf%7B%5Chat%7Bs%7D%7D%20=%20%5Calpha%20+%20%5Cmathbf%7BX%7D%20%5Cmathbf%7B%5Cbeta%7D%20+%20%5Cmathbf%7BZ%7D%20%5Cmathbf%7Bb%7D,%0A"></p>
 <p>where<br>
-<img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D"> is a matrix of dummy-encoded team, versus and home variables; <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7B%5Cbeta%7D"> is a vector of fixed effects.</p>
+<img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D"> is a matrix of the dummy-encoded versus team and home variables;<br>
+<img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7B%5Cbeta%7D"> is a vector of fixed effects.</p>
 <p>This brings more context to our predictions. It also provides a reasonable way to predict a new player, by setting their <img src="https://latex.codecogs.com/png.latex?b%20=%200"> (the mean of the random effects).</p>
 </section>
 </section>
