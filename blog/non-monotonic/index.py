@@ -62,7 +62,7 @@ mind_eyes = (
 
 # %%
 # | label: mind-in-eyes-plot
-from site import theme
+from blog import theme
 
 theme.set()
 

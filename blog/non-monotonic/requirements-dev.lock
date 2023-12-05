@@ -119,7 +119,7 @@ rpds-py==0.13.1
 scipy==1.11.4
 seaborn==0.13.0
 send2trash==1.8.2
-site @ git+https://github.com/assuncaolfi/site
+site @ git+https://github.com/assuncaolfi/site/
 six==1.16.0
 sniffio==1.3.0
 soupsieve==2.5

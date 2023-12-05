@@ -1,7 +1,6 @@
 [project]
-name = "site"
+name = "blog"
 version = "0.1.0"
-description = "Add a short description here"
 authors = [
     { name = "Luís Assunção", email = "assuncaolfi@gmail.com" }
 ]
