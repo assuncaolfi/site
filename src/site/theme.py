@@ -3,7 +3,7 @@ from matplotlib import style
 import seaborn.objects as so
 
 
-def set_theme():
+def set():
     so.Plot.config.theme.update(style.library["Solarize_Light2"])
     font_path = "../../assets/FiraCode-Regular.ttf"  # TODO include in library
     font_manager.fontManager.addfont(font_path)

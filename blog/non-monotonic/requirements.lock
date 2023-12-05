@@ -41,7 +41,7 @@ pytz==2023.3.post1
 rich==13.7.0
 scipy==1.11.4
 seaborn==0.13.0
-site @ file:///Users/assuncaolfi/Projects/site/blog/non-monotonic/../..
+site @ git+https://github.com/assuncaolfi/site
 six==1.16.0
 toolz==0.12.0
 typing-extensions==4.8.0
