@@ -7,15 +7,19 @@ website:
   site-url: https://assuncaolfi.github.io
   repo-url: https://github.com/assuncaolfi/site
   description: "My personal website"
+  favicon: assets/favicon.png
   navbar:
     background: light
     foreground: dark
     left:
-      - index.qmd
-      - blog.qmd
+      - text: / About
+        href: index.qmd
+      - text: / Blog
+        href: blog.qmd
       - icon: rss
         href: blog.xml
-      - references.qmd
+      - text: / References
+        href: references.qmd
   search: false
 
 bibliography: references.bib
@@ -32,10 +36,16 @@ format:
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap" rel="stylesheet">    
+    highlight-style: solarized
     mainfont: Fira Sans
     monofont: Fira Code
     # theme:
     #   light: sandstone
     #   dark: sandstone
-    theme: sandstone
+    theme: 
+      light:
+        - solar
+        - custom.scss
+      # dark:
+      #   - solar
     title-block-style: default # plain

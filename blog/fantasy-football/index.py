@@ -7,45 +7,47 @@
 
 # %% [markdown]
 """
-[Cartola FC](http://cartola.globo.com) is a fantasy football league following
-the Brazilian Championship A Series.
+[Cartola](http://cartola.globo.com) is a fantasy football league following the
+Brazilian Championship A Series.
 
 Cartola offers a public API to access data for the current round. A couple
-of years ago, I created a script to automate data retrieval to a [repository](https://github.com/assuncaolfi/tophat/tree/main),
-which now hosts comprehensive historical data since 2022.
+of years ago, I created a script to automate data retrieval to a 
+[repository](https://github.com/assuncaolfi/tophat/tree/main), which now hosts
+comprehensive historical data since 2022.
 
-In this post, I will delve into the data for the 2022 season, formulate a mixed
+In this post, we will delve into the data for the 2022 season, formulate a mixed
 integer linear program to pick the optimal team, and present initial concepts
 for forecasting player scores using mixed effects linear models.
 
-## The rules 
+## The game 
 
-You begin the season with a budget of C$ 100 (C$ stands for Cartoletas, the
-game’s paper currency).
+We begin the season with a budget of C$ 100, the game’s paper currency.
 
 Each round is preceded by a market session, where players are assigned a value.
-You are tasked with forming a team of 11 players plus a coach, all within your
+We are tasked with forming a team of 11 players plus a coach, all within our
 budget and adhering to a valid formation. A captain must be chosen from among
 the players, excluding the coach.
 
 The market is available until the round starts. Players then earn scores based
-on their real-life match performances. Your team's score is the aggregate of
-your players' scores, with your captain’s score doubled in the 2022 season.
+on their real-life match performances. Our team's score is the aggregate of
+our players' scores, with our captain’s score doubled in the 2022 season.
 
 Following the conclusion of the round, player values are recalibrated based
 on performance -— with increases for scores above their average and decreases for
-below-average performances. Your budget for the next round is your previous
-budget, plus the sum of your players' value variations.
+below-average performances. Our budget for the next round is our previous
+budget, plus the sum of our players' value variations.
 
 ## Data wrangling
 
-First, let's talk about data structures. Each round has a market, and each
-market is a list of players. A player is a structure like this:
+Let's talk about data structures: each round has a market, and each market is a
+list of players. A player is a structure like this:
 """
 
 # %%
 # | label: data-wrangling-players
 from pydantic import BaseModel, Field, field_validator
+
+from rich.console import Console
 from rich.pretty import pprint
 from typing import Callable, Dict, List, Optional
 import urllib.request
@@ -85,7 +87,9 @@ for round in range(1, 39):
         for player in market.players:
             player.round = 0
     markets.extend(market.players)
-pprint(markets[0], expand_all=True)
+
+console = Console(color_system=None)
+pprint(markets[0], console=console, expand_all=True)
 
 
 # %% [markdown]
@@ -96,6 +100,8 @@ Let's get the list of markets for 2022 and flatten it into a single DataFrame:
 # %%
 # | label: data-wrangling-dataframe
 import polars as pl
+
+pl.Config.set_tbl_hide_column_data_types(True)
 
 players = (
     pl.DataFrame(markets)
@@ -114,11 +120,13 @@ it:
 # %%
 # | label: data-wrangling-example
 def print_example(markets: pl.DataFrame, columns: List[str]):
-    example = players.filter(pl.col("player") == 42234).select(columns)
+    example = players.filter(pl.col("player") == 42234).select(
+        ["round", "player"] + columns
+    )
     pprint(example)
 
 
-print_example(players, players.columns)
+print_example(players, players.columns[2:])
 
 # %% [markdown]
 """
@@ -128,9 +136,9 @@ Players will show up in the market for many rounds that they do not participate
 in. However, for our analysis, we are only interested in players that actually
 played a game in the round.
 
-Each player has a `status` field that is supposed to indicate whether they will
-participate in the round. However, I've noticed this field is often inacurate,
-probably because the API data for this field is updated before the `round` is.
+Each player has a `status` field intended to indicate their participation in the
+round. However, this field is often inaccurate, likely due to the API data being
+updated before the round.
 
 One solution is to keep only rows where there is an increase in the number of
 `games` the player has played:
@@ -141,25 +149,27 @@ One solution is to keep only rows where there is an increase in the number of
 players = players.filter(
     pl.col("games") != pl.col("games").shift(1).over("player").fill_null(-1)
 )
-print_example(markets, ["player", "round", "games"])
+print_example(markets, ["games"])
 
 # %% [markdown]
 """
 ### Imputing scores
 
-Another field that is inacurate is the player `score`, probably for the same
-reason as their `status`. Fortunately, the `average` field is accurate, and  we
-can use it to recover the `score`. Let $\mathbf{s}$ be the vector of scores for
-a given player across all rounds:
+Similarly, the player `score` field is often inaccurate, likely for the same
+reasons as the `status` field. Fortunately, the `average` field is reliable,
+allowing us to recover the `score`:
 
 $$
 \begin{align*}
 \mathrm{Average}(\mathbf{s}_{1:t})
 = \frac{\mathrm{Average}(\mathbf{s}_{1:(t-1)}) + s_t}{2} \\
 s_t 
-= 2\mathrm{Average}(\mathbf{s}_{1:t}) - \mathrm{Average}(\mathbf{s}_{1:(t-1)})
+= 2\mathrm{Average}(\mathbf{s}_{1:t}) - \mathrm{Average}(\mathbf{s}_{1:(t-1)}),
 \end{align*}
 $$
+
+where $\mathbf{s}$ is the vector of scores for a given player across all rounds.
+
 """
 
 # %%
@@ -174,7 +184,7 @@ players = players.with_columns(
     score=2 * pl.col("average")
     - pl.col("average").shift(1).over("player").fill_null(pl.col("average")),
 )
-print_example(players, ["player", "round", "score", "average"])
+print_example(players, ["score", "average"])
 
 # %% [markdown]
 """
@@ -210,8 +220,8 @@ pprint(fixtures[0])
 
 # %% [markdown]
 """
-Let's flatten these fixtures into a single DataFrame and pivot it into a long
-format:
+Let's consolidate these fixtures into a single DataFrame and then pivot them
+into a long format:
 """
 
 # %%
@@ -229,21 +239,21 @@ pprint(fixtures)
 
 # %% [markdown]
 """
-Finally, let's join it to our dataset:
+Finally, let's join this data to our dataset:
 """
 
 # %%
 # | label: data-wrangling-fixtures-join
 players = players.join(fixtures, on=["round", "team"], how="inner")
-print_example(players, ["player", "round", "team", "versus", "home"])
+print_example(players, ["team", "versus", "home"])
 
 # %% [markdown]
 """
 ### Aligning variables
 
-For the rest of our analysis, the `average` field should not include the `score`
-in the given round. Also, the `appreciation` field should be relative to the
-`score` in the given round.
+In our subsequent analysis, the `average` field will exclude the `score` from
+the given round. Additionally, the `appreciation` field will be calculated in
+relation to the round's `score`.
 """
 
 # %%
@@ -252,18 +262,15 @@ players = players.with_columns(
     average=pl.col("average").shift(1).over("player").fill_null(0.0),
     appreciation=pl.col("appreciation").shift(-1).over("player").fill_null(0.0),
 )
-print_example(
-    players, ["player", "round", "average", "value", "score", "appreciation"]
-)
+print_example(players, ["average", "value", "score", "appreciation"])
 
 # %% [markdown]
 """
 ## Team picking
 
-### Problem
-
-How to pick the best team in a given market? Let $\mathcal{F}$ be the set of
-valid formations, for each formation $f \in \mathcal{F}$, solve:
+Now let's solve the problem of picking the best team a given market. Let $
+\mathcal{F}$ be the set of valid formations, then for each formation $f \in
+\mathcal{F}$, solve:
 
 $$
 \begin{equation*} \begin{array}{ll@{}ll} 
@@ -278,7 +285,7 @@ where
 
 $\mathbf{x}$ is a variable vector of player picks in the market;  
 $\hat{\mathbf{s}}$ is the vector of predicted player scores in the market;  
-$b$ is your available budget for that round;  
+$b$ is our available budget for that round;  
 $\mathbf{P}$ is the matrix of dummy-encoded player formations in the market.
 
 Finally, take the solution with the highest objective.
@@ -366,8 +373,8 @@ pprint(formations)
 
 # %% [markdown]
 """
-Now that we know what our formation constraints, we're ready to backtest.
-Starting with a budget of C$ 100, for each round let's:
+Knowing our formation constraints, we're ready to backtest. Starting with a
+budget of C$ 100, for each round let's:
 
 1. Predict each player's score based on their performance on previous rounds;
 2. Pick the team with the best total score;
@@ -412,9 +419,10 @@ def backtest(
 
 # %% [markdown]
 """
-Before diving into predictions, let's start with a couple of hypothetical
-backtests, using the actual observed scores to pick our teams. Backtesting this
-strategy, the first team we pick is:
+
+Before exploring predictions, we'll begin with a few hypothetical backtests
+using actual observed scores for team selection. Backtesting this strategy, this
+is our team in the first round:
 """
 
 
@@ -436,7 +444,19 @@ And we can plot out cumulative performance during the season:
 
 # %%
 # | label: team-picking-backtest-score
+from matplotlib import style
 import seaborn.objects as so
+
+from matplotlib import font_manager
+
+
+so.Plot.config.theme.update(style.library["Solarize_Light2"])
+font_path = "../../assets/FiraCode-Regular.ttf"
+font_manager.fontManager.addfont(font_path)
+prop = font_manager.FontProperties(fname=font_path)
+so.Plot.config.theme.update(
+    {"font.family": "sans-serif", "font.sans-serif": prop.get_name()}
+)
 
 
 def summarize(teams: pl.DataFrame, model: str) -> pl.DataFrame:
@@ -465,7 +485,7 @@ def add_line(
     fig: so.Plot,
     campaign: pl.DataFrame,
     linestyle: str = "solid",
-    halign: str = "left",
+    valign: str = "center_baseline",
 ) -> so.Plot:
     text = campaign.tail(1)
     fig = fig.add(
@@ -473,7 +493,7 @@ def add_line(
         data=campaign,
         legend=False,
     ).add(
-        so.Text({"clip_on": False}, halign=halign, offset=4),
+        so.Text({"clip_on": False}, halign="left", valign=valign),
         data=text,
     )
     return fig
@@ -481,7 +501,7 @@ def add_line(
 
 season = summarize(teams, "Score")
 fig = so.Plot(season, x="round", y="score", color="label", text="label").label(
-    title="Backtest 2022", x="Round", y="Cumulative score"
+    x="Round", y="Cumulative score"
 )
 fig = add_line(fig, season)
 fig
@@ -499,15 +519,18 @@ the start:
 # | label: team-picking-backtest-score-unlimited-budget
 # TODO use kwargs
 def add_backtest(
-    fig: so.Plot, teams: pl.DataFrame, model: str, halign: str = "left"
+    fig: so.Plot,
+    teams: pl.DataFrame,
+    model: str,
+    valign: str = "center_baseline",
 ) -> so.Plot:
     campaign = summarize(teams, model)
-    fig = add_line(fig, campaign, halign=halign)
+    fig = add_line(fig, campaign, valign=valign)
     return fig
 
 
 teams = backtest(players, predict_score, initial_budget=1000.0)
-add_backtest(fig, teams, "Score with unlimited budget", halign="right")
+add_backtest(fig, teams, "Score with unlimited budget", valign="bottom")
 
 # %% [markdown]
 """
@@ -533,18 +556,18 @@ fig
 """
 ## Score prediction
 
-For each round, we must predict $\hat{s}$, the vector of score predictions. To
-estimate the model parameters, we use the data from previous rounds.
+For each round, we must predict $\hat{s}$, the vector of score predictions,
+using data from previous rounds.
 
 However, during the first round, we don't have any previous data to train our
-model.  In this case, we need to include prior information. One way to do that
+model. In this case, we need to include prior information. One way to do that
 would be to use data from previous seasons. However, we know a variable where
 this information is already encoded: the player `value`. Each season starts with
 players valued according to their past performance. Knowing this, all our models
 start with $\hat{s} = v$ in the first round.
 
-Let's use Bambi [@Capretto2022] and its default priors to fit our models, let's
-not delve into convergence diagnostics, since we are more interested in the
+Let's use Bambi [@Capretto2022] and its default priors to fit our models. We
+won't  delve into convergence diagnostics, since we are more interested in the
 average of the predictive posteriors and the backtest itself is measure of the
 prediction quality.
 
@@ -602,7 +625,7 @@ $$
 
 where  
 $\alpha$ is an intercept and  
-$\mathbf{b}$ is a vector of random effects for each player.
+$\mathbf{b}$ is a vector of player random effects.
 
 This model performs significantly better than the average model, possibly
 because of the partial pooling between the random effects, that pulls large
@@ -627,7 +650,9 @@ def predict_model(
         predictions = candidates.get_column("value")
     else:
         model = bmb.Model(data=data.to_pandas(), **kwargs)
-        inference = model.fit(random_seed=37, progressbar=False)
+        inference = model.fit(
+            inference_method="nuts_numpyro", random_seed=37, progressbar=False
+        )
         predictions = model.predict(
             inference,
             data=candidates.to_pandas(),
@@ -640,9 +665,7 @@ def predict_model(
     return candidates
 
 
-predict_random_effects = partial(
-    predict_model, formula="score ~ (1 | player)", categorical=["player"]
-)
+predict_random_effects = partial(predict_model, formula="score ~ (1 | player)")
 teams = backtest(players, predict_random_effects)
 fig = add_backtest(fig, teams, "Random effects")
 fig
@@ -656,12 +679,15 @@ $$
 $$
 
 where  
-$\mathbf{X}$ is a matrix of the dummy-encoded versus team and home variables;  
+$\mathbf{X}$ is a matrix of the dummy-encoded fixture variables: the player
+    `team`, whether they are playing at `home`, and their `adversary` team
+    variables;
 $\mathbf{\beta}$ is a vector of fixed effects.
 
-This brings more context to our predictions. It also provides a reasonable
+This model brings more context to our predictions. It also provides a reasonable
 way to predict a new player, by setting their $b = 0$ (the mean of the random
-effects).
+effects). However, it does not improve significantly over our random effects
+model.
 """
 
 # %%
@@ -670,32 +696,29 @@ effects).
 # | warning: false
 predict_mixed_effects = partial(
     predict_model,
-    formula="score ~ home + (1 | versus) + (1 | player)",
-    categorical=["versus", "player"],
+    formula="score ~ home + C(team) + C(versus) + (1 | player)",
 )
-# teams = backtest(players, predict_mixed_effects)
-# fig = add_backtest(fig, teams, "Mixed effects")
-# fig
+teams = backtest(players, predict_mixed_effects)
+fig = add_backtest(fig, teams, "Mixed effects")
+fig
 
 # %% [markdown]
 """
-## Further ideas
+## Conclusion
 
-We developed a comprehensive framing for the fantasy football team picking
-problem, but it wasn't enough to win the 2022 Cartola season. I have some other
-ideas for this, such as:
+We developed a comprehensive framework for the fantasy football team picking
+problem. There are more ideas we could explore to improve our chances of
+winning:
 
-* enriching our data with player scouts and including them in our model;
-* incoporating prior information via priors;
-* testing strategies that balance score and appreciation,
+* enriching our data and models with player scouts;
+* including more information in our priors;
+* testing strategies that balance predicted score and appreciation;
+* further model diagnostics.
 
-but I won't pursue them for now.
+However, I suppose expert human player predictions have a certain edge over
+those of hobbyist statistical models in fantasy leagues, due to the fact that
+there are all sorts of relevant data unavailable in public datasets.
 
-I suppose expert human players have a certain edge over statistical models in
-fantasy leagues, due to the fact that there are all sorts of relevant data that
-are not quantified in public datasets.
-
-To be fair, I'm sure that's not true for all sports everywhere, but it seems to
-be the case for brazilian soccer. No wonder it's often refered to as a "little
-box full of surprises".
+At least, this seems to be the case for brazilian soccer, also known as "a
+little box of surprises".
 """

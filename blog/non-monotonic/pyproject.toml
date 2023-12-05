@@ -5,7 +5,15 @@ description = "Add a short description here"
 authors = [
     { name = "Luís Assunção", email = "assuncaolfi@gmail.com" }
 ]
-dependencies = []
+dependencies = [
+    "polars~=0.19.17",
+    "rich~=13.7.0",
+    "seaborn~=0.13.0",
+    "pyarrow~=14.0.1",
+    "pymc~=5.6.1",
+    "numpy~=1.24.4",
+    "site @ file:///Users/assuncaolfi/Projects/site/blog/non-monotonic/../..",
+]
 requires-python = ">= 3.8"
 
 [build-system]
@@ -14,6 +22,10 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
+dev-dependencies = [
+    "jupyter~=1.0.0",
+    "jupyter-cache~=0.6.1",
+]
 
 [tool.hatch.metadata]
 allow-direct-references = true

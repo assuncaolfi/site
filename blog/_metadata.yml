@@ -3,7 +3,7 @@ citation:
 date-modified: today
 format:
   html:
-    code-block-border-left: true
+    code-block-border-left: false
     code-tools:
       source: repo
     toc: true

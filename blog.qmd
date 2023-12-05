@@ -1,9 +1,6 @@
 ---
-title: "Blog"
-citation: false
 format:
-  html:
-    code-tools: false
+  html: default
 listing:
   categories: unnumbered
   contents: blog
@@ -15,7 +12,7 @@ listing:
   filter-ui: false
   sort-ui: false
   sort: "date desc"
-  type: table
+  type: default
 ---
 
 
