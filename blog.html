@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.506">
+<meta name="generator" content="quarto-1.4.519">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Luís Assunção - Blog</title>
+<title>Luís Assunção</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,6 +25,7 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
+<link href="./assets/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -46,6 +47,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -61,9 +63,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -108,11 +110,11 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">/ About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./blog.html" aria-current="page"> 
-<span class="menu-text">Blog</span></a>
+<span class="menu-text">/ Blog</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="./blog.xml"> <i class="bi bi-rss" role="img">
@@ -121,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./references.html"> 
-<span class="menu-text">References</span></a>
+<span class="menu-text">/ References</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -136,62 +138,54 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"><div class="category" data-category="football">football</div><div class="category" data-category="inference">inference</div><div class="category" data-category="modeling">modeling</div><div class="category" data-category="optimization">optimization</div><div class="category" data-category="prediction">prediction</div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"><div class="category" data-category="causal">causal</div><div class="category" data-category="cognitive">cognitive</div><div class="category" data-category="football">football</div><div class="category" data-category="modeling">modeling</div><div class="category" data-category="optimization">optimization</div><div class="category" data-category="prediction">prediction</div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Blog</h1>
+
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="causal,cognitive,modeling" data-listing-date-sort="1700179200000" data-listing-file-modified-sort="1701816517875" data-listing-date-modified-sort="1701734400000" data-listing-reading-time-sort="4" data-listing-word-count-sort="674">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./blog/non-monotonic/index.html" class="no-external">Decomposable non-monotonic models</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./blog/non-monotonic/index.html" class="no-external"></a>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-</th>
-<th>
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="modeling,inference" data-listing-date-sort="1700179200000" data-listing-file-modified-sort="1700311751209" data-listing-date-modified-sort="1700265600000" data-listing-reading-time-sort="1" data-listing-word-count-sort="78" data-listing-title-sort="Non-monotonic models" data-listing-filename-sort="index.py">
-<td>
-<span class="listing-date">Nov 17, 2023</span>
-</td>
-<td>
-<a href="./blog/non-monotonic/index.html" class="title listing-title">Non-monotonic models</a>
-</td>
-</tr>
-<tr data-index="1" data-categories="football,optimization,prediction" data-listing-date-sort="1695254400000" data-listing-file-modified-sort="1700311751205" data-listing-date-modified-sort="1700265600000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3074" data-listing-title-sort="Picking a fantasy football team" data-listing-filename-sort="index.py">
-<td>
-<span class="listing-date">Sep 21, 2023</span>
-</td>
-<td>
-<a href="./blog/fantasy-football/index.html" class="title listing-title">Picking a fantasy football team</a>
-</td>
-</tr>
-</tbody>
-</table>
+</div>
+<div class="metadata">
+<a href="./blog/non-monotonic/index.html" class="no-external">
+<div class="listing-date">
+Nov 17, 2023
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="football,optimization,prediction" data-listing-date-sort="1695254400000" data-listing-file-modified-sort="1701816517863" data-listing-date-modified-sort="1701734400000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3084">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./blog/fantasy-football/index.html" class="no-external">Picking a fantasy football team</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./blog/fantasy-football/index.html" class="no-external"></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./blog/fantasy-football/index.html" class="no-external">
+<div class="listing-date">
+Sep 21, 2023
+</div>
+</a>
+</div>
+</div>
+</div>
 <div class="listing-no-matching d-none">
 No matching items
 </div>

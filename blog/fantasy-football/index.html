@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.506">
+<meta name="generator" content="quarto-1.4.519">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -80,6 +80,7 @@ div.csl-indent {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../assets/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -99,6 +100,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -135,11 +137,11 @@ div.csl-indent {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">/ About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../blog.html"> 
-<span class="menu-text">Blog</span></a>
+<span class="menu-text">/ Blog</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="../../blog.xml"> <i class="bi bi-rss" role="img">
@@ -148,7 +150,7 @@ div.csl-indent {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../references.html"> 
-<span class="menu-text">References</span></a>
+<span class="menu-text">/ References</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -166,7 +168,7 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-rules" id="toc-the-rules" class="nav-link active" data-scroll-target="#the-rules">The rules</a></li>
+  <li><a href="#the-game" id="toc-the-game" class="nav-link active" data-scroll-target="#the-game">The game</a></li>
   <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data wrangling</a>
   <ul class="collapse">
   <li><a href="#filtering-participation" id="toc-filtering-participation" class="nav-link" data-scroll-target="#filtering-participation">Filtering participation</a></li>
@@ -176,7 +178,6 @@ div.csl-indent {
   </ul></li>
   <li><a href="#team-picking" id="toc-team-picking" class="nav-link" data-scroll-target="#team-picking">Team picking</a>
   <ul class="collapse">
-  <li><a href="#problem" id="toc-problem" class="nav-link" data-scroll-target="#problem">Problem</a></li>
   <li><a href="#backtesting" id="toc-backtesting" class="nav-link" data-scroll-target="#backtesting">Backtesting</a></li>
   </ul></li>
   <li><a href="#score-prediction" id="toc-score-prediction" class="nav-link" data-scroll-target="#score-prediction">Score prediction</a>
@@ -185,7 +186,7 @@ div.csl-indent {
   <li><a href="#player-random-effects" id="toc-player-random-effects" class="nav-link" data-scroll-target="#player-random-effects">Player random effects</a></li>
   <li><a href="#fixture-mixed-effects" id="toc-fixture-mixed-effects" class="nav-link" data-scroll-target="#fixture-mixed-effects">Fixture mixed effects</a></li>
   </ul></li>
-  <li><a href="#further-ideas" id="toc-further-ideas" class="nav-link" data-scroll-target="#further-ideas">Further ideas</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -217,7 +218,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 18, 2023</p>
+      <p class="date-modified">December 5, 2023</p>
     </div>
   </div>
     
@@ -228,19 +229,19 @@ div.csl-indent {
 </header>
 
 
-<p><a href="http://cartola.globo.com">Cartola FC</a> is a fantasy football league following the Brazilian Championship A Series.</p>
+<p><a href="http://cartola.globo.com">Cartola</a> is a fantasy football league following the Brazilian Championship A Series.</p>
 <p>Cartola offers a public API to access data for the current round. A couple of years ago, I created a script to automate data retrieval to a <a href="https://github.com/assuncaolfi/tophat/tree/main">repository</a>, which now hosts comprehensive historical data since 2022.</p>
-<p>In this post, I will delve into the data for the 2022 season, formulate a mixed integer linear program to pick the optimal team, and present initial concepts for forecasting player scores using mixed effects linear models.</p>
-<section id="the-rules" class="level2">
-<h2 class="anchored" data-anchor-id="the-rules">The rules</h2>
-<p>You begin the season with a budget of C$ 100 (C$ stands for Cartoletas, the game’s paper currency).</p>
-<p>Each round is preceded by a market session, where players are assigned a value. You are tasked with forming a team of 11 players plus a coach, all within your budget and adhering to a valid formation. A captain must be chosen from among the players, excluding the coach.</p>
-<p>The market is available until the round starts. Players then earn scores based on their real-life match performances. Your team’s score is the aggregate of your players’ scores, with your captain’s score doubled in the 2022 season.</p>
-<p>Following the conclusion of the round, player values are recalibrated based on performance -— with increases for scores above their average and decreases for below-average performances. Your budget for the next round is your previous budget, plus the sum of your players’ value variations.</p>
+<p>In this post, we will delve into the data for the 2022 season, formulate a mixed integer linear program to pick the optimal team, and present initial concepts for forecasting player scores using mixed effects linear models.</p>
+<section id="the-game" class="level2">
+<h2 class="anchored" data-anchor-id="the-game">The game</h2>
+<p>We begin the season with a budget of C$ 100, the game’s paper currency.</p>
+<p>Each round is preceded by a market session, where players are assigned a value. We are tasked with forming a team of 11 players plus a coach, all within our budget and adhering to a valid formation. A captain must be chosen from among the players, excluding the coach.</p>
+<p>The market is available until the round starts. Players then earn scores based on their real-life match performances. Our team’s score is the aggregate of our players’ scores, with our captain’s score doubled in the 2022 season.</p>
+<p>Following the conclusion of the round, player values are recalibrated based on performance -— with increases for scores above their average and decreases for below-average performances. Our budget for the next round is our previous budget, plus the sum of our players’ value variations.</p>
 </section>
 <section id="data-wrangling" class="level2">
 <h2 class="anchored" data-anchor-id="data-wrangling">Data wrangling</h2>
-<p>First, let’s talk about data structures. Each round has a market, and each market is a list of players. A player is a structure like this:</p>
+<p>Let’s talk about data structures: each round has a market, and each market is a list of players. A player is a structure like this:</p>
 <div id="cell-data-wrangling-players" class="cell" data-execution_count="2">
 <div id="data-wrangling-players" class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Player</span><span style="font-weight: bold">(</span>
@@ -264,8 +265,6 @@ div.csl-indent {
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span>30_063, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10</span><span style="font-weight: bold">)</span>
 ┌───────┬────────┬──────┬──────────┬───┬───────┬───────┬──────────────┬─────────┐
 │ round ┆ player ┆ team ┆ position ┆ … ┆ value ┆ score ┆ appreciation ┆ minimum │
-│ ---   ┆ ---    ┆ ---  ┆ ---      ┆   ┆ ---   ┆ ---   ┆ ---          ┆ ---     │
-│ i64   ┆ i64    ┆ i64  ┆ i64      ┆   ┆ f64   ┆ f64   ┆ f64          ┆ f64     │
 ╞═══════╪════════╪══════╪══════════╪═══╪═══════╪═══════╪══════════════╪═════════╡
 │ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37424</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1371</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     │
 │ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37646</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">314</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.3</span>     │
@@ -286,8 +285,6 @@ div.csl-indent {
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10</span><span style="font-weight: bold">)</span>
 ┌───────┬────────┬──────┬──────────┬───┬───────┬───────┬──────────────┬─────────┐
 │ round ┆ player ┆ team ┆ position ┆ … ┆ value ┆ score ┆ appreciation ┆ minimum │
-│ ---   ┆ ---    ┆ ---  ┆ ---      ┆   ┆ ---   ┆ ---   ┆ ---          ┆ ---     │
-│ i64   ┆ i64    ┆ i64  ┆ i64      ┆   ┆ f64   ┆ f64   ┆ f64          ┆ f64     │
 ╞═══════╪════════╪══════╪══════════╪═══╪═══════╪═══════╪══════════════╪═════════╡
 │ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.53</span>    │
 │ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7.93</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-2.07</span>        ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.52</span>    │
@@ -305,59 +302,56 @@ div.csl-indent {
 <section id="filtering-participation" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-participation">Filtering participation</h3>
 <p>Players will show up in the market for many rounds that they do not participate in. However, for our analysis, we are only interested in players that actually played a game in the round.</p>
-<p>Each player has a <code>status</code> field that is supposed to indicate whether they will participate in the round. However, I’ve noticed this field is often inacurate, probably because the API data for this field is updated before the <code>round</code> is.</p>
+<p>Each player has a <code>status</code> field intended to indicate their participation in the round. However, this field is often inaccurate, likely due to the API data being updated before the round.</p>
 <p>One solution is to keep only rows where there is an increase in the number of <code>games</code> the player has played:</p>
 <div id="cell-data-wrangling-round-participation" class="cell" data-execution_count="5">
 <div id="data-wrangling-round-participation" class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">31</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span><span style="font-weight: bold">)</span>
-┌────────┬───────┬───────┐
-│ player ┆ round ┆ games │
-│ ---    ┆ ---   ┆ ---   │
-│ i64    ┆ i64   ┆ i64   │
-╞════════╪═══════╪═══════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     │
-│ …      ┆ …     ┆ …     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">27</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">28</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">29</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">30</span>    │
-└────────┴───────┴───────┘
+┌───────┬────────┬───────┐
+│ round ┆ player ┆ games │
+╞═══════╪════════╪═══════╡
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>     │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     │
+│ …     ┆ …      ┆ …     │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">27</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">28</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">29</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">30</span>    │
+└───────┴────────┴───────┘
 </pre>
 </div>
 </div>
 </section>
 <section id="imputing-scores" class="level3">
 <h3 class="anchored" data-anchor-id="imputing-scores">Imputing scores</h3>
-<p>Another field that is inacurate is the player <code>score</code>, probably for the same reason as their <code>status</code>. Fortunately, the <code>average</code> field is accurate, and we can use it to recover the <code>score</code>. Let <span class="math inline">\(\mathbf{s}\)</span> be the vector of scores for a given player across all rounds:</p>
+<p>Similarly, the player <code>score</code> field is often inaccurate, likely for the same reasons as the <code>status</code> field. Fortunately, the <code>average</code> field is reliable, allowing us to recover the <code>score</code>:</p>
 <p><span class="math display">\[
 \begin{align*}
 \mathrm{Average}(\mathbf{s}_{1:t})
 = \frac{\mathrm{Average}(\mathbf{s}_{1:(t-1)}) + s_t}{2} \\
 s_t
-= 2\mathrm{Average}(\mathbf{s}_{1:t}) - \mathrm{Average}(\mathbf{s}_{1:(t-1)})
+= 2\mathrm{Average}(\mathbf{s}_{1:t}) - \mathrm{Average}(\mathbf{s}_{1:(t-1)}),
 \end{align*}
 \]</span></p>
+<p>where <span class="math inline">\(\mathbf{s}\)</span> is the vector of scores for a given player across all rounds.</p>
 <div id="cell-data-wrangling-missing-scores" class="cell" data-execution_count="6">
 <div id="data-wrangling-missing-scores" class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">31</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="font-weight: bold">)</span>
-┌────────┬───────┬───────┬─────────┐
-│ player ┆ round ┆ score ┆ average │
-│ ---    ┆ ---   ┆ ---   ┆ ---     │
-│ i64    ┆ i64   ┆ f64   ┆ f64     │
-╞════════╪═══════╪═══════╪═════════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.5</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">9.5</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.6</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.3</span>     │
-│ …      ┆ …     ┆ …     ┆ …       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.73</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.82</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.1</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.96</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.62</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>    │
-└────────┴───────┴───────┴─────────┘
+┌───────┬────────┬───────┬─────────┐
+│ round ┆ player ┆ score ┆ average │
+╞═══════╪════════╪═══════╪═════════╡
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>     │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.5</span>     │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">9.5</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.0</span>     │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.6</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.3</span>     │
+│ …     ┆ …      ┆ …     ┆ …       │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.73</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.82</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.1</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.96</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.62</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>    │
+└───────┴────────┴───────┴─────────┘
 </pre>
 </div>
 </div>
@@ -371,14 +365,12 @@ s_t
 </pre>
 </div>
 </div>
-<p>Let’s flatten these fixtures into a single DataFrame and pivot it into a long format:</p>
+<p>Let’s consolidate these fixtures into a single DataFrame and then pivot them into a long format:</p>
 <div id="cell-data-wrangling-fixtures-long" class="cell" data-execution_count="8">
 <div id="data-wrangling-fixtures-long" class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">760</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="font-weight: bold">)</span>
 ┌───────┬──────┬────────┬──────┐
 │ round ┆ team ┆ versus ┆ home │
-│ ---   ┆ ---  ┆ ---    ┆ ---  │
-│ i64   ┆ i64  ┆ i64    ┆ i32  │
 ╞═══════╪══════╪════════╪══════╡
 │ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">282</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">285</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
 │ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">266</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">277</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
@@ -393,50 +385,46 @@ s_t
 </pre>
 </div>
 </div>
-<p>Finally, let’s join it to our dataset:</p>
+<p>Finally, let’s join this data to our dataset:</p>
 <div id="cell-data-wrangling-fixtures-join" class="cell" data-execution_count="9">
 <div id="data-wrangling-fixtures-join" class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">31</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span><span style="font-weight: bold">)</span>
-┌────────┬───────┬──────┬────────┬──────┐
-│ player ┆ round ┆ team ┆ versus ┆ home │
-│ ---    ┆ ---   ┆ ---  ┆ ---    ┆ ---  │
-│ i64    ┆ i64   ┆ i64  ┆ i64    ┆ i32  │
-╞════════╪═══════╪══════╪════════╪══════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">263</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">314</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">275</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">280</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ …      ┆ …     ┆ …    ┆ …      ┆ …    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">262</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">354</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">294</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">282</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-└────────┴───────┴──────┴────────┴──────┘
+┌───────┬────────┬──────┬────────┬──────┐
+│ round ┆ player ┆ team ┆ versus ┆ home │
+╞═══════╪════════╪══════╪════════╪══════╡
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">263</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">314</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">275</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">280</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
+│ …     ┆ …      ┆ …    ┆ …      ┆ …    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">262</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">354</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">294</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">282</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
+└───────┴────────┴──────┴────────┴──────┘
 </pre>
 </div>
 </div>
 </section>
 <section id="aligning-variables" class="level3">
 <h3 class="anchored" data-anchor-id="aligning-variables">Aligning variables</h3>
-<p>For the rest of our analysis, the <code>average</code> field should not include the <code>score</code> in the given round. Also, the <code>appreciation</code> field should be relative to the <code>score</code> in the given round.</p>
+<p>In our subsequent analysis, the <code>average</code> field will exclude the <code>score</code> from the given round. Additionally, the <code>appreciation</code> field will be calculated in relation to the round’s <code>score</code>.</p>
 <div id="cell-data-wrangling-lookahead-variables" class="cell" data-execution_count="10">
 <div id="data-wrangling-lookahead-variables" class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">31</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span><span style="font-weight: bold">)</span>
-┌────────┬───────┬─────────┬───────┬───────┬──────────────┐
-│ player ┆ round ┆ average ┆ value ┆ score ┆ appreciation │
-│ ---    ┆ ---   ┆ ---     ┆ ---   ┆ ---   ┆ ---          │
-│ i64    ┆ i64   ┆ f64     ┆ f64   ┆ f64   ┆ f64          │
-╞════════╪═══════╪═════════╪═══════╪═══════╪══════════════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-2.07</span>        │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7.93</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.51</span>         │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.44</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">9.5</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.25</span>         │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.69</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.6</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.73</span>         │
-│ …      ┆ …     ┆ …       ┆ …     ┆ …     ┆ …            │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.91</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.48</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.73</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.03</span>         │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.82</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.51</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.1</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.17</span>         │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.96</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">12.68</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.62</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-1.62</span>        │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.06</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          │
-└────────┴───────┴─────────┴───────┴───────┴──────────────┘
+┌───────┬────────┬─────────┬───────┬───────┬──────────────┐
+│ round ┆ player ┆ average ┆ value ┆ score ┆ appreciation │
+╞═══════╪════════╪═════════╪═══════╪═══════╪══════════════╡
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-2.07</span>        │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7.93</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.51</span>         │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.44</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">9.5</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.25</span>         │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.69</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.6</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.73</span>         │
+│ …     ┆ …      ┆ …       ┆ …     ┆ …     ┆ …            │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.91</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.48</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.73</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.03</span>         │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.82</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.51</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.1</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.17</span>         │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.96</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">12.68</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.62</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-1.62</span>        │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.06</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          │
+└───────┴────────┴─────────┴───────┴───────┴──────────────┘
 </pre>
 </div>
 </div>
@@ -444,9 +432,7 @@ s_t
 </section>
 <section id="team-picking" class="level2">
 <h2 class="anchored" data-anchor-id="team-picking">Team picking</h2>
-<section id="problem" class="level3">
-<h3 class="anchored" data-anchor-id="problem">Problem</h3>
-<p>How to pick the best team in a given market? Let <span class="math inline">\(\mathcal{F}\)</span> be the set of valid formations, for each formation <span class="math inline">\(f \in \mathcal{F}\)</span>, solve:</p>
+<p>Now let’s solve the problem of picking the best team a given market. Let $ $ be the set of valid formations, then for each formation <span class="math inline">\(f \in \mathcal{F}\)</span>, solve:</p>
 <p><span class="math display">\[
 \begin{equation*} \begin{array}{ll@{}ll}
 \text{maximize} &amp; \displaystyle \hat{\mathbf{s}}^T \mathbf{x}, &amp; \mathbf{x} \in \{\mathbf{0}, \mathbf{1}\} \\
@@ -458,7 +444,7 @@ s_t
 <p>where</p>
 <p><span class="math inline">\(\mathbf{x}\)</span> is a variable vector of player picks in the market;<br>
 <span class="math inline">\(\hat{\mathbf{s}}\)</span> is the vector of predicted player scores in the market;<br>
-<span class="math inline">\(b\)</span> is your available budget for that round;<br>
+<span class="math inline">\(b\)</span> is our available budget for that round;<br>
 <span class="math inline">\(\mathbf{P}\)</span> is the matrix of dummy-encoded player formations in the market.</p>
 <p>Finally, take the solution with the highest objective.</p>
 <div id="team-picking-problem" class="cell" data-execution_count="12">
@@ -492,7 +478,6 @@ s_t
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            problem <span class="op">+=</span> pulp.lpDot(picks, <span class="va">self</span>.positions[i]) <span class="op">==</span> formation[i]</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> problem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
 <section id="backtesting" class="level3">
 <h3 class="anchored" data-anchor-id="backtesting">Backtesting</h3>
 <p>By solving the team picking problem for all rounds, we can backtest our performance in the season. Before backtesting, let’s get the set of valid formations <span class="math inline">\(\mathcal{F}\)</span>:</p>
@@ -510,7 +495,7 @@ s_t
 </pre>
 </div>
 </div>
-<p>Now that we know what our formation constraints, we’re ready to backtest. Starting with a budget of C$ 100, for each round let’s:</p>
+<p>Knowing our formation constraints, we’re ready to backtest. Starting with a budget of C$ 100, for each round let’s:</p>
 <ol type="1">
 <li>Predict each player’s score based on their performance on previous rounds;</li>
 <li>Pick the team with the best total score;</li>
@@ -544,14 +529,12 @@ s_t
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    teams <span class="op">=</span> pl.concat(teams)</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> teams</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Before diving into predictions, let’s start with a couple of hypothetical backtests, using the actual observed scores to pick our teams. Backtesting this strategy, the first team we pick is:</p>
+<p>Before exploring predictions, we’ll begin with a few hypothetical backtests using actual observed scores for team selection. Backtesting this strategy, this is our team in the first round:</p>
 <div id="cell-team-picking-backtest-first-team" class="cell" data-execution_count="16">
 <div id="team-picking-backtest-first-team" class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">12</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">13</span><span style="font-weight: bold">)</span>
 ┌───────┬────────┬──────┬──────────┬───┬─────────┬────────┬──────┬────────────┐
 │ round ┆ player ┆ team ┆ position ┆ … ┆ minimum ┆ versus ┆ home ┆ prediction │
-│ ---   ┆ ---    ┆ ---  ┆ ---      ┆   ┆ ---     ┆ ---    ┆ ---  ┆ ---        │
-│ i64   ┆ i64    ┆ i64  ┆ i64      ┆   ┆ f64     ┆ i64    ┆ i32  ┆ f64        │
 ╞═══════╪════════╪══════╪══════════╪═══╪═════════╪════════╪══════╪════════════╡
 │ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">71571</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">356</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3.19</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1371</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>       │
 │ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42145</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">294</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.75</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">290</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">15.8</span>       │
@@ -571,7 +554,7 @@ s_t
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="602" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="604" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -581,7 +564,7 @@ s_t
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="602" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="613" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -592,7 +575,7 @@ s_t
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="603" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="605" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -601,9 +584,9 @@ s_t
 </section>
 <section id="score-prediction" class="level2">
 <h2 class="anchored" data-anchor-id="score-prediction">Score prediction</h2>
-<p>For each round, we must predict <span class="math inline">\(\hat{s}\)</span>, the vector of score predictions. To estimate the model parameters, we use the data from previous rounds.</p>
+<p>For each round, we must predict <span class="math inline">\(\hat{s}\)</span>, the vector of score predictions, using data from previous rounds.</p>
 <p>However, during the first round, we don’t have any previous data to train our model. In this case, we need to include prior information. One way to do that would be to use data from previous seasons. However, we know a variable where this information is already encoded: the player <code>value</code>. Each season starts with players valued according to their past performance. Knowing this, all our models start with <span class="math inline">\(\hat{s} = v\)</span> in the first round.</p>
-<p>Let’s use Bambi <span class="citation" data-cites="Capretto2022">(<a href="#ref-Capretto2022" role="doc-biblioref">Capretto et al. 2022</a>)</span> and its default priors to fit our models, let’s not delve into convergence diagnostics, since we are more interested in the average of the predictive posteriors and the backtest itself is measure of the prediction quality.</p>
+<p>Let’s use Bambi <span class="citation" data-cites="Capretto2022">(<a href="#ref-Capretto2022" role="doc-biblioref">Capretto et al. 2022</a>)</span> and its default priors to fit our models. We won’t delve into convergence diagnostics, since we are more interested in the average of the predictive posteriors and the backtest itself is measure of the prediction quality.</p>
 <p>One question that arises here is: why not use non-parametric models such as gradient boosted trees or neural nets? After some experimentation, I concluded they are not a good fit for this problem: either because they assume independence between observations, or because they are too data hungry. Also, tuning these models for backtests might lead us into a rabbit hole <span class="citation" data-cites="Bailey2013">(<a href="#ref-Bailey2013" role="doc-biblioref">Bailey et al. 2013</a>)</span>.</p>
 <section id="player-average" class="level3">
 <h3 class="anchored" data-anchor-id="player-average">Player average</h3>
@@ -621,7 +604,7 @@ s_t
 <div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="605" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="608" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -637,13 +620,13 @@ s_t
 \]</span></p>
 <p>where<br>
 <span class="math inline">\(\alpha\)</span> is an intercept and<br>
-<span class="math inline">\(\mathbf{b}\)</span> is a vector of random effects for each player.</p>
+<span class="math inline">\(\mathbf{b}\)</span> is a vector of player random effects.</p>
 <p>This model performs significantly better than the average model, possibly because of the partial pooling between the random effects, that pulls large effects towards the overall mean <span class="citation" data-cites="clark2019shrinkage">(<a href="#ref-clark2019shrinkage" role="doc-biblioref">Clark 2019</a>)</span>. In our dataset, it’s common for players that played one or two games to have large averages by chance.</p>
 <div id="cell-score-prediction-player-random-effects" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="605" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="608" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -655,28 +638,36 @@ s_t
 \mathbf{\hat{s}} = \alpha + \mathbf{X} \mathbf{\beta} + \mathbf{Z} \mathbf{b},
 \]</span></p>
 <p>where<br>
-<span class="math inline">\(\mathbf{X}\)</span> is a matrix of the dummy-encoded versus team and home variables;<br>
-<span class="math inline">\(\mathbf{\beta}\)</span> is a vector of fixed effects.</p>
-<p>This brings more context to our predictions. It also provides a reasonable way to predict a new player, by setting their <span class="math inline">\(b = 0\)</span> (the mean of the random effects).</p>
+<span class="math inline">\(\mathbf{X}\)</span> is a matrix of the dummy-encoded fixture variables: the player <code>team</code>, whether they are playing at <code>home</code>, and their <code>adversary</code> team variables; <span class="math inline">\(\mathbf{\beta}\)</span> is a vector of fixed effects.</p>
+<p>This model brings more context to our predictions. It also provides a reasonable way to predict a new player, by setting their <span class="math inline">\(b = 0\)</span> (the mean of the random effects). However, it does not improve significantly over our random effects model.</p>
+<div id="cell-score-prediction-fixture-mixed-effects" class="cell" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/score-prediction-fixture-mixed-effects-output-1.png" id="score-prediction-fixture-mixed-effects" width="608" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
-<section id="further-ideas" class="level2">
-<h2 class="anchored" data-anchor-id="further-ideas">Further ideas</h2>
-<p>We developed a comprehensive framing for the fantasy football team picking problem, but it wasn’t enough to win the 2022 Cartola season. I have some other ideas for this, such as:</p>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>We developed a comprehensive framework for the fantasy football team picking problem. There are more ideas we could explore to improve our chances of winning:</p>
 <ul>
-<li>enriching our data with player scouts and including them in our model;</li>
-<li>incoporating prior information via priors;</li>
-<li>testing strategies that balance score and appreciation,</li>
+<li>enriching our data and models with player scouts;</li>
+<li>including more information in our priors;</li>
+<li>testing strategies that balance predicted score and appreciation;</li>
+<li>further model diagnostics.</li>
 </ul>
-<p>but I won’t pursue them for now.</p>
-<p>I suppose expert human players have a certain edge over statistical models in fantasy leagues, due to the fact that there are all sorts of relevant data that are not quantified in public datasets.</p>
-<p>To be fair, I’m sure that’s not true for all sports everywhere, but it seems to be the case for brazilian soccer. No wonder it’s often refered to as a “little box full of surprises”.</p>
+<p>However, I suppose expert human player predictions have a certain edge over those of hobbyist statistical models in fantasy leagues, due to the fact that there are all sorts of relevant data unavailable in public datasets.</p>
+<p>At least, this seems to be the case for brazilian soccer, also known as “a little box of surprises”.</p>
 
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Bailey2013" class="csl-entry" role="listitem">
 Bailey, David H., Jonathan M. Borwein, Marcos Lopez de Prado, and Qiji Jim Zhu. 2013. <span>“The Probability of Back-Test over-Fitting.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.2326253">https://doi.org/10.2139/ssrn.2326253</a>.
 </div>
@@ -686,10 +677,9 @@ Capretto, Tomás, Camen Piho, Ravin Kumar, Jacob Westfall, Tal Yarkoni, and Osva
 <div id="ref-clark2019shrinkage" class="csl-entry" role="listitem">
 Clark, Michael. 2019. <span>“Michael Clark: Shrinkage in Mixed Effects Models.”</span> <a href="https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/">https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/</a>.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2023,
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2023,
   author = {Assunção, Luís},
   title = {Picking a Fantasy Football Team},
-  pages = {undefined},
   date = {2023-09-21},
   url = {https://assuncaolfi.github.io/blog/fantasy-football},
   langid = {en}

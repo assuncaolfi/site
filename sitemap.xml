@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://assuncaolfi.github.io/blog.html</loc>
-    <lastmod>2023-11-18T12:49:11.205Z</lastmod>
-  </url>
-  <url>
-    <loc>https://assuncaolfi.github.io/blog/fantasy-football/index.html</loc>
-    <lastmod>2023-11-18T12:49:11.205Z</lastmod>
+    <loc>https://assuncaolfi.github.io/cv.html</loc>
+    <lastmod>2023-12-05T22:48:37.875Z</lastmod>
   </url>
   <url>
     <loc>https://assuncaolfi.github.io/index.html</loc>
-    <lastmod>2023-11-18T12:49:11.221Z</lastmod>
+    <lastmod>2023-12-05T22:48:37.891Z</lastmod>
   </url>
   <url>
     <loc>https://assuncaolfi.github.io/blog/non-monotonic/index.html</loc>
-    <lastmod>2023-11-18T12:49:11.209Z</lastmod>
+    <lastmod>2023-12-05T22:48:37.875Z</lastmod>
+  </url>
+  <url>
+    <loc>https://assuncaolfi.github.io/blog/fantasy-football/index.html</loc>
+    <lastmod>2023-12-05T22:48:37.863Z</lastmod>
   </url>
   <url>
     <loc>https://assuncaolfi.github.io/references.html</loc>
-    <lastmod>2023-11-18T12:49:11.221Z</lastmod>
+    <lastmod>2023-12-05T22:48:37.891Z</lastmod>
+  </url>
+  <url>
+    <loc>https://assuncaolfi.github.io/blog.html</loc>
+    <lastmod>2023-12-05T22:48:37.863Z</lastmod>
   </url>
 </urlset>
