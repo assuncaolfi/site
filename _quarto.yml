@@ -18,8 +18,8 @@ website:
         href: blog.qmd
       - icon: rss
         href: blog.xml
-      - text: / References
-        href: references.qmd
+      # - text: / References
+      #   href: references.qmd
   search: false
 
 bibliography: references.bib
