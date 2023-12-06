@@ -9,7 +9,7 @@
 <link>https://assuncaolfi.github.io/blog.html</link>
 <atom:link href="https://assuncaolfi.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>My personal website</description>
-<generator>quarto-1.4.519</generator>
+<generator>quarto-1.4.521</generator>
 <lastBuildDate>Fri, 17 Nov 2023 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Decomposable non-monotonic models</title>
@@ -19,21 +19,37 @@
 
 
 
-<p><em>This post is a work in progress.</em></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post is a work in progress.</p>
+</div>
+</div>
 <p>Recently, I helped design an experiment measuring a binary response against a continuous delay time. If the user did not do the thing at time zero, then we delayed for a variable number of minutes before reminding them to do it. This delay had a non-monotonic relationship to the response: as the delay increased, the response responded differently. Initially, the response increased; then it peaked; and finally it decreased.</p>
 <p>Causally, we may decompose this process into two: assuming the user forgot to/ could not do the thing at the time, as the delay increases, they 1) become more available for and 2) lose interest in doing the thing. This is a common phenomena in different time-based scenarios. In sports, the “aging curve” refers to how a player’s performance increases with age, then decreases. As the player gets older, they get 1) better at the sport and 2) physically weaker.</p>
-<p>Andrew Gelman wrote about this a couple of times in his blog: see <a href="https://statmodeling.stat.columbia.edu/2018/09/07/bothered-non-monotonicity-heres-one-quick-trick-make-happy/">this post from 2018</a> and <a href="https://statmodeling.stat.columbia.edu/2023/01/01/how-to-model-a-non-monotonic-relation/">this one from 2023</a>, as well as their comments, which also informed this post. Gelman proposed that we should model these processes like this:</p>
+<p>Andrew Gelman wrote about this a couple of times in his blog: see <a href="https://statmodeling.stat.columbia.edu/2018/09/07/bothered-non-monotonicity-heres-one-quick-trick-make-happy/">this post from 2018</a> and <a href="https://statmodeling.stat.columbia.edu/2023/01/01/how-to-model-a-non-monotonic-relation/">this one from 2023</a>, as well as their comments, which also informed this post. Gelman proposed modeling these processes with:</p>
 <p><img src="https://latex.codecogs.com/png.latex?g(x)%20=%20g_1(x)%20+%20g_2(x),"></p>
 <p>where<br>
 <img src="https://latex.codecogs.com/png.latex?g_1(x)"> is a monotonically increasing function with a right asymptote; and<br>
 <img src="https://latex.codecogs.com/png.latex?g_2(x)"> is a monotonically decreasing function with a left asymptote.</p>
 <p>In this post, we will go over some of these models and test them on a dataset.</p>
-<section id="mind-in-eyes" class="level2">
-<h2 class="anchored" data-anchor-id="mind-in-eyes">Mind-in-Eyes</h2>
+<section id="digit-span" class="level2">
+<h2 class="anchored" data-anchor-id="digit-span">Digit Span</h2>
+<p>The Digit Span is a verbal working memory test, part of the Wechsler Adult Intelligence Scale (WAIS) and Wechsler Memory Scale (WMS) supertests. In the Digit Span test, subjects must repeat lists of digits, either in the same or reversed order.</p>
 <p>The dataset for the study is available… <span class="citation" data-cites="Hartshorne2015">(Hartshorne and Germine 2015)</span></p>
-<p>We could control for other variables, such as the computer type (desk or laptop), but let’s assume there are no confounding effects at play here.</p>
+<blockquote class="blockquote">
+<p>Participants in Experiment 2 (N = 10,394; age range = 10–69 years old) […] were visitors to TestMyBrain.org, who took part in experiments in order to contribute to scientific research and in exchange for performance-related feedback.3 We continued data collection for each experiment for approximately 1 year, sufficient to obtain around 10,000 participants, which allowed fine- grained age- of-peak-performance analysis.</p>
+</blockquote>
+<p>We could control for other variables, such as the computer type (desk or laptop) or gender, but let’s assume there are no confounding effects at play here.</p>
 <div id="cell-mind-in-eyes-plot" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 <figure class="figure">
 <p><img src="https://assuncaolfi.github.io/blog/non-monotonic/index_files/figure-html/mind-in-eyes-plot-output-1.png" id="mind-in-eyes-plot" width="599" height="445" class="figure-img"></p>
@@ -44,25 +60,50 @@
 </section>
 <section id="empirical-models" class="level2">
 <h2 class="anchored" data-anchor-id="empirical-models">Empirical models</h2>
-<p>After struggling with splines, Splines, Gaussian Processes…</p>
+<p>Polynomials, smoothings, splines, etc.</p>
+<section id="bootstrap" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap">Bootstrap</h3>
+<blockquote class="blockquote">
+<p>Estimates and standard errors for age of peak performance were calculated using a bootstrap resam- pling procedure identical to the one used in Experiment 1 but applied to raw performance data. To dampen noise, we smoothed means for each age using a moving 3-year window prior to identifying age of peak performance in each sample. Other methods of dampening noise provide similar results. In Experiment 2, age of peak performance was compared across tasks with paired t tests. Within- participant data were not available in Experiment 3.</p>
+</blockquote>
+<div id="cell-empirical-models-bootstrap" class="cell" data-execution_count="4">
+<div id="empirical-models-bootstrap" class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">81</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span><span style="font-weight: bold">)</span>
+┌─────┬──────────┬──────┬──────────────┬────────────┐
+│ age ┆ mean     ┆ se   ┆ rolling_mean ┆ rolling_se │
+│ --- ┆ ---      ┆ ---  ┆ ---          ┆ ---        │
+│ i64 ┆ f64      ┆ f64  ┆ f64          ┆ f64        │
+╞═════╪══════════╪══════╪══════════════╪════════════╡
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.0</span>      ┆ null ┆ null         ┆ null       │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7.0</span>      ┆ null ┆ null         ┆ null       │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.7501</span>   ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.250033</span>     ┆ null       │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.409251</span> ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.719784</span>     ┆ null       │
+│ …   ┆ …        ┆ …    ┆ …            ┆ …          │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">83</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.0</span>      ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.333333</span>     ┆ null       │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">85</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.494643</span> ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.164881</span>     ┆ null       │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">100</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.523819</span> ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.006154</span>     ┆ null       │
+│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">110</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.141067</span> ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.053176</span>     ┆ null       │
+└─────┴──────────┴──────┴──────────────┴────────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="gaussian-process" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-process">Gaussian Process</h3>
+</section>
 </section>
 <section id="decomposable-models" class="level2">
 <h2 class="anchored" data-anchor-id="decomposable-models">Decomposable models</h2>
 <p>Some commenters on Andrew’s blog…</p>
 <p>All intervals are 80% credibility…</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ag(x)%20=%20g_1(x)%20+%20g_2(x)%20%5C%5C%0Ay%20%5Csim%20%5Cmathrm%7BNormal%7D(g(x),%20%5Csigma)%20%5C%5C%0A%5Csigma%20%5Csim%20%5Cmathrm%7BHalfNormal%7D(1)%0A%5Cend%7Balign%7D%0A"></p>
-<section id="laurent-polynomial" class="level3">
-<h3 class="anchored" data-anchor-id="laurent-polynomial">Laurent polynomial</h3>
-<p>Degree = 2, order = -1.</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ag(x)%20=%20ax%5E%7B-1%7D%20+%20bx%20+%20cx%5E2%0A"></p>
-</section>
-<section id="siler" class="level3">
-<h3 class="anchored" data-anchor-id="siler">Siler</h3>
+<section id="additive" class="level3">
+<h3 class="anchored" data-anchor-id="additive">Additive</h3>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ag(x)%20=%20%5Calpha_1%20%5Cexp(-%5Clambda_1%20x)%20+%20%5Calpha_2%20+%20%5Calpha_3%20%5Cexp(%5Clambda_2%20x)%0A"></p>
 <p>With priors:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A%5Calpha%20%5Csim%20%5Cmathrm%7BNormal%7D(0,%202)%20%5C%5C%0A%5Clambda%20%5Csim%20%5Cmathrm%7BHalfNormal%7D(0.01)%20%5C%5C%0A%5Cend%7Balign%7D%0A"></p>
-<div id="cell-parametric-models-siler-prior-predictive" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="cell-parametric-models-siler-prior-predictive" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <figure class="figure">
 <p><img src="https://assuncaolfi.github.io/blog/non-monotonic/index_files/figure-html/parametric-models-siler-prior-predictive-output-1.png" id="parametric-models-siler-prior-predictive" width="599" height="445" class="figure-img"></p>
@@ -70,18 +111,10 @@
 </div>
 </div>
 </div>
-<div id="cell-parametric-models-siler-posterior-predictive" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display" data-execution_count="4">
-<div>
-<figure class="figure">
-<p><img src="https://assuncaolfi.github.io/blog/non-monotonic/index_files/figure-html/parametric-models-siler-posterior-predictive-output-1.png" id="parametric-models-siler-posterior-predictive" width="599" height="445" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
 </section>
-<section id="mcelreath" class="level3">
-<h3 class="anchored" data-anchor-id="mcelreath">McElreath</h3>
+<section id="multiplicative" class="level3">
+<h3 class="anchored" data-anchor-id="multiplicative">Multiplicative</h3>
+<p>McElreath</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ag(x)%20=%20%5Cexp(-ax)%20(1%20-%20exp(-bx))%5Ec%0A"></p>
 </section>
 </section>
