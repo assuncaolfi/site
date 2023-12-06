@@ -6,14 +6,14 @@
       version="2.0">
 <channel>
 <title>Luís Assunção</title>
-<link>https://assuncaolfi.github.io/blog.html</link>
-<atom:link href="https://assuncaolfi.github.io/blog.xml" rel="self" type="application/rss+xml"/>
+<link>https://assuncaolfi.github.io/site/blog.html</link>
+<atom:link href="https://assuncaolfi.github.io/site/blog.xml" rel="self" type="application/rss+xml"/>
 <description>My personal website</description>
 <generator>quarto-1.4.373</generator>
 <lastBuildDate>Fri, 17 Nov 2023 03:00:00 GMT</lastBuildDate>
 <item>
   <title>Decomposable non-monotonic models</title>
-  <link>https://assuncaolfi.github.io/blog/non-monotonic/index.html</link>
+  <link>https://assuncaolfi.github.io/site/blog/non-monotonic/index.html</link>
   <description><![CDATA[ 
 
 
@@ -49,7 +49,7 @@ Warning
 <p>We could control for other variables, such as the computer type (desk or laptop) or gender, but let’s assume there are no confounding effects at play here.</p>
 <div id="cell-mind-in-eyes-plot" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="7">
-<p><img src="https://assuncaolfi.github.io/blog/non-monotonic/index_files/figure-html/mind-in-eyes-plot-output-1.png" id="mind-in-eyes-plot" width="599" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/mind-in-eyes-plot-output-1.png" id="mind-in-eyes-plot" width="599" height="445"></p>
 </div>
 </div>
 </section>
@@ -99,7 +99,7 @@ Warning
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A%5Calpha%20%5Csim%20%5Cmathrm%7BNormal%7D(0,%202)%20%5C%5C%0A%5Clambda%20%5Csim%20%5Cmathrm%7BHalfNormal%7D(0.01)%20%5C%5C%0A%5Cend%7Balign%7D%0A"></p>
 <div id="cell-parametric-models-siler-prior-predictive" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="9">
-<p><img src="https://assuncaolfi.github.io/blog/non-monotonic/index_files/figure-html/parametric-models-siler-prior-predictive-output-1.png" id="parametric-models-siler-prior-predictive" width="599" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/parametric-models-siler-prior-predictive-output-1.png" id="parametric-models-siler-prior-predictive" width="599" height="445"></p>
 </div>
 </div>
 </section>
@@ -136,12 +136,12 @@ November 17, 2023. <a href="https://assuncaolfi.github.io/blog/non-monotonic">ht
   <category>causal</category>
   <category>cognitive</category>
   <category>modeling</category>
-  <guid>https://assuncaolfi.github.io/blog/non-monotonic/index.html</guid>
+  <guid>https://assuncaolfi.github.io/site/blog/non-monotonic/index.html</guid>
   <pubDate>Fri, 17 Nov 2023 03:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Picking a fantasy football team</title>
-  <link>https://assuncaolfi.github.io/blog/fantasy-football/index.html</link>
+  <link>https://assuncaolfi.github.io/site/blog/fantasy-football/index.html</link>
   <description><![CDATA[ 
 
 
@@ -725,20 +725,20 @@ font-style: inherit;">return</span> teams</span></code></pre></div>
 <p>And we can plot out cumulative performance during the season:</p>
 <div id="cell-team-picking-backtest-score" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display" data-execution_count="16">
-<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="604" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="604" height="445"></p>
 </div>
 </div>
 <p>This might seem like a perfect campaign at first, but it’s possible that, early in the season, we didn’t have enough budget to pick the best scoring teams. To test this hypothesis, we backtest the same strategy with unlimited budget from the start:</p>
 <div id="cell-team-picking-backtest-score-unlimited-budget" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display" data-execution_count="17">
-<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="613" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="613" height="445"></p>
 </div>
 </div>
 <p>Both runs are nearly identical, which is evidence that focusing on appreciation is not so important if we have accurate predictions for the scores. If we predict scores perfectly, we get a near perfect run.</p>
 <p>To put our backtests into perspective, <a href="https://ge.globo.com/cartola/noticia/2022/12/03/cartola-2022-com-larga-vantagem-mosquito-bar-8-vence-liga-premiada-meliuz-e-fatura-r-20-mil.ghtml">the 2022 season champion had a total score of 3434.37</a>. This is very impressive and not very far from the near perfect run.</p>
 <div id="cell-team-picking-backtest-champion" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display" data-execution_count="18">
-<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="605" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="605" height="445"></p>
 </div>
 </div>
 </section>
@@ -758,7 +758,7 @@ font-style: inherit;">return</span> teams</span></code></pre></div>
 <p>In this model, <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7B%5Cbeta%7D"> is simply a vector of player averages. Let’s also consider that players that show up in the middle of the season have an average of zero before their first round. This will be our baseline model.</p>
 <div id="cell-score-prediction-player-average" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display" data-execution_count="19">
-<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="608" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="608" height="445"></p>
 </div>
 </div>
 </section>
@@ -771,7 +771,7 @@ font-style: inherit;">return</span> teams</span></code></pre></div>
 <p>This model performs significantly better than the average model, possibly because of the partial pooling between the random effects, that pulls large effects towards the overall mean <span class="citation" data-cites="clark2019shrinkage">(Clark 2019)</span>. In our dataset, it’s common for players that played one or two games to have large averages by chance.</p>
 <div id="cell-score-prediction-player-random-effects" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display" data-execution_count="20">
-<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="608" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="608" height="445"></p>
 </div>
 </div>
 </section>
@@ -783,7 +783,7 @@ font-style: inherit;">return</span> teams</span></code></pre></div>
 <p>This model brings more context to our predictions. It also provides a reasonable way to predict a new player, by setting their <img src="https://latex.codecogs.com/png.latex?b%20=%200"> (the mean of the random effects). However, it does not improve significantly over our random effects model.</p>
 <div id="cell-score-prediction-fixture-mixed-effects" class="cell" data-execution_count="22">
 <div class="cell-output cell-output-display" data-execution_count="21">
-<p><img src="https://assuncaolfi.github.io/blog/fantasy-football/index_files/figure-html/score-prediction-fixture-mixed-effects-output-1.png" id="score-prediction-fixture-mixed-effects" width="608" height="445"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/score-prediction-fixture-mixed-effects-output-1.png" id="score-prediction-fixture-mixed-effects" width="608" height="445"></p>
 </div>
 </div>
 </section>
@@ -829,7 +829,7 @@ September 21, 2023. <a href="https://assuncaolfi.github.io/blog/fantasy-football
   <category>football</category>
   <category>optimization</category>
   <category>prediction</category>
-  <guid>https://assuncaolfi.github.io/blog/fantasy-football/index.html</guid>
+  <guid>https://assuncaolfi.github.io/site/blog/fantasy-football/index.html</guid>
   <pubDate>Thu, 21 Sep 2023 03:00:00 GMT</pubDate>
 </item>
 </channel>
