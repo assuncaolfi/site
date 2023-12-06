@@ -5,9 +5,6 @@ about:
   image: assets/me.jpeg
   image-shape: round
   links:
-    - icon: folder
-      text: CV
-      href: cv.html
     - icon: envelope
       text: Email
       href: mailto:assuncaolfi@gmail.com
