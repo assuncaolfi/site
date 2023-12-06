@@ -7,7 +7,7 @@ about:
   links:
     - icon: folder
       text: CV
-      href: assets/cv.qmd
+      href: cv.html
     - icon: envelope
       text: Email
       href: mailto:assuncaolfi@gmail.com
