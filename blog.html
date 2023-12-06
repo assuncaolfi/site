@@ -63,9 +63,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-tags',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -92,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 <link rel="alternate" type="application/rss+xml" title="Luís Assunção" href="blog.xml" data-external="1"></head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -132,9 +132,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"><div class="category" data-category="causal">causal</div><div class="category" data-category="cognitive">cognitive</div><div class="category" data-category="football">football</div><div class="category" data-category="modeling">modeling</div><div class="category" data-category="optimization">optimization</div><div class="category" data-category="prediction">prediction</div></div></div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -147,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="causal,cognitive,modeling" data-listing-date-sort="1700179200000" data-listing-file-modified-sort="1701880728207" data-listing-date-modified-sort="1701820800000" data-listing-reading-time-sort="5" data-listing-word-count-sort="878">
+<div class="quarto-post image-right" data-index="0" data-categories="causal,cognitive,modeling" data-listing-date-sort="1700179200000" data-listing-file-modified-sort="1701880977073" data-listing-date-modified-sort="1701820800000" data-listing-reading-time-sort="5" data-listing-word-count-sort="878">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./blog/non-monotonic/index.html" class="no-external">Decomposable non-monotonic models</a>
@@ -164,7 +162,7 @@ Nov 17, 2023
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="football,optimization,prediction" data-listing-date-sort="1695254400000" data-listing-file-modified-sort="1701880728195" data-listing-date-modified-sort="1701820800000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3084">
+<div class="quarto-post image-right" data-index="1" data-categories="football,optimization,prediction" data-listing-date-sort="1695254400000" data-listing-file-modified-sort="1701880977061" data-listing-date-modified-sort="1701820800000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3084">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./blog/fantasy-football/index.html" class="no-external">Picking a fantasy football team</a>

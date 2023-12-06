@@ -1,1 +1,1 @@
-Sitemap: https://assuncaolfi.github.io/sitemap.xml
+Sitemap: https://assuncaolfi.github.io/site/sitemap.xml
