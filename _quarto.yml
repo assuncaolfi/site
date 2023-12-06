@@ -18,6 +18,8 @@ website:
         href: blog.qmd
       - icon: rss
         href: blog.xml
+      - text: / CV
+        href: cv.qmd
       # - text: / References
       #   href: references.qmd
   search: false
