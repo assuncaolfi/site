@@ -16,7 +16,7 @@ about:
       href: https://github.com/assuncaolfi
     - icon: linkedin
       text: LinkedIn
-      href: https://assuncaolfi.github.io
+      href: https://linkedin.com/in/assuncaolfi/en
 format:
   html: default
 ---

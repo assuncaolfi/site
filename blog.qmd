@@ -2,13 +2,13 @@
 format:
   html: default
 listing:
-  categories: unnumbered
+  categories: false
   contents: blog
   feed: true
   field-display-names:
     date: " "
     title: " "
-  fields: [date, title]
+  fields: [date, title, tags]
   filter-ui: false
   sort-ui: false
   sort: "date desc"

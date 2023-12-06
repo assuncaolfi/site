@@ -4,7 +4,7 @@ project:
 
 website:
   title: "Luís Assunção"
-  site-url: https://assuncaolfi.github.io
+  site-url: https://assuncaolfi.github.io/site
   repo-url: https://github.com/assuncaolfi/site
   description: "My personal website"
   favicon: assets/favicon.png
