@@ -12,7 +12,7 @@ dependencies = [
     "pyarrow~=14.0.1",
     "pymc~=5.6.1",
     "numpy~=1.24.4",
-    "site @ git+https://github.com/assuncaolfi/site/",
+    "blog @ git+https://github.com/assuncaolfi/site/",
 ]
 requires-python = ">= 3.8"
 

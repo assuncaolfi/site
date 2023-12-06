@@ -8,6 +8,7 @@
 
 -e file:.
 arviz==0.16.1
+blog @ git+https://github.com/assuncaolfi/site/
 cachetools==5.3.2
 cloudpickle==3.0.0
 cons==0.4.6
@@ -41,7 +42,6 @@ pytz==2023.3.post1
 rich==13.7.0
 scipy==1.11.4
 seaborn==0.13.0
-site @ git+https://github.com/assuncaolfi/site/
 six==1.16.0
 toolz==0.12.0
 typing-extensions==4.8.0

@@ -7,7 +7,9 @@
 
 # %% [markdown]
 """
-_This post is a work in progress._
+::: {.callout-warning}
+This post is a work in progress.
+:::
 
 Recently, I helped design an experiment measuring a binary response against a
 continuous delay time. If the user did not do the thing at time zero, then we
@@ -26,8 +28,8 @@ gets older, they get 1) better at the sport and 2) physically weaker.
 Andrew Gelman wrote about this a couple of times in his blog: see 
 [this post from 2018](https://statmodeling.stat.columbia.edu/2018/09/07/bothered-non-monotonicity-heres-one-quick-trick-make-happy/)
 and [this one from 2023](https://statmodeling.stat.columbia.edu/2023/01/01/how-to-model-a-non-monotonic-relation/),
-as well as their comments, which also informed this post. Gelman proposed that
-we should model these processes like this:
+as well as their comments, which also informed this post. Gelman proposed
+modeling these processes with:
 
 $$g(x) = g_1(x) + g_2(x),$$
 
@@ -37,12 +39,24 @@ $g_2(x)$ is a monotonically decreasing function with a left asymptote.
 
 In this post, we will go over some of these models and test them on a dataset.
 
-## Mind-in-Eyes
+## Digit Span
+
+The Digit Span is a verbal working memory test, part of the Wechsler Adult
+Intelligence Scale (WAIS) and Wechsler Memory Scale (WMS) supertests. In the
+Digit Span test, subjects must repeat lists of digits, either in the same or
+reversed order.
 
 The dataset for the study is available... [@Hartshorne2015]
 
-We could control for other variables, such as the computer type (desk or
-laptop), but let's assume there are no confounding effects at play here.
+> Participants in Experiment 2 (N = 10,394; age range = 10–69 years old) [...]
+> were visitors to TestMyBrain.org, who took part in experiments in order to
+> contribute to scientific research and in exchange for performance-related
+> feedback.3 We continued data collection for each experiment for approximately
+> 1 year, sufficient to obtain around 10,000 participants, which allowed fine-
+> grained age- of-peak-performance analysis.
+
+We could control for other variables, such as the computer type (desk or laptop)
+or gender, but let's assume there are no confounding effects at play here.
 """
 
 # %%
@@ -50,25 +64,26 @@ laptop), but let's assume there are no confounding effects at play here.
 from rich.pretty import pprint
 import polars as pl
 
-mind_eyes = (
-    pl.read_csv("data/mind-in-eyes.csv")
-    .with_columns(total_correct=pl.col("total.correct"))
-    .select("age", "total_correct")
+experiment = (
+    pl.read_csv("data/experiment-2.csv")
+    .with_columns(digit_span=pl.col("DigitSpan"))
+    .select("age", "digit_span")
     .with_columns(
-        y=(pl.col("total_correct") - pl.col("total_correct").mean())
-        / pl.col("total_correct").std()
+        y=(pl.col("digit_span") - pl.col("digit_span").mean())
+        / pl.col("digit_span").std()
     )
 )
 
 # %%
 # | label: mind-in-eyes-plot
 from blog import theme
+import seaborn.objects as so
 
 theme.set()
 
 fig = (
-    so.Plot(mind_eyes.to_pandas(), x="age", y="y")
-    .label(x="Age", y="Correct answers (z-score)", title="Mind-in-Eyes Task")
+    so.Plot(experiment.to_pandas(), x="age", y="y")
+    .label(x="Age (years)", y="Performance (z-score)", title="Digit Span")
     .add(so.Dots())
 )
 fig
@@ -77,8 +92,44 @@ fig
 """
 ## Empirical models
 
-After struggling with splines,
-Splines, Gaussian Processes...
+Polynomials, smoothings, splines, etc.
+
+### Bootstrap
+
+> Estimates and standard errors for age of peak performance were calculated using
+> a bootstrap resam- pling procedure identical to the one used in Experiment 1
+> but applied to raw performance data. To dampen noise, we smoothed means for each
+> age using a moving 3-year window prior to identifying age of peak performance
+> in each sample. Other methods of dampening noise provide similar results. In
+> Experiment 2, age of peak performance was compared across tasks with paired t
+> tests. Within- participant data were not available in Experiment 3.
+"""
+
+# %%
+# | label: empirical-models-bootstrap
+n = 2500
+seed = 37
+
+bootstrap = (
+    experiment.sample(experiment.height * n, with_replacement=True, seed=seed)
+    .with_columns(
+        sample=pl.repeat(pl.arange(0, experiment.height), experiment.height * n)
+    )
+    .group_by("sample", "age")
+    .agg(mean=pl.col("digit_span").mean())
+    .group_by("age")
+    .agg(mean=pl.col("mean").mean(), se=pl.col("mean").std())
+    .sort("age")
+    .with_columns(
+        rolling_mean=pl.col("mean").rolling_mean(3),
+        rolling_se=pl.col("se").rolling_mean(3),
+    )
+)
+pprint(bootstrap)
+
+# %% [markdown]
+"""
+### Gaussian Process
 
 ## Decomposable models
 
@@ -94,15 +145,8 @@ y \sim \mathrm{Normal}(g(x), \sigma) \\
 \end{align}
 $$
 
-### Laurent polynomial
 
-Degree = 2, order = -1.
-
-$$
-g(x) = ax^{-1} + bx + cx^2
-$$
-
-### Siler
+### Additive
 
 $$
 g(x) = \alpha_1 \exp(-\lambda_1 x) + \alpha_2 + \alpha_3 \exp(\lambda_2 x)
@@ -146,8 +190,8 @@ def add_bands(fig: so.Plot, prediction: az.InferenceData, distribution: str):
     return fig
 
 
-ages = mind_eyes.get_column("age")
-y = mind_eyes.get_column("y")
+ages = experiment.get_column("age")
+y = experiment.get_column("y")
 domain = np.arange(ages.min(), ages.max() + 1)
 
 with pm.Model() as siler:
@@ -164,6 +208,7 @@ add_bands(fig, traces.prior.prediction, "Prior")
 
 # %%
 # | label: parametric-models-siler-posterior-predictive
+# | eval: false
 # | warning: false
 with siler:
     traces = pm.sample(progressbar=False, random_seed=37)
@@ -173,7 +218,9 @@ add_bands(fig, traces.posterior.prediction, "Posterior")
 
 # %% [markdown]
 """
-### McElreath
+### Multiplicative
+
+McElreath
 
 $$
 g(x) = \exp(-ax) (1 - exp(-bx))^c
