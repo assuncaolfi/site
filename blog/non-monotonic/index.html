@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.521">
+<meta name="generator" content="quarto-1.4.548">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-11-17">
+<meta name="dcterms.date" content="2024-01-23">
 
-<title>Luís Assunção - Decomposable non-monotonic models</title>
+<title>Luís Assunção - Additive aging curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -46,7 +80,6 @@ div.csl-indent {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../assets/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -72,23 +105,46 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans&amp;display=swap" rel="stylesheet">    
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans&amp;display=swap" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -96,96 +152,60 @@ div.csl-indent {
     <span class="navbar-title">Luís Assunção</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
-<span class="menu-text">/ About</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../blog.html"> 
-<span class="menu-text">/ Blog</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../../blog.xml"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../cv.html"> 
-<span class="menu-text">/ CV</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+        <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">Additive aging curve</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/assuncaolfi/site/blob/main/blog/non-monotonic/index.ipynb"><i class="bi"></i> Code</button></div></div>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 23, 2024</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">January 23, 2024</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#digit-span" id="toc-digit-span" class="nav-link active" data-scroll-target="#digit-span">Digit Span</a></li>
-  <li><a href="#empirical-models" id="toc-empirical-models" class="nav-link" data-scroll-target="#empirical-models">Empirical models</a>
-  <ul class="collapse">
-  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap">Bootstrap</a></li>
-  <li><a href="#gaussian-process" id="toc-gaussian-process" class="nav-link" data-scroll-target="#gaussian-process">Gaussian Process</a></li>
-  </ul></li>
-  <li><a href="#decomposable-models" id="toc-decomposable-models" class="nav-link" data-scroll-target="#decomposable-models">Decomposable models</a>
-  <ul class="collapse">
-  <li><a href="#additive" id="toc-additive" class="nav-link" data-scroll-target="#additive">Additive</a></li>
-  <li><a href="#multiplicative" id="toc-multiplicative" class="nav-link" data-scroll-target="#multiplicative">Multiplicative</a></li>
-  </ul></li>
-  <li><a href="#comparison" id="toc-comparison" class="nav-link" data-scroll-target="#comparison">Comparison</a></li>
+  <li><a href="#the-digit-span-test" id="toc-the-digit-span-test" class="nav-link active" data-scroll-target="#the-digit-span-test">The Digit Span test</a></li>
+  <li><a href="#bootstrap-estimates" id="toc-bootstrap-estimates" class="nav-link" data-scroll-target="#bootstrap-estimates">Bootstrap estimates</a></li>
+  <li><a href="#penalized-splines" id="toc-penalized-splines" class="nav-link" data-scroll-target="#penalized-splines">Penalized splines</a></li>
+  <li><a href="#two-component-function" id="toc-two-component-function" class="nav-link" data-scroll-target="#two-component-function">Two component function</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Decomposable non-monotonic models</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/assuncaolfi/site/blob/main/blog/non-monotonic/index.py"><i class="bi"></i> Code</button></div></div>
-  <div class="quarto-categories">
-    <div class="quarto-category">causal</div>
-    <div class="quarto-category">cognitive</div>
-    <div class="quarto-category">modeling</div>
-  </div>
-  </div>
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">November 17, 2023</p>
-    </div>
-  </div>
-  
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 6, 2023</p>
-    </div>
-  </div>
-    
-  </div>
-  
-
-
-</header>
 
 
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -198,132 +218,228 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This post is a work in progress.</p>
+<p>This post is a draft.</p>
 </div>
 </div>
-<p>Recently, I helped design an experiment measuring a binary response against a continuous delay time. If the user did not do the thing at time zero, then we delayed for a variable number of minutes before reminding them to do it. This delay had a non-monotonic relationship to the response: as the delay increased, the response responded differently. Initially, the response increased; then it peaked; and finally it decreased.</p>
-<p>Causally, we may decompose this process into two: assuming the user forgot to/ could not do the thing at the time, as the delay increases, they 1) become more available for and 2) lose interest in doing the thing. This is a common phenomena in different time-based scenarios. In sports, the “aging curve” refers to how a player’s performance increases with age, then decreases. As the player gets older, they get 1) better at the sport and 2) physically weaker.</p>
-<p>Andrew Gelman wrote about this a couple of times in his blog: see <a href="https://statmodeling.stat.columbia.edu/2018/09/07/bothered-non-monotonicity-heres-one-quick-trick-make-happy/">this post from 2018</a> and <a href="https://statmodeling.stat.columbia.edu/2023/01/01/how-to-model-a-non-monotonic-relation/">this one from 2023</a>, as well as their comments, which also informed this post. Gelman proposed modeling these processes with:</p>
+<p>Recently, I helped design an experiment measuring a binary response against a continuous variable. If the user abandoned their cart at time zero, then we delayed for a variable number of minutes before reminding them to finish their purchase. The delay has a non-monotonic relationship to the response: as the delay increases, so does the purchase rate; then the rate peaks; and finally it decreases.</p>
+<p>Causally, we may decompose this process into two: as the delay increases, the user 1) becomes more available for and 2) loses interest in purchasing the product. This is a common phenomena in different time-based scenarios. In sports, the “aging curve” refers to how a player’s performance increases with age, then decreases. As the player gets older, they get 1) better at the sport and 2) physically weaker.</p>
+<p>Andrew Gelman wrote about this a couple of times in his blog: see his posts from <a href="https://statmodeling.stat.columbia.edu/2018/09/07/bothered-non-monotonicity-heres-one-quick-trick-make-happy/">2018</a> and <a href="https://statmodeling.stat.columbia.edu/2023/01/01/how-to-model-a-non-monotonic-relation/">2023</a>, where Gelman suggests modeling these processes using an additive function like:</p>
 <p><span class="math display">\[g(x) = g_1(x) + g_2(x),\]</span></p>
 <p>where<br>
 <span class="math inline">\(g_1(x)\)</span> is a monotonically increasing function with a right asymptote; and<br>
 <span class="math inline">\(g_2(x)\)</span> is a monotonically decreasing function with a left asymptote.</p>
-<p>In this post, we will go over some of these models and test them on a dataset.</p>
-<section id="digit-span" class="level2">
-<h2 class="anchored" data-anchor-id="digit-span">Digit Span</h2>
-<p>The Digit Span is a verbal working memory test, part of the Wechsler Adult Intelligence Scale (WAIS) and Wechsler Memory Scale (WMS) supertests. In the Digit Span test, subjects must repeat lists of digits, either in the same or reversed order.</p>
-<p>The dataset for the study is available… <span class="citation" data-cites="Hartshorne2015">(<a href="#ref-Hartshorne2015" role="doc-biblioref">Hartshorne and Germine 2015</a>)</span></p>
-<blockquote class="blockquote">
-<p>Participants in Experiment 2 (N = 10,394; age range = 10–69 years old) […] were visitors to TestMyBrain.org, who took part in experiments in order to contribute to scientific research and in exchange for performance-related feedback.3 We continued data collection for each experiment for approximately 1 year, sufficient to obtain around 10,000 participants, which allowed fine- grained age- of-peak-performance analysis.</p>
+<p>In this post, we’ll analyse an experimental dataset by fitting and comparing three different models: a non-parametric bootstrap, a semi-parametric spline and a fully parametric decomposable curve like <span class="math inline">\(g(x)\)</span>.</p>
+<section id="the-digit-span-test" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-digit-span-test">The Digit Span test</h2>
+<p>The motivation for Gelman’s 2018 post was a study relating age to peak cognitive functioning <span class="citation" data-cites="Hartshorne2015">(<a href="#ref-Hartshorne2015" role="doc-biblioref">Hartshorne and Germine 2015</a>)</span>. According to the study, one of their experiments was a large scale online experimentation platform:</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Hartshorne2015" class="csl-entry" role="listitem">
+Hartshorne, Joshua K., and Laura T. Germine. 2015. <span>“When Does Cognitive Functioning Peak? The Asynchronous Rise and Fall of Different Cognitive Abilities Across the Life Span.”</span> <em>Psychological Science</em> 26 (4): 433–43. <a href="https://doi.org/10.1177/0956797614567339">https://doi.org/10.1177/0956797614567339</a>.
+</div></div><blockquote class="blockquote">
+<p>Participants in Experiment 2 (N = 10,394; age range = 10–69 years old) […] were visitors to TestMyBrain.org, who took part in experiments in order to contribute to scientific research and in exchange for performance-related feedback. […] We continued data collection for each experiment for approximately 1 year, sufficient to obtain around 10,000 participants, which allowed fine-grained age-of-peak-performance analysis.</p>
 </blockquote>
-<p>We could control for other variables, such as the computer type (desk or laptop) or gender, but let’s assume there are no confounding effects at play here.</p>
-<div id="cell-mind-in-eyes-plot" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="7">
+<p>The dataset for Experiment 2 is available online <span class="citation" data-cites="Germine_Hartshorne_2016">(<a href="#ref-Germine_Hartshorne_2016" role="doc-biblioref">Germine and Hartshorne 2016</a>)</span> and includes results of the Digit Span verbal working memory test, part of the Wechsler Adult Intelligence Scale (WAIS) and Wechsler Memory Scale (WMS) supertests. In the Digit Span test, subjects must repeat lists of digits, either in the same or reversed order.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Germine_Hartshorne_2016" class="csl-entry" role="listitem">
+Germine, Laura, and Joshua K Hartshorne. 2016. <span>“Hartshorne &amp; Germine (2015) When Does Cognitive Functioning Peak?”</span> OSF. <a href="https://osf.io/f2saj">osf.io/f2saj</a>.
+</div></div><p>Let’s plot the relationship between age and Digit Span performance:</p>
+<div id="cell-digit-span-plot" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/mind-in-eyes-plot-output-1.png" id="mind-in-eyes-plot" width="599" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/digit-span-plot-output-1.png" id="digit-span-plot" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Visually, it’s still unclear if this relationship follows an aging curve, but we’ll get back to this matter in the next section.</p>
 </section>
-<section id="empirical-models" class="level2">
-<h2 class="anchored" data-anchor-id="empirical-models">Empirical models</h2>
-<p>Polynomials, smoothings, splines, etc.</p>
-<section id="bootstrap" class="level3">
-<h3 class="anchored" data-anchor-id="bootstrap">Bootstrap</h3>
+<section id="bootstrap-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="bootstrap-estimates">Bootstrap estimates</h2>
+<p>In the original paper, the authors describe a bootstrap resampling procedure to estimate the distribution of ages of peak performance:</p>
 <blockquote class="blockquote">
-<p>Estimates and standard errors for age of peak performance were calculated using a bootstrap resam- pling procedure identical to the one used in Experiment 1 but applied to raw performance data. To dampen noise, we smoothed means for each age using a moving 3-year window prior to identifying age of peak performance in each sample. Other methods of dampening noise provide similar results. In Experiment 2, age of peak performance was compared across tasks with paired t tests. Within- participant data were not available in Experiment 3.</p>
+<p>Estimates and standard errors for age of peak performance were calculated using a bootstrap resampling procedure identical to the one used in Experiment 1 but applied to raw performance data. To dampen noise, we smoothed means for each age using a moving 3-year window prior to identifying age of peak performance in each sample. Other methods of dampening noise provide similar results.</p>
 </blockquote>
-<div id="cell-empirical-models-bootstrap" class="cell" data-execution_count="4">
-<div id="empirical-models-bootstrap" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">81</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span><span style="font-weight: bold">)</span>
-┌─────┬──────────┬──────┬──────────────┬────────────┐
-│ age ┆ mean     ┆ se   ┆ rolling_mean ┆ rolling_se │
-│ --- ┆ ---      ┆ ---  ┆ ---          ┆ ---        │
-│ i64 ┆ f64      ┆ f64  ┆ f64          ┆ f64        │
-╞═════╪══════════╪══════╪══════════════╪════════════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.0</span>      ┆ null ┆ null         ┆ null       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7.0</span>      ┆ null ┆ null         ┆ null       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.7501</span>   ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.250033</span>     ┆ null       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.409251</span> ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.719784</span>     ┆ null       │
-│ …   ┆ …        ┆ …    ┆ …            ┆ …          │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">83</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.0</span>      ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.333333</span>     ┆ null       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">85</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.494643</span> ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.164881</span>     ┆ null       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">100</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.523819</span> ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.006154</span>     ┆ null       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">110</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.141067</span> ┆ null ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.053176</span>     ┆ null       │
-└─────┴──────────┴──────┴──────────────┴────────────┘
-</pre>
+<p>Let’s decompose this method (as I understand it) into steps:</p>
+<ol type="1">
+<li>With replacement, sample <span class="math inline">\(n\)</span> observations from the dataset;</li>
+<li>Calculate the mean performance for each sample and age;</li>
+<li>Repeat steps 1 and 2 <span class="math inline">\(m\)</span> times to get multiple samples;</li>
+<li>Sort each sample by age and smooth age means using a 3-year rolling average;</li>
+<li>Find the age of peak performance for each sample.</li>
+</ol>
+<div id="bootstrap" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> experiment.height</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>nm <span class="op">=</span> n <span class="op">*</span> m</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="dv">37</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> (</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    experiment.sample(nm, with_replacement<span class="op">=</span><span class="va">True</span>, seed<span class="op">=</span>seed)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    .with_columns(sample<span class="op">=</span>pl.arange(<span class="dv">1</span>, nm <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> m)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"sample"</span>, <span class="st">"age"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    .agg(mean<span class="op">=</span>pl.col(<span class="st">"y"</span>).mean())</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"sample"</span>, <span class="st">"age"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    .with_columns(smoothed_mean<span class="op">=</span>pl.col(<span class="st">"mean"</span>).rolling_mean(<span class="dv">3</span>).over(<span class="st">"sample"</span>))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>peak_performance <span class="op">=</span> samples.group_by(<span class="st">"sample"</span>).agg(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    age<span class="op">=</span>pl.col(<span class="st">"age"</span>).get(pl.col(<span class="st">"smoothed_mean"</span>).arg_max())</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This yields the following bootstrap distribution of ages of peak performance:</p>
+<div id="cell-bootstrap-distribution" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/bootstrap-distribution-output-1.png" id="bootstrap-distribution" width="599" height="445" class="figure-img"></p>
+</figure>
 </div>
 </div>
+</div>
+<p>This distribution suggests two important things:</p>
+<ol type="1">
+<li>The most probable age of peak performance is, by far, 33;</li>
+<li>There is a non-negligible probability that the age of peak performance happens in the early 20s, but a negligible probability that it happens in the late 20s.</li>
+</ol>
+<p>Thing 2 certainly deserves attention. This is possibly caused by a confound variable or some measuring error, but I won’t investigate this any further. Instead, let’s get back to estimating curves. We will use the samples from step 4 to summarize the distribution of mean performances. For each age, we calculate the mean and 90% interquantile range, yielding a nonparametric curve:</p>
+<div id="cell-bootstrap-curve" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/bootstrap-curve-output-1.png" id="bootstrap-curve" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This figure is analogue to figure … in the paper. Since this is an entirely empirical curve, there isn’t much to interpret here (maybe unitary changes?). However, the curve shape indicates an aging-curve-likeness.</p>
 </section>
-<section id="gaussian-process" class="level3">
-<h3 class="anchored" data-anchor-id="gaussian-process">Gaussian Process</h3>
-</section>
-</section>
-<section id="decomposable-models" class="level2">
-<h2 class="anchored" data-anchor-id="decomposable-models">Decomposable models</h2>
-<p>Some commenters on Andrew’s blog…</p>
-<p>All intervals are 80% credibility…</p>
+<section id="penalized-splines" class="level2">
+<h2 class="anchored" data-anchor-id="penalized-splines">Penalized splines</h2>
+<p>Splines are wiggly curves…</p>
 <p><span class="math display">\[
 \begin{align}
-g(x) = g_1(x) + g_2(x) \\
-y \sim \mathrm{Normal}(g(x), \sigma) \\
-\sigma \sim \mathrm{HalfNormal}(1)
+g(x) &amp;= \alpha + Z \bf{b} \\
+y &amp;\sim \mathrm{Normal}(g(x), \sigma) \\
+\alpha &amp;\sim \mathrm{Student}(3, 0, 0.1) \\
+\sigma &amp;\sim \mathrm{HalfCauchy}(1)
 \end{align}
 \]</span></p>
-<section id="additive" class="level3">
-<h3 class="anchored" data-anchor-id="additive">Additive</h3>
-<p><span class="math display">\[
-g(x) = \alpha_1 \exp(-\lambda_1 x) + \alpha_2 + \alpha_3 \exp(\lambda_2 x)
-\]</span></p>
-<p>With priors:</p>
+<p>Polynomials have runge swings…</p>
+<p>We could make assumptions about the data generating process to help us pick the number of knots. Instead, let’s pick an arbitrary large number of knots (say, 15) and let the model itself learn how wiggly the curve should be.</p>
 <p><span class="math display">\[
 \begin{align}
-\alpha \sim \mathrm{Normal}(0, 2) \\
-\lambda \sim \mathrm{HalfNormal}(0.01) \\
+b &amp;= \tau \bf{z} \\
+\tau &amp;\sim \mathrm{HalfCauchy}(1) \\
+\bf{z} &amp;\sim \mathrm{Normal}(0, 1)
 \end{align}
 \]</span></p>
-<div id="cell-parametric-models-siler-prior-predictive" class="cell" data-execution_count="5">
+<p>https://www.pymc.io/projects/examples/en/latest/howto/spline.html<br>
+https://www.tjmahr.com/random-effects-penalized-splines-same-thing/<br>
+https://elevanth.org/blog/2017/09/07/metamorphosis-multilevel-model/</p>
+<div id="spline-model" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymc <span class="im">as</span> pm</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> spline:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    Z <span class="op">=</span> pm.ConstantData(<span class="st">"Z"</span>, Z)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    α <span class="op">=</span> pm.StudentT(<span class="st">"α"</span>, <span class="dv">3</span>, <span class="dv">0</span>, sigma<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    τ <span class="op">=</span> pm.HalfCauchy(<span class="st">"τ"</span>, <span class="dv">1</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> pm.Normal(<span class="st">"z"</span>, <span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>Z.shape[<span class="dv">1</span>])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> pm.Deterministic(<span class="st">"b"</span>, τ <span class="op">*</span> z)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    μ <span class="op">=</span> pm.Deterministic(<span class="st">"μ"</span>, α <span class="op">+</span> pm.math.dot(Z, b.T))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    σ <span class="op">=</span> pm.HalfCauchy(<span class="st">"σ"</span>, <span class="dv">1</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    pm.Normal(<span class="st">"y"</span>, μ, σ, observed<span class="op">=</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="spline-sample" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-stderr">
+<pre><code>Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+Sequential sampling (4 chains in 1 job)
+NUTS: [α, τ, z, σ]
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 51 seconds.</code></pre>
+</div>
+</div>
+<p>::: {#cell-spline-plot .cell 0=‘s’ 1=‘p’ 2=‘l’ 3=‘i’ 4=‘n’ 5=‘e’ 6=‘-’ 7=‘p’ 8=‘l’ 9=‘o’ 10=‘t’ execution_count=9}</p>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/parametric-models-siler-prior-predictive-output-1.png" id="parametric-models-siler-prior-predictive" width="599" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/spline-plot-output-1.png" id="spline-plot" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<p>:::</p>
+<p>Splines are good interpolation tools…<br>
+“when, where and how things change”… https://www.youtube.com/watch?v=Zxokd_Eqrcg&amp;t=506s<br>
+However, it’s not a good idea to extrapolate…</p>
+</section>
+<section id="two-component-function" class="level2">
+<h2 class="anchored" data-anchor-id="two-component-function">Two component function</h2>
+<p>All intervals are 80% credibility…</p>
+<p><span class="math display">\[
+\begin{align}
+g_1(x) &amp;= \alpha_1 + \beta_1 \exp(-\lambda_1 x) \\
+g_2(x) &amp;= \alpha_2 + \beta_2 (1 - \exp(-\lambda_2 x)) \\
+g(x) &amp;= g_1(x) + g_2(x) \\
+     &amp;= \alpha + \beta_1 \exp(-\lambda_1 x) + \beta_2 (1 - \exp(-\lambda_2 x))
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+y &amp;\sim \mathrm{Normal}(g(x), \sigma) \\
+\alpha &amp;\sim \mathrm{Normal}(0, 2) \\
+\lambda &amp;\sim \mathrm{Exponential}(0.01) \\
+\sigma &amp;\sim \mathrm{Exponential}(1) \\
+\end{align}
+\]</span></p>
+<div id="decomposable-models-additive" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymc <span class="im">as</span> pm</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> g(x):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> α[<span class="dv">0</span>] <span class="op">*</span> pm.math.exp(<span class="op">-</span>λ[<span class="dv">0</span>] <span class="op">*</span> x) <span class="op">+</span> α[<span class="dv">1</span>] <span class="op">+</span> α[<span class="dv">2</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> pm.math.exp(<span class="op">-</span>λ[<span class="dv">1</span>] <span class="op">*</span> x))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> model:</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> pm.ConstantData(<span class="st">"x"</span>, x)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    α <span class="op">=</span> pm.Normal(<span class="st">"alpha"</span>, <span class="dv">0</span>, <span class="dv">2</span>, size<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    λ <span class="op">=</span> pm.HalfNormal(<span class="st">"lambda"</span>, <span class="fl">0.01</span>, size<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    μ <span class="op">=</span> pm.Deterministic(<span class="st">"mu"</span>, g(x))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    σ <span class="op">=</span> pm.HalfNormal(<span class="st">"sigma"</span>, <span class="dv">1</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    pm.Normal(<span class="st">"observed"</span>, mu<span class="op">=</span>μ, sigma<span class="op">=</span>σ, observed<span class="op">=</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-decomposable-models-additive-draws" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/decomposable-models-additive-draws-output-1.png" id="decomposable-models-additive-draws" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="multiplicative" class="level3">
-<h3 class="anchored" data-anchor-id="multiplicative">Multiplicative</h3>
-<p>McElreath</p>
-<p><span class="math display">\[
-g(x) = \exp(-ax) (1 - exp(-bx))^c
-\]</span></p>
-</section>
-</section>
-<section id="comparison" class="level2">
-<h2 class="anchored" data-anchor-id="comparison">Comparison</h2>
-<p>Let’s compare using LOO…</p>
-
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Hartshorne2015" class="csl-entry" role="listitem">
-Hartshorne, Joshua K., and Laura T. Germine. 2015. <span>“When Does Cognitive Functioning Peak? The Asynchronous Rise and Fall of Different Cognitive Abilities Across the Life Span.”</span> <em>Psychological Science</em> 26 (4): 433–43. <a href="https://doi.org/10.1177/0956797614567339">https://doi.org/10.1177/0956797614567339</a>.
+<p><span class="math display">\[d/dx g(x) = a_2 b_2 e^(b_2 (-x)) - a_1 b_1 e^(b_1 (-x))\]</span> <span class="math display">\[x = \frac{\log(\frac{a_1 b_1}{a_2 b_2})}{b_1 - b_2}\]</span></p>
+<div id="cell-decomposable-models-peak" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/decomposable-models-peak-output-1.png" id="decomposable-models-peak" width="642" height="445" class="figure-img"></p>
+</figure>
 </div>
-</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2023,
+</div>
+</div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2024,
   author = {Assunção, Luís},
-  title = {Decomposable Non-Monotonic Models},
-  date = {2023-11-17},
+  title = {Additive Aging Curve},
+  date = {2024-01-23},
   url = {https://assuncaolfi.github.io/site/blog/non-monotonic},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Assunção, Luís. 2023. <span>“Decomposable Non-Monotonic Models.”</span>
-November 17, 2023. <a href="https://assuncaolfi.github.io/site/blog/non-monotonic">https://assuncaolfi.github.io/site/blog/non-monotonic</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Assunção, Luís. 2024. <span>“Additive Aging Curve.”</span> January 23,
+2024. <a href="https://assuncaolfi.github.io/site/blog/non-monotonic">https://assuncaolfi.github.io/site/blog/non-monotonic</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -504,27 +620,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -539,10 +634,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -551,8 +650,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -734,43 +840,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           }
         });
       }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
-      });
-    }
-  }
 });
 </script>
 </div> <!-- /content -->

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Luís Assunção</title>
+<link>https://assuncaolfi.github.io/site/</link>
+<atom:link href="https://assuncaolfi.github.io/site/index.xml" rel="self" type="application/rss+xml"/>
+<description>My personal website</description>
+<generator>quarto-1.4.548</generator>
+<lastBuildDate>Tue, 23 Jan 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Additive aging curve</title>
+  <link>https://assuncaolfi.github.io/site/blog/non-monotonic/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post is a draft.</p>
+</div>
+</div>
+<p>Recently, I helped design an experiment measuring a binary response against a continuous variable. If the user abandoned their cart at time zero, then we delayed for a variable number of minutes before reminding them to finish their purchase. The delay has a non-monotonic relationship to the response: as the delay increases, so does the purchase rate; then the rate peaks; and finally it decreases.</p>
+<p>Causally, we may decompose this process into two: as the delay increases, the user 1) becomes more available for and 2) loses interest in purchasing the product. This is a common phenomena in different time-based scenarios. In sports, the “aging curve” refers to how a player’s performance increases with age, then decreases. As the player gets older, they get 1) better at the sport and 2) physically weaker.</p>
+<p>Andrew Gelman wrote about this a couple of times in his blog: see his posts from <a href="https://statmodeling.stat.columbia.edu/2018/09/07/bothered-non-monotonicity-heres-one-quick-trick-make-happy/">2018</a> and <a href="https://statmodeling.stat.columbia.edu/2023/01/01/how-to-model-a-non-monotonic-relation/">2023</a>, where Gelman suggests modeling these processes using an additive function like:</p>
+<p><img src="https://latex.codecogs.com/png.latex?g(x)%20=%20g_1(x)%20+%20g_2(x),"></p>
+<p>where<br>
+<img src="https://latex.codecogs.com/png.latex?g_1(x)"> is a monotonically increasing function with a right asymptote; and<br>
+<img src="https://latex.codecogs.com/png.latex?g_2(x)"> is a monotonically decreasing function with a left asymptote.</p>
+<p>In this post, we’ll analyse an experimental dataset by fitting and comparing three different models: a non-parametric bootstrap, a semi-parametric spline and a fully parametric decomposable curve like <img src="https://latex.codecogs.com/png.latex?g(x)">.</p>
+<section id="the-digit-span-test" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-digit-span-test">The Digit Span test</h2>
+<p>The motivation for Gelman’s 2018 post was a study relating age to peak cognitive functioning <span class="citation" data-cites="Hartshorne2015">(Hartshorne and Germine 2015)</span>. According to the study, one of their experiments was a large scale online experimentation platform:</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Hartshorne2015" class="csl-entry">
+Hartshorne, Joshua K., and Laura T. Germine. 2015. <span>“When Does Cognitive Functioning Peak? The Asynchronous Rise and Fall of Different Cognitive Abilities Across the Life Span.”</span> <em>Psychological Science</em> 26 (4): 433–43. <a href="https://doi.org/10.1177/0956797614567339">https://doi.org/10.1177/0956797614567339</a>.
+</div></div><blockquote class="blockquote">
+<p>Participants in Experiment 2 (N = 10,394; age range = 10–69 years old) […] were visitors to TestMyBrain.org, who took part in experiments in order to contribute to scientific research and in exchange for performance-related feedback. […] We continued data collection for each experiment for approximately 1 year, sufficient to obtain around 10,000 participants, which allowed fine-grained age-of-peak-performance analysis.</p>
+</blockquote>
+<p>The dataset for Experiment 2 is available online <span class="citation" data-cites="Germine_Hartshorne_2016">(Germine and Hartshorne 2016)</span> and includes results of the Digit Span verbal working memory test, part of the Wechsler Adult Intelligence Scale (WAIS) and Wechsler Memory Scale (WMS) supertests. In the Digit Span test, subjects must repeat lists of digits, either in the same or reversed order.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Germine_Hartshorne_2016" class="csl-entry">
+Germine, Laura, and Joshua K Hartshorne. 2016. <span>“Hartshorne &amp; Germine (2015) When Does Cognitive Functioning Peak?”</span> OSF. <a href="https://osf.io/f2saj">osf.io/f2saj</a>.
+</div></div><p>Let’s plot the relationship between age and Digit Span performance:</p>
+<div id="cell-digit-span-plot" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/digit-span-plot-output-1.png" id="digit-span-plot" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Visually, it’s still unclear if this relationship follows an aging curve, but we’ll get back to this matter in the next section.</p>
+</section>
+<section id="bootstrap-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="bootstrap-estimates">Bootstrap estimates</h2>
+<p>In the original paper, the authors describe a bootstrap resampling procedure to estimate the distribution of ages of peak performance:</p>
+<blockquote class="blockquote">
+<p>Estimates and standard errors for age of peak performance were calculated using a bootstrap resampling procedure identical to the one used in Experiment 1 but applied to raw performance data. To dampen noise, we smoothed means for each age using a moving 3-year window prior to identifying age of peak performance in each sample. Other methods of dampening noise provide similar results.</p>
+</blockquote>
+<p>Let’s decompose this method (as I understand it) into steps:</p>
+<ol type="1">
+<li>With replacement, sample <img src="https://latex.codecogs.com/png.latex?n"> observations from the dataset;</li>
+<li>Calculate the mean performance for each sample and age;</li>
+<li>Repeat steps 1 and 2 <img src="https://latex.codecogs.com/png.latex?m"> times to get multiple samples;</li>
+<li>Sort each sample by age and smooth age means using a 3-year rolling average;</li>
+<li>Find the age of peak performance for each sample.</li>
+</ol>
+<div id="bootstrap" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> polars <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pl</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> experiment.height</span>
+<span id="cb1-4">m <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10000</span></span>
+<span id="cb1-5">nm <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> m</span>
+<span id="cb1-6">seed <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">37</span></span>
+<span id="cb1-7">samples <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (</span>
+<span id="cb1-8">    experiment.sample(nm, with_replacement<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, seed<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>seed)</span>
+<span id="cb1-9">    .with_columns(sample<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pl.arange(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, nm <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> m)</span>
+<span id="cb1-10">    .group_by(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sample"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"age"</span>)</span>
+<span id="cb1-11">    .agg(mean<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pl.col(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"y"</span>).mean())</span>
+<span id="cb1-12">    .sort(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sample"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"age"</span>)</span>
+<span id="cb1-13">    .with_columns(smoothed_mean<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pl.col(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mean"</span>).rolling_mean(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>).over(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sample"</span>))</span>
+<span id="cb1-14">)</span>
+<span id="cb1-15">peak_performance <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> samples.group_by(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sample"</span>).agg(</span>
+<span id="cb1-16">    age<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pl.col(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"age"</span>).get(pl.col(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"smoothed_mean"</span>).arg_max())</span>
+<span id="cb1-17">)</span></code></pre></div>
+</div>
+<p>This yields the following bootstrap distribution of ages of peak performance:</p>
+<div id="cell-bootstrap-distribution" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/bootstrap-distribution-output-1.png" id="bootstrap-distribution" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This distribution suggests two important things:</p>
+<ol type="1">
+<li>The most probable age of peak performance is, by far, 33;</li>
+<li>There is a non-negligible probability that the age of peak performance happens in the early 20s, but a negligible probability that it happens in the late 20s.</li>
+</ol>
+<p>Thing 2 certainly deserves attention. This is possibly caused by a confound variable or some measuring error, but I won’t investigate this any further. Instead, let’s get back to estimating curves. We will use the samples from step 4 to summarize the distribution of mean performances. For each age, we calculate the mean and 90% interquantile range, yielding a nonparametric curve:</p>
+<div id="cell-bootstrap-curve" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/bootstrap-curve-output-1.png" id="bootstrap-curve" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This figure is analogue to figure … in the paper. Since this is an entirely empirical curve, there isn’t much to interpret here (maybe unitary changes?). However, the curve shape indicates an aging-curve-likeness.</p>
+</section>
+<section id="penalized-splines" class="level2">
+<h2 class="anchored" data-anchor-id="penalized-splines">Penalized splines</h2>
+<p>Splines are wiggly curves…</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ag(x)%20&amp;=%20%5Calpha%20+%20Z%20%5Cbf%7Bb%7D%20%5C%5C%0Ay%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(g(x),%20%5Csigma)%20%5C%5C%0A%5Calpha%20&amp;%5Csim%20%5Cmathrm%7BStudent%7D(3,%200,%200.1)%20%5C%5C%0A%5Csigma%20&amp;%5Csim%20%5Cmathrm%7BHalfCauchy%7D(1)%0A%5Cend%7Balign%7D%0A"></p>
+<p>Polynomials have runge swings…</p>
+<p>We could make assumptions about the data generating process to help us pick the number of knots. Instead, let’s pick an arbitrary large number of knots (say, 15) and let the model itself learn how wiggly the curve should be.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ab%20&amp;=%20%5Ctau%20%5Cbf%7Bz%7D%20%5C%5C%0A%5Ctau%20&amp;%5Csim%20%5Cmathrm%7BHalfCauchy%7D(1)%20%5C%5C%0A%5Cbf%7Bz%7D%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(0,%201)%0A%5Cend%7Balign%7D%0A"></p>
+<p>https://www.pymc.io/projects/examples/en/latest/howto/spline.html<br>
+https://www.tjmahr.com/random-effects-penalized-splines-same-thing/<br>
+https://elevanth.org/blog/2017/09/07/metamorphosis-multilevel-model/</p>
+<div id="spline-model" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pymc <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pm</span>
+<span id="cb2-2"></span>
+<span id="cb2-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">with</span> pm.Model() <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> spline:</span>
+<span id="cb2-4">    Z <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.ConstantData(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Z"</span>, Z)</span>
+<span id="cb2-5">    α <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.StudentT(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"α"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, sigma<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>)</span>
+<span id="cb2-6">    τ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.HalfCauchy(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"τ"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-7">    z <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.Normal(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"z"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>Z.shape[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])</span>
+<span id="cb2-8">    b <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.Deterministic(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"b"</span>, τ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> z)</span>
+<span id="cb2-9">    μ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.Deterministic(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"μ"</span>, α <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> pm.math.dot(Z, b.T))</span>
+<span id="cb2-10">    σ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.HalfCauchy(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"σ"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-11">    pm.Normal(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"y"</span>, μ, σ, observed<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>y)</span></code></pre></div>
+</div>
+<div id="spline-sample" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-stderr">
+<pre><code>Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+Sequential sampling (4 chains in 1 job)
+NUTS: [α, τ, z, σ]
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 51 seconds.</code></pre>
+</div>
+</div>
+<p>::: {#cell-spline-plot .cell 0=‘s’ 1=‘p’ 2=‘l’ 3=‘i’ 4=‘n’ 5=‘e’ 6=‘-’ 7=‘p’ 8=‘l’ 9=‘o’ 10=‘t’ execution_count=9}</p>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/spline-plot-output-1.png" id="spline-plot" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<p>:::</p>
+<p>Splines are good interpolation tools…<br>
+“when, where and how things change”… https://www.youtube.com/watch?v=Zxokd_Eqrcg&amp;t=506s<br>
+However, it’s not a good idea to extrapolate…</p>
+</section>
+<section id="two-component-function" class="level2">
+<h2 class="anchored" data-anchor-id="two-component-function">Two component function</h2>
+<p>All intervals are 80% credibility…</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ag_1(x)%20&amp;=%20%5Calpha_1%20+%20%5Cbeta_1%20%5Cexp(-%5Clambda_1%20x)%20%5C%5C%0Ag_2(x)%20&amp;=%20%5Calpha_2%20+%20%5Cbeta_2%20(1%20-%20%5Cexp(-%5Clambda_2%20x))%20%5C%5C%0Ag(x)%20&amp;=%20g_1(x)%20+%20g_2(x)%20%5C%5C%0A%20%20%20%20%20&amp;=%20%5Calpha%20+%20%5Cbeta_1%20%5Cexp(-%5Clambda_1%20x)%20+%20%5Cbeta_2%20(1%20-%20%5Cexp(-%5Clambda_2%20x))%0A%5Cend%7Balign%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ay%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(g(x),%20%5Csigma)%20%5C%5C%0A%5Calpha%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(0,%202)%20%5C%5C%0A%5Clambda%20&amp;%5Csim%20%5Cmathrm%7BExponential%7D(0.01)%20%5C%5C%0A%5Csigma%20&amp;%5Csim%20%5Cmathrm%7BExponential%7D(1)%20%5C%5C%0A%5Cend%7Balign%7D%0A"></p>
+<div id="decomposable-models-additive" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pymc <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pm</span>
+<span id="cb4-2"></span>
+<span id="cb4-3"></span>
+<span id="cb4-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> g(x):</span>
+<span id="cb4-5">    y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> α[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> pm.math.exp(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>λ[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> α[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> α[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> pm.math.exp(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>λ[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x))</span>
+<span id="cb4-6">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> y</span>
+<span id="cb4-7"></span>
+<span id="cb4-8"></span>
+<span id="cb4-9"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">with</span> pm.Model() <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> model:</span>
+<span id="cb4-10">    x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.ConstantData(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"x"</span>, x)</span>
+<span id="cb4-11">    α <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.Normal(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"alpha"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb4-12">    λ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.HalfNormal(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lambda"</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>, size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb4-13">    μ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.Deterministic(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mu"</span>, g(x))</span>
+<span id="cb4-14">    σ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.HalfNormal(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sigma"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb4-15">    pm.Normal(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"observed"</span>, mu<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>μ, sigma<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>σ, observed<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>y)</span></code></pre></div>
+</div>
+<div id="cell-decomposable-models-additive-draws" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/decomposable-models-additive-draws-output-1.png" id="decomposable-models-additive-draws" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><img src="https://latex.codecogs.com/png.latex?d/dx%20g(x)%20=%20a_2%20b_2%20e%5E(b_2%20(-x))%20-%20a_1%20b_1%20e%5E(b_1%20(-x))"> <img src="https://latex.codecogs.com/png.latex?x%20=%20%5Cfrac%7B%5Clog(%5Cfrac%7Ba_1%20b_1%7D%7Ba_2%20b_2%7D)%7D%7Bb_1%20-%20b_2%7D"></p>
+<div id="cell-decomposable-models-peak" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/decomposable-models-peak-output-1.png" id="decomposable-models-peak" width="642" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2024,
+  author = {Assunção, Luís},
+  title = {Additive Aging Curve},
+  date = {2024-01-23},
+  url = {https://assuncaolfi.github.io/site/blog/non-monotonic},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2024" class="csl-entry quarto-appendix-citeas">
+Assunção, Luís. 2024. <span>“Additive Aging Curve.”</span> January 23,
+2024. <a href="https://assuncaolfi.github.io/site/blog/non-monotonic">https://assuncaolfi.github.io/site/blog/non-monotonic</a>.
+</div></div></section></div> ]]></description>
+  <guid>https://assuncaolfi.github.io/site/blog/non-monotonic/</guid>
+  <pubDate>Tue, 23 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
