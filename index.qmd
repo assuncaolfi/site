@@ -15,7 +15,7 @@ listing:
 
 ## About [{{< bi envelope-at-fill >}}](mailto:assuncaolfi@gmail.com) [{{< bi github >}}](https://github.com/assuncaolfi) [{{< bi linkedin >}}](https://linkedin.com/in/assuncaolfi/en)
 
-Hello! I'm Luís Assunção[^1].
+Hello! I'm Luís[^1].
 
 [^1]: ![](assets/me.jpeg)
 

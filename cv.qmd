@@ -1,14 +1,13 @@
 ---
 title: Curriculum Vitae
+subtitle: Luís Assunção
 format:
   html:
     toc: true
   pdf: default
 ---
 
-# Luís Assunção
-
-[{{< bi envelope-fill >}} Email]({{< var email >}}) /
+[{{< bi envelope-at-fill >}} Email]({{< var email >}}) /
 [{{< bi github >}} GitHub]({{< var github >}}) /
 [{{< bi linkedin >}} LinkedIn]({{< var linkedin >}}) /
 [{{< bi globe-americas >}} Website]({{< var website >}})
@@ -63,22 +62,22 @@ cohort](https://pubmed.ncbi.nlm.nih.gov/36375382/)
 Posts on data analysis using tools such as Python, `polars`, `pymc`, `pulp`,
 `seaborn`:
 
-* [Picking a fantasy football team](https://assuncaolfi.github.io/site/blog/fantasy-football):
+* [Drafting a fantasy football team](https://assuncaolfi.github.io/site/blog/fantasy-football):
   In this post, I delve into the data for the 2022 season of a brazilian fantasy
-  football league; formulate a mixed integer linear program to pick the optimal
+  football league, formulate a mixed integer linear program to draft the optimal
   team; and present initial concepts for forecasting player scores using mixed
   effects linear models.
 
-* [Decomposable non-monotonic models](https://assuncaolfi.github.io/site/blog/non-monotonic):
-  In this post, I compare empirical and parametric approaches to model non-
-  monotonic relationships using a Digit Span verbal working memory cognitive test
-  dataset.
+* [Additive aging curve](https://assuncaolfi.github.io/site/blog/aging-curve):
+  In this post, I compare empirical, semi-parametric and parametric approaches
+  to modeling aging-curve-like non-monotonic relationships using data from a
+  verbal working memory test.
 
 
 ### Repositories
 
 * [site](https://github.com/assuncaolfi/site): My website and blog post codes
-using Quarto Markdown
+using Quarto
 * [mldc2020](https://github.com/assuncaolfi/mldc2020): Recommendation system and
 7th place solution to the Mercado Libre Data Challenge 2020
 * [rstanbtm](https://github.com/assuncaolfi/rstanbtm): Biterm Topic Model
