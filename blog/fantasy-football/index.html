@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.543">
+<meta name="generator" content="quarto-1.4.548">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2023-09-21">
 
-<title>Luís Assunção - Picking a fantasy football team</title>
+<title>Luís Assunção - Drafting a fantasy football team</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,7 +18,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
@@ -105,9 +105,6 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans&amp;display=swap" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -161,52 +158,57 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">Picking a fantasy football team</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/assuncaolfi/site/blob/main/blog/fantasy-football/index.ipynb"><i class="bi"></i> Code</button></div></div>
-                                <div class="quarto-categories">
-                <div class="quarto-category">football</div>
-                <div class="quarto-category">optimization</div>
-                <div class="quarto-category">prediction</div>
-              </div>
-                  </div>
+      <div class="quarto-title-block"><div><h1 class="title">Drafting a fantasy football team</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/assuncaolfi/site/blob/main/blog/fantasy-football/index.ipynb"><i class="bi"></i> Code</button></div></div>
+                      </div>
   </div>
-
-
+    
+  
   <div class="quarto-title-meta">
 
-
+      
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
         <p class="date">September 21, 2023</p>
       </div>
     </div>
-
+    
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
         <p class="date-modified">January 23, 2024</p>
       </div>
     </div>
-
+      
     </div>
-
-
+    
+  
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Contents</h2>
-
+   
   <ul>
   <li><a href="#the-game" id="toc-the-game" class="nav-link active" data-scroll-target="#the-game">The game</a></li>
   <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data wrangling</a>
   <ul class="collapse">
   <li><a href="#filtering-participation" id="toc-filtering-participation" class="nav-link" data-scroll-target="#filtering-participation">Filtering participation</a></li>
+  <li><a href="#imputing-scores" id="toc-imputing-scores" class="nav-link" data-scroll-target="#imputing-scores">Imputing scores</a></li>
   <li><a href="#adding-fixtures" id="toc-adding-fixtures" class="nav-link" data-scroll-target="#adding-fixtures">Adding fixtures</a></li>
   <li><a href="#aligning-variables" id="toc-aligning-variables" class="nav-link" data-scroll-target="#aligning-variables">Aligning variables</a></li>
   </ul></li>
+  <li><a href="#team-picking" id="toc-team-picking" class="nav-link" data-scroll-target="#team-picking">Team picking</a>
+  <ul class="collapse">
+  <li><a href="#backtesting" id="toc-backtesting" class="nav-link" data-scroll-target="#backtesting">Backtesting</a></li>
+  </ul></li>
+  <li><a href="#score-prediction" id="toc-score-prediction" class="nav-link" data-scroll-target="#score-prediction">Score prediction</a>
+  <ul class="collapse">
   <li><a href="#player-average" id="toc-player-average" class="nav-link" data-scroll-target="#player-average">Player average</a></li>
+  <li><a href="#player-random-effects" id="toc-player-random-effects" class="nav-link" data-scroll-target="#player-random-effects">Player random effects</a></li>
+  <li><a href="#fixture-mixed-effects" id="toc-fixture-mixed-effects" class="nav-link" data-scroll-target="#fixture-mixed-effects">Fixture mixed effects</a></li>
+  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
@@ -220,7 +222,7 @@ window.Quarto = {
 
 <p><a href="http://cartola.globo.com">Cartola</a> is a fantasy football league following the Brazilian Championship A Series.</p>
 <p>Cartola offers a public API to access data for the current round. A couple of years ago, I created a script to automate data retrieval to a <a href="https://github.com/assuncaolfi/tophat/tree/main">repository</a>, which now hosts comprehensive historical data since 2022.</p>
-<p>In this post, we will delve into the data for the 2022 season, formulate a mixed integer linear program to pick the optimal team, and present initial concepts for forecasting player scores using mixed effects linear models.</p>
+<p>In this post, I will delve into the data for the 2022 season, formulate a mixed integer linear program to draft the optimal team, and present initial concepts for forecasting player scores using mixed effects linear models.</p>
 <section id="the-game" class="level2">
 <h2 class="anchored" data-anchor-id="the-game">The game</h2>
 <p>We begin the season with a budget of C$ 100, the game’s paper currency.</p>
@@ -228,17 +230,72 @@ window.Quarto = {
 <p>The market is available until the round starts. Players then earn scores based on their real-life match performances. Our team’s score is the aggregate of our players’ scores, with our captain’s score doubled in the 2022 season.</p>
 <p>Following the conclusion of the round, player values are recalibrated based on performance -— with increases for scores above their average and decreases for below-average performances. Our budget for the next round is our previous budget, plus the sum of our players’ value variations.</p>
 </section>
-<section id="data-wrangling" class="level2 page-columns page-full">
+<section id="data-wrangling" class="level2">
 <h2 class="anchored" data-anchor-id="data-wrangling">Data wrangling</h2>
 <p>Let’s talk about data structures: each round has a market, and each market is a list of players. A player is a structure like this:</p>
+<div id="cell-data-wrangling-players" class="cell" data-execution_count="1">
+<div id="data-wrangling-players" class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>Player(round=0, player=42234, team=264, position=1, games=0, average=0.0, value=10.0, score=0.0, appreciation=0.0, minimum=4.53)</code></pre>
+</div>
+</div>
 <p>Let’s get the list of markets for 2022 and flatten it into a single DataFrame:</p>
+<div id="data-wrangling-dataframe" class="cell" data-execution_count="76">
+<div class="cell-output cell-output-stdout">
+<pre><code>+-------------------------------------------------------------------------------+
+| round   player   team   position   …   value   score   appreciation   minimum |
++===============================================================================+
+| 1       37424    1371   6          …   3.0     0.0     0.0            0.0     |
+| 1       37646    314    3          …   5.0     0.0     0.0            2.3     |
+| 1       37656    266    1          …   9.0     0.0     0.0            4.08    |
+| …       …        …      …          …   …       …       …              …       |
+| 38      121398   354    4          …   1.0     0.0     0.0            0.0     |
+| 38      121399   354    4          …   1.0     0.0     0.0            0.0     |
+| 38      121400   354    5          …   1.0     0.0     0.0            0.0     |
++-------------------------------------------------------------------------------+
+shape: (30_063, 10)</code></pre>
+</div>
+</div>
 <p>Now, let’s focus on a specific <code>player</code> to illustrate our data while we wrangle it:</p>
+<div id="data-wrangling-example" class="cell" data-execution_count="61">
+<div class="cell-output cell-output-stdout">
+<pre><code>+-------------------------------------------------------------------------------+
+| round   player   team   position   …   value   score   appreciation   minimum |
++===============================================================================+
+| 1       42234    264    1          …   10.0    0.0     0.0            4.53    |
+| 2       42234    264    1          …   7.93    2.0     -2.07          5.52    |
+| 3       42234    264    1          …   10.44   11.0    2.51           4.75    |
+| …       …        …      …          …   …       …       …              …       |
+| 36      42234    264    1          …   11.51   0.0     0.03           3.63    |
+| 37      42234    264    1          …   12.68   0.0     1.17           9.29    |
+| 38      42234    264    1          …   11.06   0.0     -1.62          1.37    |
++-------------------------------------------------------------------------------+
+shape: (38, 10)</code></pre>
+</div>
+</div>
 <section id="filtering-participation" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-participation">Filtering participation</h3>
 <p>Players will show up in the market for many rounds that they do not participate in. However, for our analysis, we are only interested in players that actually played a game in the round.</p>
 <p>Each player has a <code>status</code> field intended to indicate their participation in the round. However, this field is often inaccurate, likely due to the API data being updated before the round.</p>
 <p>One solution is to keep only rows where there is an increase in the number of <code>games</code> the player has played:</p>
-<p>r”“” ## Imputing scores</p>
+<div id="data-wrangling-round-participation" class="cell" data-execution_count="62">
+<div class="cell-output cell-output-stdout">
+<pre><code>+------------------------+
+| round   player   games |
++========================+
+| 1       42234    0     |
+| 2       42234    1     |
+| 3       42234    2     |
+| …       …        …     |
+| 36      42234    28    |
+| 37      42234    29    |
+| 38      42234    30    |
++------------------------+
+shape: (31, 3)</code></pre>
+</div>
+</div>
+</section>
+<section id="imputing-scores" class="level3">
+<h3 class="anchored" data-anchor-id="imputing-scores">Imputing scores</h3>
 <p>Similarly, the player <code>score</code> field is often inaccurate, likely for the same reasons as the <code>status</code> field. Fortunately, the <code>average</code> field is reliable, allowing us to recover the <code>score</code>:</p>
 <p><span class="math display">\[
 \begin{align*}
@@ -248,18 +305,90 @@ s_t
 = 2\mathrm{Average}(\mathbf{s}_{1:t}) - \mathrm{Average}(\mathbf{s}_{1:(t-1)}),
 \end{align*}
 \]</span></p>
-<p>where <span class="math inline">\(\mathbf{s}\)</span> is the vector of scores for a given player across all rounds. ““”</p>
+<p>where <span class="math inline">\(\mathbf{s}\)</span> is the vector of scores for a given player across all rounds.</p>
+<div id="data-wrangling-missing-scores" class="cell" data-execution_count="63">
+<div class="cell-output cell-output-stdout">
+<pre><code>+----------------------------------+
+| round   player   score   average |
++==================================+
+| 1       42234    2.0     2.0     |
+| 2       42234    11.0    6.5     |
+| 3       42234    9.5     8.0     |
+| …       …        …       …       |
+| 36      42234    5.1     4.96    |
+| 37      42234    4.62    4.79    |
+| 38      42234    4.79    4.79    |
++----------------------------------+
+shape: (31, 4)</code></pre>
+</div>
+</div>
 </section>
 <section id="adding-fixtures" class="level3">
 <h3 class="anchored" data-anchor-id="adding-fixtures">Adding fixtures</h3>
 <p>Let’s fetch the list of fixtures to enrich our dataset. A fixture is an object like:</p>
+<div id="cell-data-wrangling-fixtures" class="cell" data-execution_count="65">
+<div id="data-wrangling-fixtures" class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>Fixture(round=1, home=282, away=285)</code></pre>
+</div>
+</div>
 <p>Let’s consolidate these fixtures into a single DataFrame and then pivot them into a long format:</p>
+<div id="data-wrangling-fixtures-long" class="cell" data-execution_count="66">
+<div class="cell-output cell-output-stdout">
+<pre><code>+------------------------------+
+| round   team   versus   home |
++==============================+
+| 1       282    285      1    |
+| 1       266    277      1    |
+| 1       276    293      1    |
+| …       …      …        …    |
+| 38      276    290      0    |
+| 38      294    1371     0    |
+| 38      263    293      0    |
++------------------------------+
+shape: (760, 4)</code></pre>
+</div>
+</div>
 <p>Finally, let’s join this data to our dataset:</p>
+<div id="data-wrangling-fixtures-join" class="cell" data-execution_count="67">
+<div class="cell-output cell-output-stdout">
+<pre><code>+---------------------------------------+
+| round   player   team   versus   home |
++=======================================+
+| 1       42234    264    263      0    |
+| 2       42234    264    314      1    |
+| 3       42234    264    275      0    |
+| …       …        …      …        …    |
+| 36      42234    264    354      1    |
+| 37      42234    264    294      0    |
+| 38      42234    264    282      1    |
++---------------------------------------+
+shape: (31, 5)</code></pre>
+</div>
+</div>
 </section>
-<section id="aligning-variables" class="level3 page-columns page-full">
+<section id="aligning-variables" class="level3">
 <h3 class="anchored" data-anchor-id="aligning-variables">Aligning variables</h3>
 <p>In our subsequent analysis, the <code>average</code> field will exclude the <code>score</code> from the given round. Additionally, the <code>appreciation</code> field will be calculated in relation to the round’s <code>score</code>.</p>
-<p>r”“” # Team picking</p>
+<div id="data-wrangling-lookahead-variables" class="cell" data-execution_count="68">
+<div class="cell-output cell-output-stdout">
+<pre><code>+---------------------------------------------------------+
+| round   player   average   value   score   appreciation |
++=========================================================+
+| 1       42234    0.0       10.0    2.0     -2.07        |
+| 2       42234    2.0       7.93    11.0    2.51         |
+| 3       42234    6.5       10.44   9.5     1.25         |
+| …       …        …         …       …       …            |
+| 36      42234    4.82      11.51   5.1     1.17         |
+| 37      42234    4.96      12.68   4.62    -1.62        |
+| 38      42234    4.79      11.06   4.79    0.0          |
++---------------------------------------------------------+
+shape: (31, 6)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="team-picking" class="level2">
+<h2 class="anchored" data-anchor-id="team-picking">Team picking</h2>
 <p>Now let’s solve the problem of picking the best team a given market. Let $ $ be the set of valid formations, then for each formation <span class="math inline">\(f \in
 \mathcal{F}\)</span>, solve:</p>
 <p><span class="math display">\[
@@ -272,80 +401,156 @@ s_t
 \]</span></p>
 <p>where</p>
 <p><span class="math inline">\(\mathbf{x}\)</span> is a variable vector of player picks in the market; <span class="math inline">\(\hat{\mathbf{s}}\)</span> is the vector of predicted player scores in the market; <span class="math inline">\(b\)</span> is our available budget for that round; <span class="math inline">\(\mathbf{P}\)</span> is the matrix of dummy-encoded player formations in the market.</p>
-<p>Finally, take the solution with the highest objective. ““”</p>
-<div id="team-picking-problem" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Problem(BaseModel):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    scores: List[<span class="bu">float</span>]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    values: List[<span class="bu">float</span>]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    budget: <span class="bu">float</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    positions: List[List[<span class="bu">int</span>]]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    formations: List[Formation]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>) <span class="op">-&gt;</span> List[pulp.LpSolution]:</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        formations <span class="op">=</span> [<span class="bu">list</span>(f.model_dump().values()) <span class="cf">for</span> f <span class="kw">in</span> <span class="va">self</span>.formations]</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        problems <span class="op">=</span> [<span class="va">self</span>.construct(f) <span class="cf">for</span> f <span class="kw">in</span> formations]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        [p.solve(pulp.COIN(msg<span class="op">=</span><span class="va">False</span>)) <span class="cf">for</span> p <span class="kw">in</span> problems]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        objectives <span class="op">=</span> [p.objective.value() <span class="cf">for</span> p <span class="kw">in</span> problems]</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        best <span class="op">=</span> np.argmax(np.array(objectives))</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        solution <span class="op">=</span> problems[best]</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        variables <span class="op">=</span> [v.value() <span class="cf">for</span> v <span class="kw">in</span> solution.variables()]</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        picks <span class="op">=</span> np.array(variables)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> picks</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>, formation: List[<span class="bu">int</span>]) <span class="op">-&gt;</span> pulp.LpProblem:</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>.scores)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> <span class="bu">len</span>(formation)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">=</span> pulp.LpProblem(<span class="st">"team_picking"</span>, pulp.LpMaximize)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        indexes <span class="op">=</span> [<span class="st">"pick_"</span> <span class="op">+</span> <span class="bu">str</span>(i).zfill(<span class="bu">len</span>(<span class="bu">str</span>(n))) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        picks <span class="op">=</span> [pulp.LpVariable(i, cat<span class="op">=</span>pulp.const.LpBinary) <span class="cf">for</span> i <span class="kw">in</span> indexes]</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">+=</span> pulp.lpDot(picks, <span class="va">self</span>.scores)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">+=</span> pulp.lpDot(picks, <span class="va">self</span>.values) <span class="op">&lt;=</span> <span class="va">self</span>.budget</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(m):</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            problem <span class="op">+=</span> pulp.lpDot(picks, <span class="va">self</span>.positions[i]) <span class="op">==</span> formation[i]</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> problem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Finally, take the solution with the highest objective.</p>
+<div id="team-picking-problem" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pulp</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Formation(BaseModel):</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    goalkeeper: <span class="bu">int</span> <span class="op">=</span> Field(alias<span class="op">=</span><span class="st">"gol"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    defender: <span class="bu">int</span> <span class="op">=</span> Field(alias<span class="op">=</span><span class="st">"zag"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    winger: <span class="bu">int</span> <span class="op">=</span> Field(alias<span class="op">=</span><span class="st">"lat"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    midfielder: <span class="bu">int</span> <span class="op">=</span> Field(alias<span class="op">=</span><span class="st">"mei"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    forward: <span class="bu">int</span> <span class="op">=</span> Field(alias<span class="op">=</span><span class="st">"ata"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    coach: <span class="bu">int</span> <span class="op">=</span> Field(alias<span class="op">=</span><span class="st">"tec"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Problem(BaseModel):</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    scores: List[<span class="bu">float</span>]</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    values: List[<span class="bu">float</span>]</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    budget: <span class="bu">float</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    positions: List[List[<span class="bu">int</span>]]</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    formations: List[Formation]</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> solve(<span class="va">self</span>) <span class="op">-&gt;</span> List[pulp.LpSolution]:</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        formations <span class="op">=</span> [<span class="bu">list</span>(f.model_dump().values()) <span class="cf">for</span> f <span class="kw">in</span> <span class="va">self</span>.formations]</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        problems <span class="op">=</span> [<span class="va">self</span>.construct(f) <span class="cf">for</span> f <span class="kw">in</span> formations]</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        [p.solve(pulp.COIN(msg<span class="op">=</span><span class="va">False</span>)) <span class="cf">for</span> p <span class="kw">in</span> problems]</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        objectives <span class="op">=</span> [p.objective.value() <span class="cf">for</span> p <span class="kw">in</span> problems]</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        best <span class="op">=</span> np.argmax(np.array(objectives))</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        solution <span class="op">=</span> problems[best]</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        variables <span class="op">=</span> [v.value() <span class="cf">for</span> v <span class="kw">in</span> solution.variables()]</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        picks <span class="op">=</span> np.array(variables)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> picks</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>, formation: List[<span class="bu">int</span>]) <span class="op">-&gt;</span> pulp.LpProblem:</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>.scores)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> <span class="bu">len</span>(formation)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">=</span> pulp.LpProblem(<span class="st">"team_picking"</span>, pulp.LpMaximize)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        indexes <span class="op">=</span> [<span class="st">"pick_"</span> <span class="op">+</span> <span class="bu">str</span>(i).zfill(<span class="bu">len</span>(<span class="bu">str</span>(n))) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>        picks <span class="op">=</span> [pulp.LpVariable(i, cat<span class="op">=</span>pulp.const.LpBinary) <span class="cf">for</span> i <span class="kw">in</span> indexes]</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">+=</span> pulp.lpDot(picks, <span class="va">self</span>.scores)</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">+=</span> pulp.lpDot(picks, <span class="va">self</span>.values) <span class="op">&lt;=</span> <span class="va">self</span>.budget</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(m):</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>            problem <span class="op">+=</span> pulp.lpDot(picks, <span class="va">self</span>.positions[i]) <span class="op">==</span> formation[i]</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> problem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>r”“” ## Backtesting</p>
-<p>By solving the team picking problem for all rounds, we can backtest our performance in the season. Before backtesting, let’s get the set of valid formations <span class="math inline">\(\mathcal{F}\)</span>: ““”</p>
+<section id="backtesting" class="level3">
+<h3 class="anchored" data-anchor-id="backtesting">Backtesting</h3>
+<p>By solving the team picking problem for all rounds, we can backtest our performance in the season. Before backtesting, let’s get the set of valid formations <span class="math inline">\(\mathcal{F}\)</span>:</p>
+<div id="cell-team-picking-formations" class="cell" data-execution_count="11">
+<div id="team-picking-formations" class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>[Formation(goalkeeper=1, defender=3, winger=0, midfielder=4, forward=3, coach=1),
+ Formation(goalkeeper=1, defender=3, winger=0, midfielder=5, forward=2, coach=1),
+ Formation(goalkeeper=1, defender=2, winger=2, midfielder=3, forward=3, coach=1),
+ Formation(goalkeeper=1, defender=2, winger=2, midfielder=4, forward=2, coach=1),
+ Formation(goalkeeper=1, defender=2, winger=2, midfielder=5, forward=1, coach=1),
+ Formation(goalkeeper=1, defender=3, winger=2, midfielder=3, forward=2, coach=1),
+ Formation(goalkeeper=1, defender=3, winger=2, midfielder=4, forward=1, coach=1)]</code></pre>
+</div>
+</div>
 <p>Knowing our formation constraints, we’re ready to backtest. Starting with a budget of C$ 100, for each round let’s:</p>
 <ol type="1">
 <li>Predict each player’s score based on their performance on previous rounds;</li>
 <li>Pick the team with the best total score;</li>
 <li>Add the sum of the team player’s appreciation to our budget.</li>
 </ol>
-<div id="team-picking-backtest" class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backtest(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    players: pl.DataFrame, predict: Callable, initial_budget: <span class="bu">float</span> <span class="op">=</span> <span class="fl">100.0</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> pl.DataFrame:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    rounds <span class="op">=</span> players.get_column(<span class="st">"round"</span>).<span class="bu">max</span>()</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    budget <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> rounds</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    teams <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> rounds</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    budget[<span class="dv">0</span>] <span class="op">=</span> initial_budget</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">round</span> <span class="kw">in</span> <span class="bu">range</span>(rounds):</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">round</span> <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            budget[<span class="bu">round</span>] <span class="op">=</span> budget[<span class="bu">round</span> <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> appreciation</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> players.<span class="bu">filter</span>(pl.col(<span class="st">"round"</span>) <span class="op">&lt;</span> <span class="bu">round</span> <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        candidates <span class="op">=</span> players.<span class="bu">filter</span>(pl.col(<span class="st">"round"</span>) <span class="op">==</span> <span class="bu">round</span> <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        candidates <span class="op">=</span> predict(data, candidates)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">=</span> Problem(</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            scores<span class="op">=</span>candidates.get_column(<span class="st">"prediction"</span>),</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            values<span class="op">=</span>candidates.get_column(<span class="st">"value"</span>),</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            positions<span class="op">=</span>candidates.get_column(<span class="st">"position"</span>).to_dummies(),</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            budget<span class="op">=</span>budget[<span class="bu">round</span>],</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            formations<span class="op">=</span>formations,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        picks <span class="op">=</span> problem.solve()</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        team <span class="op">=</span> candidates.<span class="bu">filter</span>(picks <span class="op">==</span> <span class="dv">1</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        teams[<span class="bu">round</span>] <span class="op">=</span> team</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        appreciation <span class="op">=</span> team.get_column(<span class="st">"appreciation"</span>).<span class="bu">sum</span>()</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    teams <span class="op">=</span> pl.concat(teams)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> teams</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="team-picking-backtest" class="cell" data-execution_count="77">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Callable</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backtest(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    players: pl.DataFrame, predict: Callable, initial_budget: <span class="bu">float</span> <span class="op">=</span> <span class="fl">100.0</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> pl.DataFrame:</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    rounds <span class="op">=</span> players.get_column(<span class="st">"round"</span>).<span class="bu">max</span>()</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    budget <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> rounds</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    teams <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> rounds</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    budget[<span class="dv">0</span>] <span class="op">=</span> initial_budget</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    appreciation <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">round</span> <span class="kw">in</span> <span class="bu">range</span>(rounds):</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">round</span> <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>            budget[<span class="bu">round</span>] <span class="op">=</span> budget[<span class="bu">round</span> <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> appreciation</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> players.<span class="bu">filter</span>(pl.col(<span class="st">"round"</span>) <span class="op">&lt;</span> <span class="bu">round</span> <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        candidates <span class="op">=</span> players.<span class="bu">filter</span>(pl.col(<span class="st">"round"</span>) <span class="op">==</span> <span class="bu">round</span> <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        candidates <span class="op">=</span> predict(data, candidates)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">=</span> Problem(</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            scores<span class="op">=</span>candidates.get_column(<span class="st">"prediction"</span>),</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            values<span class="op">=</span>candidates.get_column(<span class="st">"value"</span>),</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>            positions<span class="op">=</span>candidates.get_column(<span class="st">"position"</span>).to_dummies(),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>            budget<span class="op">=</span>budget[<span class="bu">round</span>],</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>            formations<span class="op">=</span>formations,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>        picks <span class="op">=</span> problem.solve()</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        team <span class="op">=</span> candidates.<span class="bu">filter</span>(picks <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        teams[<span class="bu">round</span>] <span class="op">=</span> team</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>        appreciation <span class="op">=</span> team.get_column(<span class="st">"appreciation"</span>).<span class="bu">sum</span>()</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    teams <span class="op">=</span> pl.concat(teams)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> teams</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Before exploring predictions, we’ll begin with a few hypothetical backtests using actual observed scores for team selection. Backtesting this strategy, this is our team in the first round:</p>
+<div id="team-picking-backtest-first-team" class="cell" data-execution_count="69">
+<div class="cell-output cell-output-stdout">
+<pre><code>+-----------------------------------------------------------------------------+
+| round   player   team   position   …   minimum   versus   home   prediction |
++=============================================================================+
+| 1       71571    356    1          …   3.19      1371     1      11.0       |
+| 1       42145    294    2          …   2.75      290      1      15.8       |
+| 1       105584   264    2          …   2.75      263      0      10.5       |
+| …       …        …      …          …   …         …        …      …          |
+| 1       89840    276    5          …   5.42      293      1      27.1       |
+| 1       104530   294    5          …   2.3       290      1      11.0       |
+| 1       97341    276    6          …   0.0       293      1      9.52       |
++-----------------------------------------------------------------------------+
+shape: (12, 13)</code></pre>
+</div>
+</div>
 <p>And we can plot out cumulative performance during the season:</p>
+<div id="cell-team-picking-backtest-score" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="604" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>This might seem like a perfect campaign at first, but it’s possible that, early in the season, we didn’t have enough budget to pick the best scoring teams. To test this hypothesis, we backtest the same strategy with unlimited budget from the start:</p>
+<div id="cell-team-picking-backtest-score-unlimited-budget" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="613" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Both runs are nearly identical, which is evidence that focusing on appreciation is not so important if we have accurate predictions for the scores. If we predict scores perfectly, we get a near perfect run.</p>
 <p>To put our backtests into perspective, <a href="https://ge.globo.com/cartola/noticia/2022/12/03/cartola-2022-com-larga-vantagem-mosquito-bar-8-vence-liga-premiada-meliuz-e-fatura-r-20-mil.ghtml">the 2022 season champion had a total score of 3434.37</a>. This is very impressive and not very far from the near perfect run.</p>
-<p>r”“” # Score prediction</p>
+<div id="cell-team-picking-backtest-champion" class="cell" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="608" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="score-prediction" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="score-prediction">Score prediction</h2>
 <p>For each round, we must predict <span class="math inline">\(\hat{s}\)</span>, the vector of score predictions, using data from previous rounds.</p>
 <p>However, during the first round, we don’t have any previous data to train our model. In this case, we need to include prior information. One way to do that would be to use data from previous seasons. However, we know a variable where this information is already encoded: the player <code>value</code>. Each season starts with players valued according to their past performance. Knowing this, all our models start with <span class="math inline">\(\hat{s} = v\)</span> in the first round.</p>
 <p>Let’s use Bambi <span class="citation" data-cites="Capretto2022">(<a href="#ref-Capretto2022" role="doc-biblioref">Capretto et al. 2022</a>)</span> and its default priors to fit our models. We won’t delve into convergence diagnostics, since we are more interested in the average of the predictive posteriors and the backtest itself is measure of the prediction quality.</p>
@@ -354,10 +559,8 @@ Capretto, Tomás, Camen Piho, Ravin Kumar, Jacob Westfall, Tal Yarkoni, and Osva
 </div><div id="ref-Bailey2013" class="csl-entry" role="listitem">
 Bailey, David H., Jonathan M. Borwein, Marcos Lopez de Prado, and Qiji Jim Zhu. 2013. <span>“The Probability of Back-Test over-Fitting.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.2326253">https://doi.org/10.2139/ssrn.2326253</a>.
 </div></div><p>One question that arises here is: why not use non-parametric models such as gradient boosted trees or neural nets? After some experimentation, I concluded they are not a good fit for this problem: either because they assume independence between observations, or because they are too data hungry. Also, tuning these models for backtests might lead us into a rabbit hole <span class="citation" data-cites="Bailey2013">(<a href="#ref-Bailey2013" role="doc-biblioref">Bailey et al. 2013</a>)</span>.</p>
-</section>
-</section>
-<section id="player-average" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="player-average">Player average</h2>
+<section id="player-average" class="level3">
+<h3 class="anchored" data-anchor-id="player-average">Player average</h3>
 <p><span class="math display">\[
 \begin{align*}
 \mathbf{\hat{s}} = \mathbf{Z} \mathbf{\beta} \\
@@ -365,8 +568,19 @@ Bailey, David H., Jonathan M. Borwein, Marcos Lopez de Prado, and Qiji Jim Zhu. 
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(\mathbf{Z}\)</span> is a dummy-encoded matrix of players; <span class="math inline">\(\mathbf{\beta}\)</span> is a vector of parameters for each player.</p>
-<p>In this model, <span class="math inline">\(\mathbf{\beta}\)</span> is simply a vector of player averages. Let’s also consider that players that show up in the middle of the season have an average of zero before their first round. This will be our baseline model. ““”</p>
-<p>r”“” ## Player random effects</p>
+<p>In this model, <span class="math inline">\(\mathbf{\beta}\)</span> is simply a vector of player averages. Let’s also consider that players that show up in the middle of the season have an average of zero before their first round. This will be our baseline model.</p>
+<div id="cell-score-prediction-player-average" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="608" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="player-random-effects" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="player-random-effects">Player random effects</h3>
 <p><span class="math display">\[
 \begin{align*}
 \mathbf{\hat{s}} = \alpha + \mathbf{Z} \mathbf{b} \\
@@ -374,15 +588,36 @@ Bailey, David H., Jonathan M. Borwein, Marcos Lopez de Prado, and Qiji Jim Zhu. 
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(\alpha\)</span> is an intercept and <span class="math inline">\(\mathbf{b}\)</span> is a vector of player random effects.</p>
-<p>This model performs significantly better than the average model, possibly because of the partial pooling between the random effects, that pulls large effects towards the overall mean <span class="citation" data-cites="clark2019shrinkage">(<a href="#ref-clark2019shrinkage" role="doc-biblioref">Clark 2019</a>)</span>. In our dataset, it’s common for players that played one or two games to have large averages by chance. ““”</p>
+<p>This model performs significantly better than the average model, possibly because of the partial pooling between the random effects, that pulls large effects towards the overall mean <span class="citation" data-cites="clark2019shrinkage">(<a href="#ref-clark2019shrinkage" role="doc-biblioref">Clark 2019</a>)</span>. In our dataset, it’s common for players that played one or two games to have large averages by chance.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-clark2019shrinkage" class="csl-entry" role="listitem">
 Clark, Michael. 2019. <span>“Michael Clark: Shrinkage in Mixed Effects Models.”</span> <a href="https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/">https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/</a>.
-</div></div><p>r”“” ## Fixture mixed effects</p>
+</div></div><div id="cell-score-prediction-player-random-effects" class="cell" data-message="false" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="608" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fixture-mixed-effects" class="level3">
+<h3 class="anchored" data-anchor-id="fixture-mixed-effects">Fixture mixed effects</h3>
 <p><span class="math display">\[
 \mathbf{\hat{s}} = \alpha + \mathbf{X} \mathbf{\beta} + \mathbf{Z} \mathbf{b},
 \]</span></p>
 <p>where <span class="math inline">\(\mathbf{X}\)</span> is a matrix of the dummy-encoded fixture variables: the player <code>team</code>, whether they are playing at <code>home</code>, and their <code>adversary</code> team variables; <span class="math inline">\(\mathbf{\beta}\)</span> is a vector of fixed effects.</p>
-<p>This model brings more context to our predictions. It also provides a reasonable way to predict a new player, by setting their <span class="math inline">\(b = 0\)</span> (the mean of the random effects). However, it does not improve significantly over our random effects model. ““”</p>
+<p>This model brings more context to our predictions. It also provides a reasonable way to predict a new player, by setting their <span class="math inline">\(b = 0\)</span> (the mean of the random effects). However, it does not improve significantly over our random effects model.</p>
+<div id="cell-score-prediction-fixture-mixed-effects" class="cell" data-message="false" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/score-prediction-fixture-mixed-effects-output-1.png" id="score-prediction-fixture-mixed-effects" width="608" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -402,13 +637,13 @@ Clark, Michael. 2019. <span>“Michael Clark: Shrinkage in Mixed Effects Models.
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2023,
   author = {Assunção, Luís},
-  title = {Picking a Fantasy Football Team},
+  title = {Drafting a Fantasy Football Team},
   date = {2023-09-21},
   url = {https://assuncaolfi.github.io/site/blog/fantasy-football},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Assunção, Luís. 2023. <span>“Picking a Fantasy Football Team.”</span>
+Assunção, Luís. 2023. <span>“Drafting a Fantasy Football Team.”</span>
 September 21, 2023. <a href="https://assuncaolfi.github.io/site/blog/fantasy-football">https://assuncaolfi.github.io/site/blog/fantasy-football</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -430,7 +665,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       toggleBodyColorMode(bsSheetEl);
     }
   }
-  toggleBodyColorPrimary();
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -440,7 +675,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {
+      if (clz.startsWith('code-annotation-')) {                     
         return true;
       }
     }
@@ -471,11 +706,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
       button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button,
-        { trigger: "manual",
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
           offset: [0, -8]});
-      tooltip.show();
+      tooltip.show();    
     }
     setTimeout(function() {
       if (tooltip) {
@@ -528,7 +763,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (codeDiv.classList.contains(fromCls)) {
           codeDiv.classList.remove(fromCls);
           codeDiv.classList.add(toCls);
-        }
+        } 
       }
       return false;
     }
@@ -564,7 +799,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     if (onUntriggerFn) {
       config.onUntrigger = onUntriggerFn;
     }
-    window.tippy(el, config);
+    window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
   for (var i=0; i<noterefs.length; i++) {
@@ -636,7 +871,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     tippyHover(xref, undefined, function(instance) {
       instance.disable();
       let url = xref.getAttribute('href');
-      let hash = undefined;
+      let hash = undefined; 
       if (url.startsWith('#')) {
         hash = url;
       } else {
@@ -664,7 +899,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             if (note !== null) {
               const html = processXRef(id, note);
               instance.setContent(html);
-            }
+            } 
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -688,7 +923,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             const html = processXRef(null, note);
             instance.setContent(html);
-          }
+          } 
         }).finally(() => {
           instance.enable();
           instance.show();
@@ -728,7 +963,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             height = bottom - top;
           }
           if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it
+            // cook up a div (if necessary) and position it 
             let div = window.document.getElementById("code-annotation-line-highlight");
             if (div === null) {
               div = window.document.createElement("div");
