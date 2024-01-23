@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss  xmlns:atom="http://www.w3.org/2005/Atom"
-      xmlns:media="http://search.yahoo.com/mrss/"
-      xmlns:content="http://purl.org/rss/1.0/modules/content/"
-      xmlns:dc="http://purl.org/dc/elements/1.1/"
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
       version="2.0">
 <channel>
 <title>Luís Assunção</title>
@@ -14,7 +14,7 @@
 <item>
   <title>Additive aging curve</title>
   <link>https://assuncaolfi.github.io/site/blog/non-monotonic/</link>
-  <description><![CDATA[
+  <description><![CDATA[ 
 
 
 
@@ -164,8 +164,8 @@ font-style: inherit;">"smoothed_mean"</span>).arg_max())</span>
 <span id="cb1-17">)</span></code></pre></div>
 </div>
 <p>This yields the following bootstrap distribution of ages of peak performance:</p>
-<div id="cell-bootstrap-distribution" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="cell-bootstrap-distribution" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 <figure class="figure">
 <p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/bootstrap-distribution-output-1.png" id="bootstrap-distribution" width="599" height="445" class="figure-img"></p>
@@ -283,7 +283,7 @@ font-style: inherit;">=</span>y)</span></code></pre></div>
 Initializing NUTS using jitter+adapt_diag...
 Sequential sampling (4 chains in 1 job)
 NUTS: [α, τ, z, σ]
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 51 seconds.</code></pre>
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 47 seconds.</code></pre>
 </div>
 </div>
 <p>::: {#cell-spline-plot .cell 0=‘s’ 1=‘p’ 2=‘l’ 3=‘i’ 4=‘n’ 5=‘e’ 6=‘-’ 7=‘p’ 8=‘l’ 9=‘o’ 10=‘t’ execution_count=9}</p>
@@ -419,11 +419,11 @@ font-style: inherit;">=</span>y)</span></code></pre></div>
 </div>
 </div>
 <p><img src="https://latex.codecogs.com/png.latex?d/dx%20g(x)%20=%20a_2%20b_2%20e%5E(b_2%20(-x))%20-%20a_1%20b_1%20e%5E(b_1%20(-x))"> <img src="https://latex.codecogs.com/png.latex?x%20=%20%5Cfrac%7B%5Clog(%5Cfrac%7Ba_1%20b_1%7D%7Ba_2%20b_2%7D)%7D%7Bb_1%20-%20b_2%7D"></p>
-<div id="cell-decomposable-models-peak" class="cell" data-execution_count="12">
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div id="cell-decomposable-models-peak" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/decomposable-models-peak-output-1.png" id="decomposable-models-peak" width="642" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/decomposable-models-peak-output-1.png" id="decomposable-models-peak" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
