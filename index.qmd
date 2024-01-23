@@ -28,4 +28,4 @@ ginger cat[^2] in Belo Horizonte, Brazil.
 
 [^2]: ![](assets/cat.jpeg)
 
-## Blog [{{< bi rss >}}](blog.xml)
+## Blog [{{< bi rss-fill >}}](blog.xml)
