@@ -2,18 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://assuncaolfi.github.io/site/index.html</loc>
-    <lastmod>2024-01-23T16:01:16.827Z</lastmod>
+    <lastmod>2024-01-23T16:30:26.951Z</lastmod>
   </url>
   <url>
     <loc>https://assuncaolfi.github.io/site/cv.html</loc>
-    <lastmod>2024-01-23T04:11:10.987Z</lastmod>
+    <lastmod>2024-01-23T19:02:00.848Z</lastmod>
   </url>
   <url>
     <loc>https://assuncaolfi.github.io/site/blog/fantasy-football/index.html</loc>
-    <lastmod>2024-01-23T04:46:56.562Z</lastmod>
+    <lastmod>2024-01-23T21:32:42.372Z</lastmod>
   </url>
   <url>
     <loc>https://assuncaolfi.github.io/site/blog/non-monotonic/index.html</loc>
+    <lastmod>2024-01-23T05:01:43.126Z</lastmod>
+  </url>
+  <url>
+    <loc>https://assuncaolfi.github.io/site/blog/aging-curve/index.html</loc>
     <lastmod>2024-01-23T05:01:43.126Z</lastmod>
   </url>
 </urlset>

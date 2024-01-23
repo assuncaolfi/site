@@ -1,19 +1,20 @@
 [project]
-name = "non-monotonic"
+name = "aging-curve"
 version = "0.1.0"
 authors = [
     { name = "Luís Assunção", email = "assuncaolfi@gmail.com" }
 ]
 dependencies = [
+    "blog @ git+https://github.com/assuncaolfi/site/",
+    "jupyter-cache~=0.6.1",
+    "jupyter~=1.0.0",
+    "numpy~=1.24.4",
+    "patsy~=0.5.6",
     "polars~=0.19.17",
-    "rich~=13.7.0",
-    "seaborn~=0.13.0",
     "pyarrow~=14.0.1",
     "pymc~=5.6.1",
-    "numpy~=1.24.4",
-    "blog @ git+https://github.com/assuncaolfi/site/",
-    "patsy~=0.5.6",
-    "graphviz~=0.20.1",
+    "rich~=13.7.0",
+    "seaborn~=0.13.0",
 ]
 requires-python = ">= 3.8"
 
@@ -23,15 +24,9 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = [
-    "jupyter~=1.0.0",
-    "jupyter-cache~=0.6.1",
-    "black~=23.12.1",
-    "jupytext~=1.16.0",
-]
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
-[tool.black]
-line-length = 79
+[tool.hatch.build.targets.wheel]
+bypass-selection = true

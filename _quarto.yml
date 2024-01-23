@@ -3,22 +3,20 @@ project:
   output-dir: docs
 
 website:
-  title: "Luís Assunção"
   site-url: https://assuncaolfi.github.io/site
+  navbar: true
   repo-url: https://github.com/assuncaolfi/site
-  description: "My personal website"
+  # description: "My personal website"
   # favicon: assets/favicon.png
-  navbar:
-    background: light
-    foreground: dark
   search: false
+  title: "Luís Assunção"
 
 bibliography: references.bib
 
 execute:
   cache: true
   echo: false
-  freeze: auto
+  freeze: true
 
 format:
   html:
@@ -27,8 +25,8 @@ format:
     code-copy: hover
     code-tools:
       source: repo
-    # TODO move includes to scss
     highlight-style: assets/custom.theme.json
+    html-table-processing: none
     reference-location: margin
     theme:
       - sandstone

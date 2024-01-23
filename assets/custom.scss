@@ -32,20 +32,25 @@ $danger:        $red !default;
 $light:         $gray-200 !default;
 $dark:          $gray-800 !default;
 
-$body-bg: $white !default;
-$body-color: $dark !default;
-
+$btn-code-copy-color: $primary;
+$btn-code-copy-color-active: $primary;
+$code-bg: $light;
+$code-color: $dark;
 $link-color: $primary;
 $link-hover-color: $primary;
-
-/*-- scss:rules --*/
+$navbar-bg: $light;
+$navbar-fg: $dark;
 
 @import "https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap";
 
-body {
-  font-family: "Fira Sans";
-}
+$font-family-sans-serif: "Fira Sans";
+$font-family-monospace: "Fira Code";
 
-code, h1, h2, h3, h4, h5, h6, header, navbar, #TOC, table, td, th, tr  {
+// $body-bg: $white !default;
+// $body-color: $dark !default;
+
+/*-- scss:rules --*/
+
+h1, h2, h3, h4, h5, h6, header, navbar, #TOC, table, td, th, tr  {
   font-family: "Fira Code";
 }

@@ -2,6 +2,13 @@
   {
     "listing": "/index.html",
     "items": [
+      "/blog/aging-curve/index.html",
+      "/blog/fantasy-football/index.html"
+    ]
+  },
+  {
+    "listing": "/cv.html",
+    "items": [
       "/blog/non-monotonic/index.html"
     ]
   }

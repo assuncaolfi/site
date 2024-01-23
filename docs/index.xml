@@ -8,12 +8,12 @@
 <title>Luís Assunção</title>
 <link>https://assuncaolfi.github.io/site/</link>
 <atom:link href="https://assuncaolfi.github.io/site/index.xml" rel="self" type="application/rss+xml"/>
-<description>My personal website</description>
+<description></description>
 <generator>quarto-1.4.543</generator>
 <lastBuildDate>Tue, 23 Jan 2024 03:00:00 GMT</lastBuildDate>
 <item>
   <title>Additive aging curve</title>
-  <link>https://assuncaolfi.github.io/site/blog/non-monotonic/</link>
+  <link>https://assuncaolfi.github.io/site/blog/aging-curve/</link>
   <description><![CDATA[ 
 
 
@@ -57,7 +57,7 @@ Germine, Laura, and Joshua K Hartshorne. 2016. <span>“Hartshorne &amp; Germine
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/digit-span-plot-output-1.png" id="digit-span-plot" width="599" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/digit-span-plot-output-1.png" id="digit-span-plot" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -168,7 +168,7 @@ font-style: inherit;">"smoothed_mean"</span>).arg_max())</span>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/bootstrap-distribution-output-1.png" id="bootstrap-distribution" width="599" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/bootstrap-distribution-output-1.png" id="bootstrap-distribution" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -183,7 +183,7 @@ font-style: inherit;">"smoothed_mean"</span>).arg_max())</span>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/bootstrap-curve-output-1.png" id="bootstrap-curve" width="599" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/bootstrap-curve-output-1.png" id="bootstrap-curve" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -290,7 +290,7 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/spline-plot-output-1.png" id="spline-plot" width="599" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/spline-plot-output-1.png" id="spline-plot" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -413,7 +413,7 @@ font-style: inherit;">=</span>y)</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/decomposable-models-additive-draws-output-1.png" id="decomposable-models-additive-draws" width="599" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/decomposable-models-additive-draws-output-1.png" id="decomposable-models-additive-draws" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -423,7 +423,7 @@ font-style: inherit;">=</span>y)</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/non-monotonic/index_files/figure-html/decomposable-models-peak-output-1.png" id="decomposable-models-peak" width="599" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/decomposable-models-peak-output-1.png" id="decomposable-models-peak" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -437,15 +437,764 @@ font-style: inherit;">=</span>y)</span></code></pre></div>
   author = {Assunção, Luís},
   title = {Additive Aging Curve},
   date = {2024-01-23},
-  url = {https://assuncaolfi.github.io/site/blog/non-monotonic},
+  url = {https://assuncaolfi.github.io/site/blog/aging-curve},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2024" class="csl-entry quarto-appendix-citeas">
 Assunção, Luís. 2024. <span>“Additive Aging Curve.”</span> January 23,
-2024. <a href="https://assuncaolfi.github.io/site/blog/non-monotonic">https://assuncaolfi.github.io/site/blog/non-monotonic</a>.
+2024. <a href="https://assuncaolfi.github.io/site/blog/aging-curve">https://assuncaolfi.github.io/site/blog/aging-curve</a>.
 </div></div></section></div> ]]></description>
-  <guid>https://assuncaolfi.github.io/site/blog/non-monotonic/</guid>
+  <guid>https://assuncaolfi.github.io/site/blog/aging-curve/</guid>
   <pubDate>Tue, 23 Jan 2024 03:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Drafting a fantasy football team</title>
+  <link>https://assuncaolfi.github.io/site/blog/fantasy-football/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><a href="http://cartola.globo.com">Cartola</a> is a fantasy football league following the Brazilian Championship A Series.</p>
+<p>Cartola offers a public API to access data for the current round. A couple of years ago, I created a script to automate data retrieval to a <a href="https://github.com/assuncaolfi/tophat/tree/main">repository</a>, which now hosts comprehensive historical data since 2022.</p>
+<p>In this post, I will delve into the data for the 2022 season, formulate a mixed integer linear program to draft the optimal team, and present initial concepts for forecasting player scores using mixed effects linear models.</p>
+<section id="the-game" class="level2">
+<h2 class="anchored" data-anchor-id="the-game">The game</h2>
+<p>We begin the season with a budget of C$ 100, the game’s paper currency.</p>
+<p>Each round is preceded by a market session, where players are assigned a value. We are tasked with forming a team of 11 players plus a coach, all within our budget and adhering to a valid formation. A captain must be chosen from among the players, excluding the coach.</p>
+<p>The market is available until the round starts. Players then earn scores based on their real-life match performances. Our team’s score is the aggregate of our players’ scores, with our captain’s score doubled in the 2022 season.</p>
+<p>Following the conclusion of the round, player values are recalibrated based on performance -— with increases for scores above their average and decreases for below-average performances. Our budget for the next round is our previous budget, plus the sum of our players’ value variations.</p>
+</section>
+<section id="data-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="data-wrangling">Data wrangling</h2>
+<p>Let’s talk about data structures: each round has a market, and each market is a list of players. A player is a structure like this:</p>
+<div id="cell-data-wrangling-players" class="cell" data-execution_count="1">
+<div id="data-wrangling-players" class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>Player(round=0, player=42234, team=264, position=1, games=0, average=0.0, value=10.0, score=0.0, appreciation=0.0, minimum=4.53)</code></pre>
+</div>
+</div>
+<p>Let’s get the list of markets for 2022 and flatten it into a single DataFrame:</p>
+<div id="data-wrangling-dataframe" class="cell" data-execution_count="76">
+<div class="cell-output cell-output-stdout">
+<pre><code>+-------------------------------------------------------------------------------+
+| round   player   team   position   …   value   score   appreciation   minimum |
++===============================================================================+
+| 1       37424    1371   6          …   3.0     0.0     0.0            0.0     |
+| 1       37646    314    3          …   5.0     0.0     0.0            2.3     |
+| 1       37656    266    1          …   9.0     0.0     0.0            4.08    |
+| …       …        …      …          …   …       …       …              …       |
+| 38      121398   354    4          …   1.0     0.0     0.0            0.0     |
+| 38      121399   354    4          …   1.0     0.0     0.0            0.0     |
+| 38      121400   354    5          …   1.0     0.0     0.0            0.0     |
++-------------------------------------------------------------------------------+
+shape: (30_063, 10)</code></pre>
+</div>
+</div>
+<p>Now, let’s focus on a specific <code>player</code> to illustrate our data while we wrangle it:</p>
+<div id="data-wrangling-example" class="cell" data-execution_count="61">
+<div class="cell-output cell-output-stdout">
+<pre><code>+-------------------------------------------------------------------------------+
+| round   player   team   position   …   value   score   appreciation   minimum |
++===============================================================================+
+| 1       42234    264    1          …   10.0    0.0     0.0            4.53    |
+| 2       42234    264    1          …   7.93    2.0     -2.07          5.52    |
+| 3       42234    264    1          …   10.44   11.0    2.51           4.75    |
+| …       …        …      …          …   …       …       …              …       |
+| 36      42234    264    1          …   11.51   0.0     0.03           3.63    |
+| 37      42234    264    1          …   12.68   0.0     1.17           9.29    |
+| 38      42234    264    1          …   11.06   0.0     -1.62          1.37    |
++-------------------------------------------------------------------------------+
+shape: (38, 10)</code></pre>
+</div>
+</div>
+<section id="filtering-participation" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-participation">Filtering participation</h3>
+<p>Players will show up in the market for many rounds that they do not participate in. However, for our analysis, we are only interested in players that actually played a game in the round.</p>
+<p>Each player has a <code>status</code> field intended to indicate their participation in the round. However, this field is often inaccurate, likely due to the API data being updated before the round.</p>
+<p>One solution is to keep only rows where there is an increase in the number of <code>games</code> the player has played:</p>
+<div id="data-wrangling-round-participation" class="cell" data-execution_count="62">
+<div class="cell-output cell-output-stdout">
+<pre><code>+------------------------+
+| round   player   games |
++========================+
+| 1       42234    0     |
+| 2       42234    1     |
+| 3       42234    2     |
+| …       …        …     |
+| 36      42234    28    |
+| 37      42234    29    |
+| 38      42234    30    |
++------------------------+
+shape: (31, 3)</code></pre>
+</div>
+</div>
+</section>
+<section id="imputing-scores" class="level3">
+<h3 class="anchored" data-anchor-id="imputing-scores">Imputing scores</h3>
+<p>Similarly, the player <code>score</code> field is often inaccurate, likely for the same reasons as the <code>status</code> field. Fortunately, the <code>average</code> field is reliable, allowing us to recover the <code>score</code>:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign*%7D%0A%5Cmathrm%7BAverage%7D(%5Cmathbf%7Bs%7D_%7B1:t%7D)%0A=%20%5Cfrac%7B%5Cmathrm%7BAverage%7D(%5Cmathbf%7Bs%7D_%7B1:(t-1)%7D)%20+%20s_t%7D%7B2%7D%20%5C%5C%0As_t%0A=%202%5Cmathrm%7BAverage%7D(%5Cmathbf%7Bs%7D_%7B1:t%7D)%20-%20%5Cmathrm%7BAverage%7D(%5Cmathbf%7Bs%7D_%7B1:(t-1)%7D),%0A%5Cend%7Balign*%7D%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bs%7D"> is the vector of scores for a given player across all rounds.</p>
+<div id="data-wrangling-missing-scores" class="cell" data-execution_count="63">
+<div class="cell-output cell-output-stdout">
+<pre><code>+----------------------------------+
+| round   player   score   average |
++==================================+
+| 1       42234    2.0     2.0     |
+| 2       42234    11.0    6.5     |
+| 3       42234    9.5     8.0     |
+| …       …        …       …       |
+| 36      42234    5.1     4.96    |
+| 37      42234    4.62    4.79    |
+| 38      42234    4.79    4.79    |
++----------------------------------+
+shape: (31, 4)</code></pre>
+</div>
+</div>
+</section>
+<section id="adding-fixtures" class="level3">
+<h3 class="anchored" data-anchor-id="adding-fixtures">Adding fixtures</h3>
+<p>Let’s fetch the list of fixtures to enrich our dataset. A fixture is an object like:</p>
+<div id="cell-data-wrangling-fixtures" class="cell" data-execution_count="65">
+<div id="data-wrangling-fixtures" class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>Fixture(round=1, home=282, away=285)</code></pre>
+</div>
+</div>
+<p>Let’s consolidate these fixtures into a single DataFrame and then pivot them into a long format:</p>
+<div id="data-wrangling-fixtures-long" class="cell" data-execution_count="66">
+<div class="cell-output cell-output-stdout">
+<pre><code>+------------------------------+
+| round   team   versus   home |
++==============================+
+| 1       282    285      1    |
+| 1       266    277      1    |
+| 1       276    293      1    |
+| …       …      …        …    |
+| 38      276    290      0    |
+| 38      294    1371     0    |
+| 38      263    293      0    |
++------------------------------+
+shape: (760, 4)</code></pre>
+</div>
+</div>
+<p>Finally, let’s join this data to our dataset:</p>
+<div id="data-wrangling-fixtures-join" class="cell" data-execution_count="67">
+<div class="cell-output cell-output-stdout">
+<pre><code>+---------------------------------------+
+| round   player   team   versus   home |
++=======================================+
+| 1       42234    264    263      0    |
+| 2       42234    264    314      1    |
+| 3       42234    264    275      0    |
+| …       …        …      …        …    |
+| 36      42234    264    354      1    |
+| 37      42234    264    294      0    |
+| 38      42234    264    282      1    |
++---------------------------------------+
+shape: (31, 5)</code></pre>
+</div>
+</div>
+</section>
+<section id="aligning-variables" class="level3">
+<h3 class="anchored" data-anchor-id="aligning-variables">Aligning variables</h3>
+<p>In our subsequent analysis, the <code>average</code> field will exclude the <code>score</code> from the given round. Additionally, the <code>appreciation</code> field will be calculated in relation to the round’s <code>score</code>.</p>
+<div id="data-wrangling-lookahead-variables" class="cell" data-execution_count="68">
+<div class="cell-output cell-output-stdout">
+<pre><code>+---------------------------------------------------------+
+| round   player   average   value   score   appreciation |
++=========================================================+
+| 1       42234    0.0       10.0    2.0     -2.07        |
+| 2       42234    2.0       7.93    11.0    2.51         |
+| 3       42234    6.5       10.44   9.5     1.25         |
+| …       …        …         …       …       …            |
+| 36      42234    4.82      11.51   5.1     1.17         |
+| 37      42234    4.96      12.68   4.62    -1.62        |
+| 38      42234    4.79      11.06   4.79    0.0          |
++---------------------------------------------------------+
+shape: (31, 6)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="team-picking" class="level2">
+<h2 class="anchored" data-anchor-id="team-picking">Team picking</h2>
+<p>Now let’s solve the problem of picking the best team a given market. Let $ $ be the set of valid formations, then for each formation <img src="https://latex.codecogs.com/png.latex?f%20%5Cin%0A%5Cmathcal%7BF%7D">, solve:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Bequation*%7D%20%5Cbegin%7Barray%7D%7Bll@%7B%7Dll%7D%0A%5Ctext%7Bmaximize%7D%20&amp;%20%5Cdisplaystyle%20%5Chat%7B%5Cmathbf%7Bs%7D%7D%5ET%20%5Cmathbf%7Bx%7D,%20&amp;%20%5Cmathbf%7Bx%7D%20%5Cin%20%5C%7B%5Cmathbf%7B0%7D,%20%5Cmathbf%7B1%7D%5C%7D%20%5C%5C%0A%5Ctext%7Bsubject%20to%7D%0A&amp;%20%5Cdisplaystyle%20%5Cmathbf%7Bv%7D%5ET%20%5Cmathbf%7Bx%7D%20%5Cleq%20b%20%5C%5C%0A&amp;%20%5Cdisplaystyle%20%5Cmathbf%7BP%7D%5ET%20%5Cmathbf%7Bx%7D%20=%20f,%20%5C%5C%0A%5Cend%7Barray%7D%20%5Cend%7Bequation*%7D%0A"></p>
+<p>where</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D"> is a variable vector of player picks in the market; <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Cmathbf%7Bs%7D%7D"> is the vector of predicted player scores in the market; <img src="https://latex.codecogs.com/png.latex?b"> is our available budget for that round; <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BP%7D"> is the matrix of dummy-encoded player formations in the market.</p>
+<p>Finally, take the solution with the highest objective.</p>
+<div id="team-picking-problem" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb10-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pulp</span>
+<span id="cb10-3"></span>
+<span id="cb10-4"></span>
+<span id="cb10-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Formation(BaseModel):</span>
+<span id="cb10-6">    goalkeeper: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Field(alias<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gol"</span>)</span>
+<span id="cb10-7">    defender: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Field(alias<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"zag"</span>)</span>
+<span id="cb10-8">    winger: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Field(alias<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lat"</span>)</span>
+<span id="cb10-9">    midfielder: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Field(alias<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mei"</span>)</span>
+<span id="cb10-10">    forward: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Field(alias<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ata"</span>)</span>
+<span id="cb10-11">    coach: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Field(alias<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"tec"</span>)</span>
+<span id="cb10-12"></span>
+<span id="cb10-13"></span>
+<span id="cb10-14"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Problem(BaseModel):</span>
+<span id="cb10-15">    scores: List[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>]</span>
+<span id="cb10-16">    values: List[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>]</span>
+<span id="cb10-17">    budget: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span></span>
+<span id="cb10-18">    positions: List[List[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>]]</span>
+<span id="cb10-19">    formations: List[Formation]</span>
+<span id="cb10-20"></span>
+<span id="cb10-21">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> solve(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> List[pulp.LpSolution]:</span>
+<span id="cb10-22">        formations <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(f.model_dump().values()) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> f <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.formations]</span>
+<span id="cb10-23">        problems <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.construct(f) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> f <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> formations]</span>
+<span id="cb10-24">        [p.solve(pulp.COIN(msg<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> p <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> problems]</span>
+<span id="cb10-25">        objectives <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [p.objective.value() <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> p <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> problems]</span>
+<span id="cb10-26">        best <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.argmax(np.array(objectives))</span>
+<span id="cb10-27">        solution <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> problems[best]</span>
+<span id="cb10-28">        variables <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [v.value() <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> v <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> solution.variables()]</span>
+<span id="cb10-29">        picks <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array(variables)</span>
+<span id="cb10-30">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> picks</span>
+<span id="cb10-31"></span>
+<span id="cb10-32">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> construct(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, formation: List[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>]) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> pulp.LpProblem:</span>
+<span id="cb10-33">        n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.scores)</span>
+<span id="cb10-34">        m <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(formation)</span>
+<span id="cb10-35">        problem <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pulp.LpProblem(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"team_picking"</span>, pulp.LpMaximize)</span>
+<span id="cb10-36">        indexes <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pick_"</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>(i).zfill(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>(n))) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(n)]</span>
+<span id="cb10-37">        picks <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [pulp.LpVariable(i, cat<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pulp.const.LpBinary) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> indexes]</span>
+<span id="cb10-38">        problem <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> pulp.lpDot(picks, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.scores)</span>
+<span id="cb10-39">        problem <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> pulp.lpDot(picks, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.values) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.budget</span>
+<span id="cb10-40">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(m):</span>
+<span id="cb10-41">            problem <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> pulp.lpDot(picks, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.positions[i]) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> formation[i]</span>
+<span id="cb10-42">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> problem</span></code></pre></div>
+</div>
+<section id="backtesting" class="level3">
+<h3 class="anchored" data-anchor-id="backtesting">Backtesting</h3>
+<p>By solving the team picking problem for all rounds, we can backtest our performance in the season. Before backtesting, let’s get the set of valid formations <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BF%7D">:</p>
+<div id="cell-team-picking-formations" class="cell" data-execution_count="11">
+<div id="team-picking-formations" class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>[Formation(goalkeeper=1, defender=3, winger=0, midfielder=4, forward=3, coach=1),
+ Formation(goalkeeper=1, defender=3, winger=0, midfielder=5, forward=2, coach=1),
+ Formation(goalkeeper=1, defender=2, winger=2, midfielder=3, forward=3, coach=1),
+ Formation(goalkeeper=1, defender=2, winger=2, midfielder=4, forward=2, coach=1),
+ Formation(goalkeeper=1, defender=2, winger=2, midfielder=5, forward=1, coach=1),
+ Formation(goalkeeper=1, defender=3, winger=2, midfielder=3, forward=2, coach=1),
+ Formation(goalkeeper=1, defender=3, winger=2, midfielder=4, forward=1, coach=1)]</code></pre>
+</div>
+</div>
+<p>Knowing our formation constraints, we’re ready to backtest. Starting with a budget of C$ 100, for each round let’s:</p>
+<ol type="1">
+<li>Predict each player’s score based on their performance on previous rounds;</li>
+<li>Pick the team with the best total score;</li>
+<li>Add the sum of the team player’s appreciation to our budget.</li>
+</ol>
+<div id="team-picking-backtest" class="cell" data-execution_count="77">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> typing <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Callable</span>
+<span id="cb12-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> polars <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pl</span>
+<span id="cb12-3"></span>
+<span id="cb12-4"></span>
+<span id="cb12-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> backtest(</span>
+<span id="cb12-6">    players: pl.DataFrame, predict: Callable, initial_budget: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100.0</span></span>
+<span id="cb12-7">) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> pl.DataFrame:</span>
+<span id="cb12-8">    rounds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> players.get_column(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"round"</span>).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>()</span>
+<span id="cb12-9">    budget <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> rounds</span>
+<span id="cb12-10">    teams <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> rounds</span>
+<span id="cb12-11">    budget[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> initial_budget</span>
+<span id="cb12-12">    appreciation <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb12-13">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(rounds):</span>
+<span id="cb12-14">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb12-15">            budget[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> budget[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> appreciation</span>
+<span id="cb12-16">        data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> players.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">filter</span>(pl.col(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"round"</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb12-17">        candidates <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> players.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">filter</span>(pl.col(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"round"</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb12-18">        candidates <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> predict(data, candidates)</span>
+<span id="cb12-19">        problem <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Problem(</span>
+<span id="cb12-20">            scores<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>candidates.get_column(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"prediction"</span>),</span>
+<span id="cb12-21">            values<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>candidates.get_column(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"value"</span>),</span>
+<span id="cb12-22">            positions<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>candidates.get_column(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"position"</span>).to_dummies(),</span>
+<span id="cb12-23">            budget<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>budget[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>],</span>
+<span id="cb12-24">            formations<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>formations,</span>
+<span id="cb12-25">        )</span>
+<span id="cb12-26">        picks <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> problem.solve()</span>
+<span id="cb12-27">        team <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> candidates.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">filter</span>(picks <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb12-28">        teams[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> team</span>
+<span id="cb12-29">        appreciation <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> team.get_column(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"appreciation"</span>).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>()</span>
+<span id="cb12-30">    teams <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pl.concat(teams)</span>
+<span id="cb12-31">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> teams</span></code></pre></div>
+</div>
+<p>Before exploring predictions, we’ll begin with a few hypothetical backtests using actual observed scores for team selection. Backtesting this strategy, this is our team in the first round:</p>
+<div id="team-picking-backtest-first-team" class="cell" data-execution_count="69">
+<div class="cell-output cell-output-stdout">
+<pre><code>+-----------------------------------------------------------------------------+
+| round   player   team   position   …   minimum   versus   home   prediction |
++=============================================================================+
+| 1       71571    356    1          …   3.19      1371     1      11.0       |
+| 1       42145    294    2          …   2.75      290      1      15.8       |
+| 1       105584   264    2          …   2.75      263      0      10.5       |
+| …       …        …      …          …   …         …        …      …          |
+| 1       89840    276    5          …   5.42      293      1      27.1       |
+| 1       104530   294    5          …   2.3       290      1      11.0       |
+| 1       97341    276    6          …   0.0       293      1      9.52       |
++-----------------------------------------------------------------------------+
+shape: (12, 13)</code></pre>
+</div>
+</div>
+<p>And we can plot out cumulative performance during the season:</p>
+<div id="cell-team-picking-backtest-score" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="604" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This might seem like a perfect campaign at first, but it’s possible that, early in the season, we didn’t have enough budget to pick the best scoring teams. To test this hypothesis, we backtest the same strategy with unlimited budget from the start:</p>
+<div id="cell-team-picking-backtest-score-unlimited-budget" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="613" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Both runs are nearly identical, which is evidence that focusing on appreciation is not so important if we have accurate predictions for the scores. If we predict scores perfectly, we get a near perfect run.</p>
+<p>To put our backtests into perspective, <a href="https://ge.globo.com/cartola/noticia/2022/12/03/cartola-2022-com-larga-vantagem-mosquito-bar-8-vence-liga-premiada-meliuz-e-fatura-r-20-mil.ghtml">the 2022 season champion had a total score of 3434.37</a>. This is very impressive and not very far from the near perfect run.</p>
+<div id="cell-team-picking-backtest-champion" class="cell" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="608" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="score-prediction" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="score-prediction">Score prediction</h2>
+<p>For each round, we must predict <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bs%7D">, the vector of score predictions, using data from previous rounds.</p>
+<p>However, during the first round, we don’t have any previous data to train our model. In this case, we need to include prior information. One way to do that would be to use data from previous seasons. However, we know a variable where this information is already encoded: the player <code>value</code>. Each season starts with players valued according to their past performance. Knowing this, all our models start with <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bs%7D%20=%20v"> in the first round.</p>
+<p>Let’s use Bambi <span class="citation" data-cites="Capretto2022">(Capretto et al. 2022)</span> and its default priors to fit our models. We won’t delve into convergence diagnostics, since we are more interested in the average of the predictive posteriors and the backtest itself is measure of the prediction quality.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Capretto2022" class="csl-entry">
+Capretto, Tomás, Camen Piho, Ravin Kumar, Jacob Westfall, Tal Yarkoni, and Osvaldo A Martin. 2022. <span>“Bambi: A Simple Interface for Fitting Bayesian Linear Models in Python.”</span> <em>Journal of Statistical Software</em> 103 (15): 1–29. <a href="https://doi.org/10.18637/jss.v103.i15">https://doi.org/10.18637/jss.v103.i15</a>.
+</div><div id="ref-Bailey2013" class="csl-entry">
+Bailey, David H., Jonathan M. Borwein, Marcos Lopez de Prado, and Qiji Jim Zhu. 2013. <span>“The Probability of Back-Test over-Fitting.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.2326253">https://doi.org/10.2139/ssrn.2326253</a>.
+</div></div><p>One question that arises here is: why not use non-parametric models such as gradient boosted trees or neural nets? After some experimentation, I concluded they are not a good fit for this problem: either because they assume independence between observations, or because they are too data hungry. Also, tuning these models for backtests might lead us into a rabbit hole <span class="citation" data-cites="Bailey2013">(Bailey et al. 2013)</span>.</p>
+<section id="player-average" class="level3">
+<h3 class="anchored" data-anchor-id="player-average">Player average</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign*%7D%0A%5Cmathbf%7B%5Chat%7Bs%7D%7D%20=%20%5Cmathbf%7BZ%7D%20%5Cmathbf%7B%5Cbeta%7D%20%5C%5C%0A%5Cmathbf%7Bs%7D%20%5Csim%20N(%5Cmathbf%7B%5Chat%7Bs%7D%7D,%20%5Csigma),%0A%5Cend%7Balign*%7D%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BZ%7D"> is a dummy-encoded matrix of players; <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7B%5Cbeta%7D"> is a vector of parameters for each player.</p>
+<p>In this model, <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7B%5Cbeta%7D"> is simply a vector of player averages. Let’s also consider that players that show up in the middle of the season have an average of zero before their first round. This will be our baseline model.</p>
+<div id="cell-score-prediction-player-average" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="608" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="player-random-effects" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="player-random-effects">Player random effects</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign*%7D%0A%5Cmathbf%7B%5Chat%7Bs%7D%7D%20=%20%5Calpha%20+%20%5Cmathbf%7BZ%7D%20%5Cmathbf%7Bb%7D%20%5C%5C%0A%5Cmathbf%7Bb%7D%20%5Csim%20N(0,%20%5Csigma_b),%0A%5Cend%7Balign*%7D%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Calpha"> is an intercept and <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7Bb%7D"> is a vector of player random effects.</p>
+<p>This model performs significantly better than the average model, possibly because of the partial pooling between the random effects, that pulls large effects towards the overall mean <span class="citation" data-cites="clark2019shrinkage">(Clark 2019)</span>. In our dataset, it’s common for players that played one or two games to have large averages by chance.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-clark2019shrinkage" class="csl-entry">
+Clark, Michael. 2019. <span>“Michael Clark: Shrinkage in Mixed Effects Models.”</span> <a href="https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/">https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/</a>.
+</div></div><div id="cell-score-prediction-player-random-effects" class="cell" data-message="false" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="608" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fixture-mixed-effects" class="level3">
+<h3 class="anchored" data-anchor-id="fixture-mixed-effects">Fixture mixed effects</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbf%7B%5Chat%7Bs%7D%7D%20=%20%5Calpha%20+%20%5Cmathbf%7BX%7D%20%5Cmathbf%7B%5Cbeta%7D%20+%20%5Cmathbf%7BZ%7D%20%5Cmathbf%7Bb%7D,%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D"> is a matrix of the dummy-encoded fixture variables: the player <code>team</code>, whether they are playing at <code>home</code>, and their <code>adversary</code> team variables; <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7B%5Cbeta%7D"> is a vector of fixed effects.</p>
+<p>This model brings more context to our predictions. It also provides a reasonable way to predict a new player, by setting their <img src="https://latex.codecogs.com/png.latex?b%20=%200"> (the mean of the random effects). However, it does not improve significantly over our random effects model.</p>
+<div id="cell-score-prediction-fixture-mixed-effects" class="cell" data-message="false" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/fantasy-football/index_files/figure-html/score-prediction-fixture-mixed-effects-output-1.png" id="score-prediction-fixture-mixed-effects" width="608" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>We developed a comprehensive framework for the fantasy football team picking problem. There are more ideas we could explore to improve our chances of winning:</p>
+<ul>
+<li>enriching our data and models with player scouts;</li>
+<li>including more information in our priors;</li>
+<li>testing strategies that balance predicted score and appreciation;</li>
+<li>further model diagnostics.</li>
+</ul>
+<p>However, I suppose expert human player predictions have a certain edge over those of hobbyist statistical models in fantasy leagues, due to the fact that there are all sorts of relevant data unavailable in public datasets.</p>
+<p>At least, this seems to be the case for brazilian soccer, also known as “a little box of surprises”.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2023,
+  author = {Assunção, Luís},
+  title = {Drafting a Fantasy Football Team},
+  date = {2023-09-21},
+  url = {https://assuncaolfi.github.io/site/blog/fantasy-football},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2023" class="csl-entry quarto-appendix-citeas">
+Assunção, Luís. 2023. <span>“Drafting a Fantasy Football Team.”</span>
+September 21, 2023. <a href="https://assuncaolfi.github.io/site/blog/fantasy-football">https://assuncaolfi.github.io/site/blog/fantasy-football</a>.
+</div></div></section></div> ]]></description>
+  <guid>https://assuncaolfi.github.io/site/blog/fantasy-football/</guid>
+  <pubDate>Thu, 21 Sep 2023 03:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
