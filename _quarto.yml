@@ -24,18 +24,12 @@ format:
   html:
     citations-hover: false
     citation-location: margin
-    code-block-bg: "#f8f5f0"
     code-copy: hover
     code-tools:
       source: repo
     # TODO move includes to scss
-    header-includes: |
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap" rel="stylesheet">
-    highlight-style: monochrome
-    mainfont: Fira Sans
-    monofont: Fira Code
+    highlight-style: assets/custom.theme.json
+    reference-location: margin
     theme:
       - sandstone
       - assets/custom.scss

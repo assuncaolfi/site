@@ -1,27 +1,32 @@
 ---
 title: >
-  [{{< bi envelope-at-fill >}}](mailto:assuncaolfi@gmail.com)
+  [{{< bi envelope-at-fill >}}](mailto:assuncaolfi@gmail.com) 
   [{{< bi github >}}](https://github.com/assuncaolfi)
   [{{< bi linkedin >}}](https://linkedin.com/in/assuncaolfi/en)
-about:
-  template: solana
-  image: assets/me.jpeg
-  image-shape: rectangle
+# about:
+#   template: solana
+#   image: assets/me.jpeg
+#   image-shape: rectangle
 format:
-  html: default
+  html:
+    anchor-sections: false
 listing:
   contents: blog
   feed: true
   template: assets/gallery.ejs
 ---
 
-Hello! I'm Luís Assunção and this is my website.
+Hello! I'm Luís Assunção[^1] and this is my website.
+
+[^1]: ![](assets/me.jpeg)
 
 I'm a statistician and data scientist -- my goal is to help people make better
 decisions under uncertainty. To achieve this, I design experiments, infer causal
 relationships, model probabilities, and [more](cv.html).
 
 I also enjoy hiking, music and woodworking. I live with my partner and our
-ginger cat in Belo Horizonte, Brazil.
+ginger cat[^2] in Belo Horizonte, Brazil.
+
+[^2]: ![](assets/cat.jpeg)
 
 ## Blog [{{< bi rss >}}](blog.xml)

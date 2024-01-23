@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "  ",
     "section": "",
-    "text": "Hello! I’m Luís Assunção and this is my website.\nI’m a statistician and data scientist – my goal is to help people make better decisions under uncertainty. To achieve this, I design experiments, infer causal relationships, model probabilities, and more.\nI also enjoy hiking, music and woodworking. I live with my partner and our ginger cat in Belo Horizonte, Brazil."
+    "text": "Hello! I’m Luís Assunção1 and this is my website.\nI’m a statistician and data scientist – my goal is to help people make better decisions under uncertainty. To achieve this, I design experiments, infer causal relationships, model probabilities, and more.\nI also enjoy hiking, music and woodworking. I live with my partner and our ginger cat2 in Belo Horizonte, Brazil."
   },
   {
     "objectID": "index.html#blog",
@@ -117,5 +117,12 @@
     "title": "Additive aging curve",
     "section": "Two component function",
     "text": "Two component function\nAll intervals are 80% credibility…\n\\[\n\\begin{align}\ng_1(x) &= \\alpha_1 + \\beta_1 \\exp(-\\lambda_1 x) \\\\\ng_2(x) &= \\alpha_2 + \\beta_2 (1 - \\exp(-\\lambda_2 x)) \\\\\ng(x) &= g_1(x) + g_2(x) \\\\\n     &= \\alpha + \\beta_1 \\exp(-\\lambda_1 x) + \\beta_2 (1 - \\exp(-\\lambda_2 x))\n\\end{align}\n\\]\n\\[\n\\begin{align}\ny &\\sim \\mathrm{Normal}(g(x), \\sigma) \\\\\n\\alpha &\\sim \\mathrm{Normal}(0, 2) \\\\\n\\lambda &\\sim \\mathrm{Exponential}(0.01) \\\\\n\\sigma &\\sim \\mathrm{Exponential}(1) \\\\\n\\end{align}\n\\]\n\nimport pymc as pm\n\n\ndef g(x):\n    y = α[0] * pm.math.exp(-λ[0] * x) + α[1] + α[2] * (1 - pm.math.exp(-λ[1] * x))\n    return y\n\n\nwith pm.Model() as model:\n    x = pm.ConstantData(\"x\", x)\n    α = pm.Normal(\"alpha\", 0, 2, size=3)\n    λ = pm.HalfNormal(\"lambda\", 0.01, size=2)\n    μ = pm.Deterministic(\"mu\", g(x))\n    σ = pm.HalfNormal(\"sigma\", 1)\n    pm.Normal(\"observed\", mu=μ, sigma=σ, observed=y)\n\n\n\n\n\n\n\n\n\n\n\\[d/dx g(x) = a_2 b_2 e^(b_2 (-x)) - a_1 b_1 e^(b_1 (-x))\\] \\[x = \\frac{\\log(\\frac{a_1 b_1}{a_2 b_2})}{b_1 - b_2}\\]"
+  },
+  {
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "  ",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\n↩︎"
   }
 ]
