@@ -2,14 +2,14 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "  ",
+    "title": "Home",
     "section": "",
-    "text": "Hello! I’m Luís Assunção1 and this is my website.\nI’m a statistician and data scientist – my goal is to help people make better decisions under uncertainty. To achieve this, I design experiments, infer causal relationships, model probabilities, and more.\nI also enjoy hiking, music and woodworking. I live with my partner and our ginger cat2 in Belo Horizonte, Brazil."
+    "text": "Hello! I’m Luís Assunção1 and this is my website.\n1 I’m a statistician and data scientist – my goal is to help people make better decisions under uncertainty. To achieve this, I design experiments, infer causal relationships, model probabilities, and more.\nI also enjoy hiking, music and woodworking. I live with my partner and our ginger cat2 in Belo Horizonte, Brazil.\n2"
   },
   {
     "objectID": "index.html#blog",
     "href": "index.html#blog",
-    "title": "  ",
+    "title": "Home",
     "section": "Blog ",
     "text": "Blog"
   },
@@ -124,5 +124,19 @@
     "title": "  ",
     "section": "Footnotes",
     "text": "Footnotes\n\n\n↩︎"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Home",
+    "section": "",
+    "text": "Hello! I’m Luís Assunção1 and this is my website.\n1 I’m a statistician and data scientist – my goal is to help people make better decisions under uncertainty. To achieve this, I design experiments, infer causal relationships, model probabilities, and more.\nI also enjoy hiking, music and woodworking. I live with my partner and our ginger cat2 in Belo Horizonte, Brazil.\n2"
+  },
+  {
+    "objectID": "index.html#section",
+    "href": "index.html#section",
+    "title": "Home",
+    "section": "",
+    "text": "/"
   }
 ]

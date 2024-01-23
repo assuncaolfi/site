@@ -1,8 +1,5 @@
 ---
-title: >
-  [{{< bi envelope-at-fill >}}](mailto:assuncaolfi@gmail.com) 
-  [{{< bi github >}}](https://github.com/assuncaolfi)
-  [{{< bi linkedin >}}](https://linkedin.com/in/assuncaolfi/en)
+title: "Home"
 # about:
 #   template: solana
 #   image: assets/me.jpeg
@@ -15,6 +12,8 @@ listing:
   feed: true
   template: assets/gallery.ejs
 ---
+
+## About [{{< bi envelope-at-fill >}}](mailto:assuncaolfi@gmail.com) [{{< bi github >}}](https://github.com/assuncaolfi) [{{< bi linkedin >}}](https://linkedin.com/in/assuncaolfi/en)
 
 Hello! I'm Luís Assunção[^1] and this is my website.
 

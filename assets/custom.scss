@@ -1,7 +1,5 @@
 /*-- scss:defaults --*/
 
-@import "https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap";
-
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #f8f5f0 !default;
@@ -37,6 +35,13 @@ $dark:          $gray-800 !default;
 $body-bg: $white !default;
 $body-color: $dark !default;
 
+$link-color: $primary;
+$link-hover-color: $primary;
+
+/*-- scss:rules --*/
+
+@import "https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap";
+
 body {
   font-family: "Fira Sans";
 }
@@ -44,6 +49,3 @@ body {
 code, h1, h2, h3, h4, h5, h6, header, navbar, #TOC, table, td, th, tr  {
   font-family: "Fira Code";
 }
-
-$link-color: $primary;
-$link-hover-color: $primary;
