@@ -1,27 +1,27 @@
 ---
-title: "About"
+title: >
+  [{{< bi envelope-at-fill >}}](mailto:assuncaolfi@gmail.com)
+  [{{< bi github >}}](https://github.com/assuncaolfi)
+  [{{< bi linkedin >}}](https://linkedin.com/in/assuncaolfi/en)
 about:
   template: solana
   image: assets/me.jpeg
-  image-shape: round
-  links:
-    - icon: envelope
-      text: Email
-      href: mailto:assuncaolfi@gmail.com
-    - icon: github
-      text: GitHub
-      href: https://github.com/assuncaolfi
-    - icon: linkedin
-      text: LinkedIn
-      href: https://linkedin.com/in/assuncaolfi/en
+  image-shape: rectangle
 format:
   html: default
+listing:
+  contents: blog
+  feed: true
+  template: assets/gallery.ejs
 ---
 
-Hello! My name is Luís Assunção and I'm a Data Scientist.
+Hello! I'm Luís Assunção and this is my website.
 
-I help people make better decisions under uncertainty through experimentation,
-causal inference and probabilistic modeling.
+I'm a statistician and data scientist -- my goal is to help people make better
+decisions under uncertainty. To achieve this, I design experiments, infer causal
+relationships, model probabilities, and [more](cv.html).
 
 I also enjoy hiking, music and woodworking. I live with my partner and our
 ginger cat in Belo Horizonte, Brazil.
+
+## Blog [{{< bi rss >}}](blog.xml)

@@ -1,9 +1,7 @@
 citation:
   author: Luís Assunção
-date-modified: today
 format:
   html:
-    code-block-border-left: false
-    code-tools:
-      source: repo
+    date-modified: today
     toc: true
+    toc-title: Contents

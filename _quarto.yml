@@ -7,21 +7,10 @@ website:
   site-url: https://assuncaolfi.github.io/site
   repo-url: https://github.com/assuncaolfi/site
   description: "My personal website"
-  favicon: assets/favicon.png
+  # favicon: assets/favicon.png
   navbar:
     background: light
     foreground: dark
-    left:
-      - text: / About
-        href: index.qmd
-      - text: / Blog
-        href: blog.qmd
-      - icon: rss
-        href: blog.xml
-      - text: / CV
-        href: cv.qmd
-      # - text: / References
-      #   href: references.qmd
   search: false
 
 bibliography: references.bib
@@ -33,21 +22,21 @@ execute:
 
 format:
   html:
-    css: styles.css
+    citations-hover: false
+    citation-location: margin
+    code-block-bg: "#f8f5f0"
+    code-copy: hover
+    code-tools:
+      source: repo
+    # TODO move includes to scss
     header-includes: |
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap" rel="stylesheet">    
-    highlight-style: solarized
+      <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap" rel="stylesheet">
+    highlight-style: monochrome
     mainfont: Fira Sans
     monofont: Fira Code
-    # theme:
-    #   light: sandstone
-    #   dark: sandstone
-    theme: 
-      light:
-        - solar
-        - custom.scss
-      # dark:
-      #   - solar
-    title-block-style: default # plain
+    theme:
+      - sandstone
+      - assets/custom.scss
+    title-block-banner: true

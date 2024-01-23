@@ -1,5 +1,5 @@
 ---
-title: "Curriculum Vitae"
+title: Curriculum Vitae
 format:
   html:
     toc: true
@@ -8,10 +8,38 @@ format:
 
 # Luís Assunção
 
-[{{< fa envelope >}} Email]({{< var email >}})
-[{{< fa brands github >}} GitHub]({{< var github >}})
-[{{< fa brands linkedin >}} LinkedIn]({{< var linkedin >}})
-[{{< fa globe >}} Website]({{< var website >}})
+[{{< bi envelope-fill >}} Email]({{< var email >}}) /
+[{{< bi github >}} GitHub]({{< var github >}}) /
+[{{< bi linkedin >}} LinkedIn]({{< var linkedin >}}) /
+[{{< bi globe-americas >}} Website]({{< var website >}})
+
+## Employment
+
+### [Hotmart](https://hotmart.com/en)
+
+**Staff Data Scientist | April 2020 - present**
+
+* Developed an in-house AB hierarchical testing framework with optional stopping
+* Consulted for and developed randomized controlled trials
+* Estimated causal effects in non-randomized experiments
+* Estimated pricing elasticity for digital products using multilevel models
+* Classified evergreen vs launching sales strategies using hidden state models
+* Improved quality of course assigments using Item Response Theory models
+
+### [Oper](https://operdata.com.br)
+
+**Data Scientist | Oct 2018 - March 2020**
+
+* Consulted for companies such as AB InBev and GTB in statistical projects
+* Modeled spatial pricing elasticity for beverages using Gaussian Processes
+* Estimated revenue attribution in multi-touchpoint marketing campaigns
+
+### [IRIS](https://irisbh.com.br/en/)
+
+**Intern | 2015 - 2017**
+
+* Collected, wrangled and described survey data
+* Researched policies to advance human rights in the digital matters
 
 ## Education
 
@@ -20,7 +48,7 @@ format:
 **Federal University of Minas Gerais (UFMG) | Belo Horizonte, MG - Brazil | 2017
 - 2021**
 
-* Researched and authored a 
+* Researched and authored a
 [reproducible monograph](https://github.com/assuncaolfi/monografia/blob/main/monografia.pdf)
 (in portuguese with an abstract in english) on exponential random graphs applied
 to epidemiology
@@ -28,52 +56,24 @@ to epidemiology
 hospital presentation in COVID-19 patients: Findings from a large Brazilian
 cohort](https://pubmed.ncbi.nlm.nih.gov/36375382/)
 
-## Employment
-
-### [Hotmart](https://hotmart.com/en) 
-
-**Staff Data Scientist | April 2020 - present**  
-
-* Developed an in-house AB hierarchical testing framework with optional stopping
-* Consulted for and developed randomized controlled trials
-* Estimated causal effects in non-randomized experiments
-* Estimated pricing elasticity for digital products using multilevel models
-* Classified evergreen vs launching sales strategies using hidden state models
-* Topified creators and products using Dirichlet-Multinomial models
-
-### [Oper](https://operdata.com.br) 
-
-**Data Scientist | Oct 2018 - March 2020**  
-
-* Consulted for companies such as AB InBev and GTB in statistical projects
-* Modeled spatial pricing elasticity for beverages using Gaussian Processes
-* Estimated revenue attribution in multi-touchpoint marketing campaigns
-
-### [IRIS](https://irisbh.com.br/en/) 
-
-**Intern | 2015 - 2017**
-
-* Collected, wrangled and described survey data
-* Researched policies to advance human rights in the digital matters
-
 ## Examples
 
 ### Blog
+
+Posts on data analysis using tools such as Python, `polars`, `pymc`, `pulp`,
+`seaborn`:
 
 * [Picking a fantasy football team](https://assuncaolfi.github.io/site/blog/fantasy-football):
   In this post, I delve into the data for the 2022 season of a brazilian fantasy
   football league; formulate a mixed integer linear program to pick the optimal
   team; and present initial concepts for forecasting player scores using mixed
-  effects linear models. 
-  
+  effects linear models.
+
 * [Decomposable non-monotonic models](https://assuncaolfi.github.io/site/blog/non-monotonic):
   In this post, I compare empirical and parametric approaches to model non-
   monotonic relationships using a Digit Span verbal working memory cognitive test
   dataset.
 
-Click the {{< fa code >}} **CODE** link on the upper right of any post to see
-its full code. Common tools used in these posts: Python, `polars`, `pymc`,
-`pulp`, `seaborn`.
 
 ### Repositories
 

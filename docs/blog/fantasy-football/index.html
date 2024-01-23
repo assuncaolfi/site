@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.373">
+<meta name="generator" content="quarto-1.4.543">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -18,7 +18,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
@@ -80,7 +80,6 @@ div.csl-indent {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../assets/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -100,132 +99,124 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans&amp;display=swap" rel="stylesheet">    
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans&amp;display=swap" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Luís Assunção</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
-<span class="menu-text">/ About</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../blog.html"> 
-<span class="menu-text">/ Blog</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../../blog.xml"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../references.html"> 
-<span class="menu-text">/ References</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+        <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">Picking a fantasy football team</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/assuncaolfi/site/blob/main/blog/fantasy-football/index.ipynb"><i class="bi"></i> Code</button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">football</div>
+                <div class="quarto-category">optimization</div>
+                <div class="quarto-category">prediction</div>
+              </div>
+                  </div>
+  </div>
+
+
+  <div class="quarto-title-meta">
+
+
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 21, 2023</p>
+      </div>
+    </div>
+
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">January 23, 2024</p>
+      </div>
+    </div>
+
+    </div>
+
+
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
+    <h2 id="toc-title">Contents</h2>
+
   <ul>
   <li><a href="#the-game" id="toc-the-game" class="nav-link active" data-scroll-target="#the-game">The game</a></li>
   <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data wrangling</a>
   <ul class="collapse">
   <li><a href="#filtering-participation" id="toc-filtering-participation" class="nav-link" data-scroll-target="#filtering-participation">Filtering participation</a></li>
-  <li><a href="#imputing-scores" id="toc-imputing-scores" class="nav-link" data-scroll-target="#imputing-scores">Imputing scores</a></li>
   <li><a href="#adding-fixtures" id="toc-adding-fixtures" class="nav-link" data-scroll-target="#adding-fixtures">Adding fixtures</a></li>
   <li><a href="#aligning-variables" id="toc-aligning-variables" class="nav-link" data-scroll-target="#aligning-variables">Aligning variables</a></li>
   </ul></li>
-  <li><a href="#team-picking" id="toc-team-picking" class="nav-link" data-scroll-target="#team-picking">Team picking</a>
-  <ul class="collapse">
-  <li><a href="#backtesting" id="toc-backtesting" class="nav-link" data-scroll-target="#backtesting">Backtesting</a></li>
-  </ul></li>
-  <li><a href="#score-prediction" id="toc-score-prediction" class="nav-link" data-scroll-target="#score-prediction">Score prediction</a>
-  <ul class="collapse">
   <li><a href="#player-average" id="toc-player-average" class="nav-link" data-scroll-target="#player-average">Player average</a></li>
-  <li><a href="#player-random-effects" id="toc-player-random-effects" class="nav-link" data-scroll-target="#player-random-effects">Player random effects</a></li>
-  <li><a href="#fixture-mixed-effects" id="toc-fixture-mixed-effects" class="nav-link" data-scroll-target="#fixture-mixed-effects">Fixture mixed effects</a></li>
-  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Picking a fantasy football team</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/assuncaolfi/site/blob/main/blog/fantasy-football/index.py"><i class="bi"></i> Code</button></div></div>
-  <div class="quarto-categories">
-    <div class="quarto-category">football</div>
-    <div class="quarto-category">optimization</div>
-    <div class="quarto-category">prediction</div>
-  </div>
-  </div>
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
 
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 21, 2023</p>
-    </div>
-  </div>
-  
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 6, 2023</p>
-    </div>
-  </div>
-    
-  </div>
-  
-
-
-</header>
 
 <p><a href="http://cartola.globo.com">Cartola</a> is a fantasy football league following the Brazilian Championship A Series.</p>
 <p>Cartola offers a public API to access data for the current round. A couple of years ago, I created a script to automate data retrieval to a <a href="https://github.com/assuncaolfi/tophat/tree/main">repository</a>, which now hosts comprehensive historical data since 2022.</p>
@@ -237,93 +228,17 @@ div.csl-indent {
 <p>The market is available until the round starts. Players then earn scores based on their real-life match performances. Our team’s score is the aggregate of our players’ scores, with our captain’s score doubled in the 2022 season.</p>
 <p>Following the conclusion of the round, player values are recalibrated based on performance -— with increases for scores above their average and decreases for below-average performances. Our budget for the next round is our previous budget, plus the sum of our players’ value variations.</p>
 </section>
-<section id="data-wrangling" class="level2">
+<section id="data-wrangling" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="data-wrangling">Data wrangling</h2>
 <p>Let’s talk about data structures: each round has a market, and each market is a list of players. A player is a structure like this:</p>
-<div id="cell-data-wrangling-players" class="cell" data-execution_count="2">
-<div id="data-wrangling-players" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Player</span><span style="font-weight: bold">(</span>
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">round</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">player</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">team</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">position</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">games</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">average</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">value</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.0</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">score</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">appreciation</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #808000; text-decoration-color: #808000">minimum</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.53</span>
-<span style="font-weight: bold">)</span>
-</pre>
-</div>
-</div>
 <p>Let’s get the list of markets for 2022 and flatten it into a single DataFrame:</p>
-<div id="cell-data-wrangling-dataframe" class="cell" data-execution_count="3">
-<div id="data-wrangling-dataframe" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span>30_063, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10</span><span style="font-weight: bold">)</span>
-┌───────┬────────┬──────┬──────────┬───┬───────┬───────┬──────────────┬─────────┐
-│ round ┆ player ┆ team ┆ position ┆ … ┆ value ┆ score ┆ appreciation ┆ minimum │
-╞═══════╪════════╪══════╪══════════╪═══╪═══════╪═══════╪══════════════╪═════════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37424</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1371</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37646</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">314</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.3</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37656</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">266</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">9.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.08</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37788</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">356</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.85</span>    │
-│ …     ┆ …      ┆ …    ┆ …        ┆ … ┆ …     ┆ …     ┆ …            ┆ …       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">121397</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">286</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">121398</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">354</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">121399</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">354</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">121400</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">354</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     │
-└───────┴────────┴──────┴──────────┴───┴───────┴───────┴──────────────┴─────────┘
-</pre>
-</div>
-</div>
 <p>Now, let’s focus on a specific <code>player</code> to illustrate our data while we wrangle it:</p>
-<div id="cell-data-wrangling-example" class="cell" data-execution_count="4">
-<div id="data-wrangling-example" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10</span><span style="font-weight: bold">)</span>
-┌───────┬────────┬──────┬──────────┬───┬───────┬───────┬──────────────┬─────────┐
-│ round ┆ player ┆ team ┆ position ┆ … ┆ value ┆ score ┆ appreciation ┆ minimum │
-╞═══════╪════════╪══════╪══════════╪═══╪═══════╪═══════╪══════════════╪═════════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.53</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7.93</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-2.07</span>        ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.52</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.44</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.51</span>         ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.75</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.44</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.78</span>    │
-│ …     ┆ …      ┆ …    ┆ …        ┆ … ┆ …     ┆ …     ┆ …            ┆ …       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.48</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-0.71</span>        ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3.55</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.51</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.03</span>         ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3.63</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">12.68</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.17</span>         ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">9.29</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.06</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-1.62</span>        ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.37</span>    │
-└───────┴────────┴──────┴──────────┴───┴───────┴───────┴──────────────┴─────────┘
-</pre>
-</div>
-</div>
 <section id="filtering-participation" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-participation">Filtering participation</h3>
 <p>Players will show up in the market for many rounds that they do not participate in. However, for our analysis, we are only interested in players that actually played a game in the round.</p>
 <p>Each player has a <code>status</code> field intended to indicate their participation in the round. However, this field is often inaccurate, likely due to the API data being updated before the round.</p>
 <p>One solution is to keep only rows where there is an increase in the number of <code>games</code> the player has played:</p>
-<div id="cell-data-wrangling-round-participation" class="cell" data-execution_count="5">
-<div id="data-wrangling-round-participation" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">31</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span><span style="font-weight: bold">)</span>
-┌───────┬────────┬───────┐
-│ round ┆ player ┆ games │
-╞═══════╪════════╪═══════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     │
-│ …     ┆ …      ┆ …     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">27</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">28</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">29</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">30</span>    │
-└───────┴────────┴───────┘
-</pre>
-</div>
-</div>
-</section>
-<section id="imputing-scores" class="level3">
-<h3 class="anchored" data-anchor-id="imputing-scores">Imputing scores</h3>
+<p>r”“” ## Imputing scores</p>
 <p>Similarly, the player <code>score</code> field is often inaccurate, likely for the same reasons as the <code>status</code> field. Fortunately, the <code>average</code> field is reliable, allowing us to recover the <code>score</code>:</p>
 <p><span class="math display">\[
 \begin{align*}
@@ -333,104 +248,20 @@ s_t
 = 2\mathrm{Average}(\mathbf{s}_{1:t}) - \mathrm{Average}(\mathbf{s}_{1:(t-1)}),
 \end{align*}
 \]</span></p>
-<p>where <span class="math inline">\(\mathbf{s}\)</span> is the vector of scores for a given player across all rounds.</p>
-<div id="cell-data-wrangling-missing-scores" class="cell" data-execution_count="6">
-<div id="data-wrangling-missing-scores" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">31</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="font-weight: bold">)</span>
-┌───────┬────────┬───────┬─────────┐
-│ round ┆ player ┆ score ┆ average │
-╞═══════╪════════╪═══════╪═════════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.5</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">9.5</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.0</span>     │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.6</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.3</span>     │
-│ …     ┆ …      ┆ …     ┆ …       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.73</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.82</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.1</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.96</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.62</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>    │
-└───────┴────────┴───────┴─────────┘
-</pre>
-</div>
-</div>
+<p>where <span class="math inline">\(\mathbf{s}\)</span> is the vector of scores for a given player across all rounds. ““”</p>
 </section>
 <section id="adding-fixtures" class="level3">
 <h3 class="anchored" data-anchor-id="adding-fixtures">Adding fixtures</h3>
 <p>Let’s fetch the list of fixtures to enrich our dataset. A fixture is an object like:</p>
-<div id="cell-data-wrangling-fixtures" class="cell" data-execution_count="7">
-<div id="data-wrangling-fixtures" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Fixture</span><span style="font-weight: bold">(</span><span style="color: #808000; text-decoration-color: #808000">round</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">home</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">282</span>, <span style="color: #808000; text-decoration-color: #808000">away</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">285</span><span style="font-weight: bold">)</span>
-</pre>
-</div>
-</div>
 <p>Let’s consolidate these fixtures into a single DataFrame and then pivot them into a long format:</p>
-<div id="cell-data-wrangling-fixtures-long" class="cell" data-execution_count="8">
-<div id="data-wrangling-fixtures-long" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">760</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span><span style="font-weight: bold">)</span>
-┌───────┬──────┬────────┬──────┐
-│ round ┆ team ┆ versus ┆ home │
-╞═══════╪══════╪════════╪══════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">282</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">285</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">266</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">277</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">276</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">293</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">373</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">262</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-│ …     ┆ …    ┆ …      ┆ …    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">286</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">354</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">276</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">290</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">294</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1371</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">263</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">293</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-└───────┴──────┴────────┴──────┘
-</pre>
-</div>
-</div>
 <p>Finally, let’s join this data to our dataset:</p>
-<div id="cell-data-wrangling-fixtures-join" class="cell" data-execution_count="9">
-<div id="data-wrangling-fixtures-join" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">31</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span><span style="font-weight: bold">)</span>
-┌───────┬────────┬──────┬────────┬──────┐
-│ round ┆ player ┆ team ┆ versus ┆ home │
-╞═══════╪════════╪══════╪════════╪══════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">263</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">314</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">275</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">280</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ …     ┆ …      ┆ …    ┆ …      ┆ …    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">262</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">354</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">294</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">282</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    │
-└───────┴────────┴──────┴────────┴──────┘
-</pre>
-</div>
-</div>
 </section>
-<section id="aligning-variables" class="level3">
+<section id="aligning-variables" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="aligning-variables">Aligning variables</h3>
 <p>In our subsequent analysis, the <code>average</code> field will exclude the <code>score</code> from the given round. Additionally, the <code>appreciation</code> field will be calculated in relation to the round’s <code>score</code>.</p>
-<div id="cell-data-wrangling-lookahead-variables" class="cell" data-execution_count="10">
-<div id="data-wrangling-lookahead-variables" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">31</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span><span style="font-weight: bold">)</span>
-┌───────┬────────┬─────────┬───────┬───────┬──────────────┐
-│ round ┆ player ┆ average ┆ value ┆ score ┆ appreciation │
-╞═══════╪════════╪═════════╪═══════╪═══════╪══════════════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-2.07</span>        │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7.93</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.51</span>         │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.44</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">9.5</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.25</span>         │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.69</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">8.6</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.73</span>         │
-│ …     ┆ …      ┆ …       ┆ …     ┆ …     ┆ …            │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">35</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.91</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.48</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.73</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.03</span>         │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">36</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.82</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.51</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.1</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.17</span>         │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">37</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.96</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">12.68</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.62</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">-1.62</span>        │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">38</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42234</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.06</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.79</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>          │
-└───────┴────────┴─────────┴───────┴───────┴──────────────┘
-</pre>
-</div>
-</div>
-</section>
-</section>
-<section id="team-picking" class="level2">
-<h2 class="anchored" data-anchor-id="team-picking">Team picking</h2>
-<p>Now let’s solve the problem of picking the best team a given market. Let $ $ be the set of valid formations, then for each formation <span class="math inline">\(f \in \mathcal{F}\)</span>, solve:</p>
+<p>r”“” # Team picking</p>
+<p>Now let’s solve the problem of picking the best team a given market. Let $ $ be the set of valid formations, then for each formation <span class="math inline">\(f \in
+\mathcal{F}\)</span>, solve:</p>
 <p><span class="math display">\[
 \begin{equation*} \begin{array}{ll@{}ll}
 \text{maximize} &amp; \displaystyle \hat{\mathbf{s}}^T \mathbf{x}, &amp; \mathbf{x} \in \{\mathbf{0}, \mathbf{1}\} \\
@@ -440,12 +271,9 @@ s_t
 \end{array} \end{equation*}
 \]</span></p>
 <p>where</p>
-<p><span class="math inline">\(\mathbf{x}\)</span> is a variable vector of player picks in the market;<br>
-<span class="math inline">\(\hat{\mathbf{s}}\)</span> is the vector of predicted player scores in the market;<br>
-<span class="math inline">\(b\)</span> is our available budget for that round;<br>
-<span class="math inline">\(\mathbf{P}\)</span> is the matrix of dummy-encoded player formations in the market.</p>
-<p>Finally, take the solution with the highest objective.</p>
-<div id="team-picking-problem" class="cell" data-execution_count="12">
+<p><span class="math inline">\(\mathbf{x}\)</span> is a variable vector of player picks in the market; <span class="math inline">\(\hat{\mathbf{s}}\)</span> is the vector of predicted player scores in the market; <span class="math inline">\(b\)</span> is our available budget for that round; <span class="math inline">\(\mathbf{P}\)</span> is the matrix of dummy-encoded player formations in the market.</p>
+<p>Finally, take the solution with the highest objective. ““”</p>
+<div id="team-picking-problem" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Problem(BaseModel):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    scores: List[<span class="bu">float</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    values: List[<span class="bu">float</span>]</span>
@@ -476,30 +304,15 @@ s_t
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            problem <span class="op">+=</span> pulp.lpDot(picks, <span class="va">self</span>.positions[i]) <span class="op">==</span> formation[i]</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> problem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="backtesting" class="level3">
-<h3 class="anchored" data-anchor-id="backtesting">Backtesting</h3>
-<p>By solving the team picking problem for all rounds, we can backtest our performance in the season. Before backtesting, let’s get the set of valid formations <span class="math inline">\(\mathcal{F}\)</span>:</p>
-<div id="cell-team-picking-formations" class="cell" data-execution_count="13">
-<div id="team-picking-formations" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">[</span>
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Formation</span><span style="font-weight: bold">(</span><span style="color: #808000; text-decoration-color: #808000">goalkeeper</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">defender</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>, <span style="color: #808000; text-decoration-color: #808000">winger</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>, <span style="color: #808000; text-decoration-color: #808000">midfielder</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>, <span style="color: #808000; text-decoration-color: #808000">forward</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>, <span style="color: #808000; text-decoration-color: #808000">coach</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">)</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Formation</span><span style="font-weight: bold">(</span><span style="color: #808000; text-decoration-color: #808000">goalkeeper</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">defender</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>, <span style="color: #808000; text-decoration-color: #808000">winger</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>, <span style="color: #808000; text-decoration-color: #808000">midfielder</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>, <span style="color: #808000; text-decoration-color: #808000">forward</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">coach</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">)</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Formation</span><span style="font-weight: bold">(</span><span style="color: #808000; text-decoration-color: #808000">goalkeeper</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">defender</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">winger</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">midfielder</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>, <span style="color: #808000; text-decoration-color: #808000">forward</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>, <span style="color: #808000; text-decoration-color: #808000">coach</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">)</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Formation</span><span style="font-weight: bold">(</span><span style="color: #808000; text-decoration-color: #808000">goalkeeper</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">defender</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">winger</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">midfielder</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>, <span style="color: #808000; text-decoration-color: #808000">forward</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">coach</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">)</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Formation</span><span style="font-weight: bold">(</span><span style="color: #808000; text-decoration-color: #808000">goalkeeper</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">defender</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">winger</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">midfielder</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>, <span style="color: #808000; text-decoration-color: #808000">forward</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">coach</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">)</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Formation</span><span style="font-weight: bold">(</span><span style="color: #808000; text-decoration-color: #808000">goalkeeper</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">defender</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>, <span style="color: #808000; text-decoration-color: #808000">winger</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">midfielder</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>, <span style="color: #808000; text-decoration-color: #808000">forward</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">coach</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">)</span>,
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Formation</span><span style="font-weight: bold">(</span><span style="color: #808000; text-decoration-color: #808000">goalkeeper</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">defender</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>, <span style="color: #808000; text-decoration-color: #808000">winger</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #808000; text-decoration-color: #808000">midfielder</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>, <span style="color: #808000; text-decoration-color: #808000">forward</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #808000; text-decoration-color: #808000">coach</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">)</span>
-<span style="font-weight: bold">]</span>
-</pre>
-</div>
-</div>
+<p>r”“” ## Backtesting</p>
+<p>By solving the team picking problem for all rounds, we can backtest our performance in the season. Before backtesting, let’s get the set of valid formations <span class="math inline">\(\mathcal{F}\)</span>: ““”</p>
 <p>Knowing our formation constraints, we’re ready to backtest. Starting with a budget of C$ 100, for each round let’s:</p>
 <ol type="1">
 <li>Predict each player’s score based on their performance on previous rounds;</li>
 <li>Pick the team with the best total score;</li>
 <li>Add the sum of the team player’s appreciation to our budget.</li>
 </ol>
-<div id="team-picking-backtest" class="cell" data-execution_count="15">
+<div id="team-picking-backtest" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backtest(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    players: pl.DataFrame, predict: Callable, initial_budget: <span class="bu">float</span> <span class="op">=</span> <span class="fl">100.0</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> pl.DataFrame:</span>
@@ -528,102 +341,48 @@ s_t
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> teams</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Before exploring predictions, we’ll begin with a few hypothetical backtests using actual observed scores for team selection. Backtesting this strategy, this is our team in the first round:</p>
-<div id="cell-team-picking-backtest-first-team" class="cell" data-execution_count="16">
-<div id="team-picking-backtest-first-team" class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">shape: <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">12</span>, <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">13</span><span style="font-weight: bold">)</span>
-┌───────┬────────┬──────┬──────────┬───┬─────────┬────────┬──────┬────────────┐
-│ round ┆ player ┆ team ┆ position ┆ … ┆ minimum ┆ versus ┆ home ┆ prediction │
-╞═══════╪════════╪══════╪══════════╪═══╪═════════╪════════╪══════╪════════════╡
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">71571</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">356</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3.19</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1371</span>   ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42145</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">294</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.75</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">290</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">15.8</span>       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">105584</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">264</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.75</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">263</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10.5</span>       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">107110</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">280</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">286</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">14.9</span>       │
-│ …     ┆ …      ┆ …    ┆ …        ┆ … ┆ …       ┆ …      ┆ …    ┆ …          │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">39148</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">282</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7.2</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">285</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">18.9</span>       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">89840</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">276</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.42</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">293</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">27.1</span>       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">104530</span> ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">294</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.3</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">290</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">11.0</span>       │
-│ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">97341</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">276</span>  ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>        ┆ … ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>     ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">293</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>    ┆ <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">9.52</span>       │
-└───────┴────────┴──────┴──────────┴───┴─────────┴────────┴──────┴────────────┘
-</pre>
-</div>
-</div>
 <p>And we can plot out cumulative performance during the season:</p>
-<div id="cell-team-picking-backtest-score" class="cell" data-execution_count="17">
-<div class="cell-output cell-output-display" data-execution_count="16">
-<p><img src="index_files/figure-html/team-picking-backtest-score-output-1.png" id="team-picking-backtest-score" width="604" height="445"></p>
-</div>
-</div>
 <p>This might seem like a perfect campaign at first, but it’s possible that, early in the season, we didn’t have enough budget to pick the best scoring teams. To test this hypothesis, we backtest the same strategy with unlimited budget from the start:</p>
-<div id="cell-team-picking-backtest-score-unlimited-budget" class="cell" data-execution_count="18">
-<div class="cell-output cell-output-display" data-execution_count="17">
-<p><img src="index_files/figure-html/team-picking-backtest-score-unlimited-budget-output-1.png" id="team-picking-backtest-score-unlimited-budget" width="613" height="445"></p>
-</div>
-</div>
 <p>Both runs are nearly identical, which is evidence that focusing on appreciation is not so important if we have accurate predictions for the scores. If we predict scores perfectly, we get a near perfect run.</p>
 <p>To put our backtests into perspective, <a href="https://ge.globo.com/cartola/noticia/2022/12/03/cartola-2022-com-larga-vantagem-mosquito-bar-8-vence-liga-premiada-meliuz-e-fatura-r-20-mil.ghtml">the 2022 season champion had a total score of 3434.37</a>. This is very impressive and not very far from the near perfect run.</p>
-<div id="cell-team-picking-backtest-champion" class="cell" data-execution_count="19">
-<div class="cell-output cell-output-display" data-execution_count="18">
-<p><img src="index_files/figure-html/team-picking-backtest-champion-output-1.png" id="team-picking-backtest-champion" width="605" height="445"></p>
-</div>
-</div>
-</section>
-</section>
-<section id="score-prediction" class="level2">
-<h2 class="anchored" data-anchor-id="score-prediction">Score prediction</h2>
+<p>r”“” # Score prediction</p>
 <p>For each round, we must predict <span class="math inline">\(\hat{s}\)</span>, the vector of score predictions, using data from previous rounds.</p>
 <p>However, during the first round, we don’t have any previous data to train our model. In this case, we need to include prior information. One way to do that would be to use data from previous seasons. However, we know a variable where this information is already encoded: the player <code>value</code>. Each season starts with players valued according to their past performance. Knowing this, all our models start with <span class="math inline">\(\hat{s} = v\)</span> in the first round.</p>
 <p>Let’s use Bambi <span class="citation" data-cites="Capretto2022">(<a href="#ref-Capretto2022" role="doc-biblioref">Capretto et al. 2022</a>)</span> and its default priors to fit our models. We won’t delve into convergence diagnostics, since we are more interested in the average of the predictive posteriors and the backtest itself is measure of the prediction quality.</p>
-<p>One question that arises here is: why not use non-parametric models such as gradient boosted trees or neural nets? After some experimentation, I concluded they are not a good fit for this problem: either because they assume independence between observations, or because they are too data hungry. Also, tuning these models for backtests might lead us into a rabbit hole <span class="citation" data-cites="Bailey2013">(<a href="#ref-Bailey2013" role="doc-biblioref">Bailey et al. 2013</a>)</span>.</p>
-<section id="player-average" class="level3">
-<h3 class="anchored" data-anchor-id="player-average">Player average</h3>
+<div class="no-row-height column-margin column-container"><div id="ref-Capretto2022" class="csl-entry" role="listitem">
+Capretto, Tomás, Camen Piho, Ravin Kumar, Jacob Westfall, Tal Yarkoni, and Osvaldo A Martin. 2022. <span>“Bambi: A Simple Interface for Fitting Bayesian Linear Models in Python.”</span> <em>Journal of Statistical Software</em> 103 (15): 1–29. <a href="https://doi.org/10.18637/jss.v103.i15">https://doi.org/10.18637/jss.v103.i15</a>.
+</div><div id="ref-Bailey2013" class="csl-entry" role="listitem">
+Bailey, David H., Jonathan M. Borwein, Marcos Lopez de Prado, and Qiji Jim Zhu. 2013. <span>“The Probability of Back-Test over-Fitting.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.2326253">https://doi.org/10.2139/ssrn.2326253</a>.
+</div></div><p>One question that arises here is: why not use non-parametric models such as gradient boosted trees or neural nets? After some experimentation, I concluded they are not a good fit for this problem: either because they assume independence between observations, or because they are too data hungry. Also, tuning these models for backtests might lead us into a rabbit hole <span class="citation" data-cites="Bailey2013">(<a href="#ref-Bailey2013" role="doc-biblioref">Bailey et al. 2013</a>)</span>.</p>
+</section>
+</section>
+<section id="player-average" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="player-average">Player average</h2>
 <p><span class="math display">\[
 \begin{align*}
 \mathbf{\hat{s}} = \mathbf{Z} \mathbf{\beta} \\
 \mathbf{s} \sim N(\mathbf{\hat{s}}, \sigma),
 \end{align*}
 \]</span></p>
-<p>where<br>
-<span class="math inline">\(\mathbf{Z}\)</span> is a dummy-encoded matrix of players;<br>
-<span class="math inline">\(\mathbf{\beta}\)</span> is a vector of parameters for each player.</p>
-<p>In this model, <span class="math inline">\(\mathbf{\beta}\)</span> is simply a vector of player averages. Let’s also consider that players that show up in the middle of the season have an average of zero before their first round. This will be our baseline model.</p>
-<div id="cell-score-prediction-player-average" class="cell" data-execution_count="20">
-<div class="cell-output cell-output-display" data-execution_count="19">
-<p><img src="index_files/figure-html/score-prediction-player-average-output-1.png" id="score-prediction-player-average" width="608" height="445"></p>
-</div>
-</div>
-</section>
-<section id="player-random-effects" class="level3">
-<h3 class="anchored" data-anchor-id="player-random-effects">Player random effects</h3>
+<p>where <span class="math inline">\(\mathbf{Z}\)</span> is a dummy-encoded matrix of players; <span class="math inline">\(\mathbf{\beta}\)</span> is a vector of parameters for each player.</p>
+<p>In this model, <span class="math inline">\(\mathbf{\beta}\)</span> is simply a vector of player averages. Let’s also consider that players that show up in the middle of the season have an average of zero before their first round. This will be our baseline model. ““”</p>
+<p>r”“” ## Player random effects</p>
 <p><span class="math display">\[
 \begin{align*}
 \mathbf{\hat{s}} = \alpha + \mathbf{Z} \mathbf{b} \\
 \mathbf{b} \sim N(0, \sigma_b),
 \end{align*}
 \]</span></p>
-<p>where<br>
-<span class="math inline">\(\alpha\)</span> is an intercept and<br>
-<span class="math inline">\(\mathbf{b}\)</span> is a vector of player random effects.</p>
-<p>This model performs significantly better than the average model, possibly because of the partial pooling between the random effects, that pulls large effects towards the overall mean <span class="citation" data-cites="clark2019shrinkage">(<a href="#ref-clark2019shrinkage" role="doc-biblioref">Clark 2019</a>)</span>. In our dataset, it’s common for players that played one or two games to have large averages by chance.</p>
-<div id="cell-score-prediction-player-random-effects" class="cell" data-execution_count="21">
-<div class="cell-output cell-output-display" data-execution_count="20">
-<p><img src="index_files/figure-html/score-prediction-player-random-effects-output-1.png" id="score-prediction-player-random-effects" width="608" height="445"></p>
-</div>
-</div>
-</section>
-<section id="fixture-mixed-effects" class="level3">
-<h3 class="anchored" data-anchor-id="fixture-mixed-effects">Fixture mixed effects</h3>
+<p>where <span class="math inline">\(\alpha\)</span> is an intercept and <span class="math inline">\(\mathbf{b}\)</span> is a vector of player random effects.</p>
+<p>This model performs significantly better than the average model, possibly because of the partial pooling between the random effects, that pulls large effects towards the overall mean <span class="citation" data-cites="clark2019shrinkage">(<a href="#ref-clark2019shrinkage" role="doc-biblioref">Clark 2019</a>)</span>. In our dataset, it’s common for players that played one or two games to have large averages by chance. ““”</p>
+<div class="no-row-height column-margin column-container"><div id="ref-clark2019shrinkage" class="csl-entry" role="listitem">
+Clark, Michael. 2019. <span>“Michael Clark: Shrinkage in Mixed Effects Models.”</span> <a href="https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/">https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/</a>.
+</div></div><p>r”“” ## Fixture mixed effects</p>
 <p><span class="math display">\[
 \mathbf{\hat{s}} = \alpha + \mathbf{X} \mathbf{\beta} + \mathbf{Z} \mathbf{b},
 \]</span></p>
-<p>where<br>
-<span class="math inline">\(\mathbf{X}\)</span> is a matrix of the dummy-encoded fixture variables: the player <code>team</code>, whether they are playing at <code>home</code>, and their <code>adversary</code> team variables; <span class="math inline">\(\mathbf{\beta}\)</span> is a vector of fixed effects.</p>
-<p>This model brings more context to our predictions. It also provides a reasonable way to predict a new player, by setting their <span class="math inline">\(b = 0\)</span> (the mean of the random effects). However, it does not improve significantly over our random effects model.</p>
-<div id="cell-score-prediction-fixture-mixed-effects" class="cell" data-execution_count="22">
-<div class="cell-output cell-output-display" data-execution_count="21">
-<p><img src="index_files/figure-html/score-prediction-fixture-mixed-effects-output-1.png" id="score-prediction-fixture-mixed-effects" width="608" height="445"></p>
-</div>
-</div>
-</section>
+<p>where <span class="math inline">\(\mathbf{X}\)</span> is a matrix of the dummy-encoded fixture variables: the player <code>team</code>, whether they are playing at <code>home</code>, and their <code>adversary</code> team variables; <span class="math inline">\(\mathbf{\beta}\)</span> is a vector of fixed effects.</p>
+<p>This model brings more context to our predictions. It also provides a reasonable way to predict a new player, by setting their <span class="math inline">\(b = 0\)</span> (the mean of the random effects). However, it does not improve significantly over our random effects model. ““”</p>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -641,27 +400,16 @@ s_t
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Bailey2013" class="csl-entry" role="listitem">
-Bailey, David H., Jonathan M. Borwein, Marcos Lopez de Prado, and Qiji Jim Zhu. 2013. <span>“The Probability of Back-Test over-Fitting.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.2326253">https://doi.org/10.2139/ssrn.2326253</a>.
-</div>
-<div id="ref-Capretto2022" class="csl-entry" role="listitem">
-Capretto, Tomás, Camen Piho, Ravin Kumar, Jacob Westfall, Tal Yarkoni, and Osvaldo A Martin. 2022. <span>“Bambi: A Simple Interface for Fitting Bayesian Linear Models in Python.”</span> <em>Journal of Statistical Software</em> 103 (15): 1–29. <a href="https://doi.org/10.18637/jss.v103.i15">https://doi.org/10.18637/jss.v103.i15</a>.
-</div>
-<div id="ref-clark2019shrinkage" class="csl-entry" role="listitem">
-Clark, Michael. 2019. <span>“Michael Clark: Shrinkage in Mixed Effects Models.”</span> <a href="https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/">https://m-clark.github.io/posts/2019-05-14-shrinkage-in-mixed-models/</a>.
-</div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2023,
   author = {Assunção, Luís},
   title = {Picking a Fantasy Football Team},
-  pages = {undefined},
   date = {2023-09-21},
-  url = {https://assuncaolfi.github.io/blog/fantasy-football},
+  url = {https://assuncaolfi.github.io/site/blog/fantasy-football},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2023" class="csl-entry quarto-appendix-citeas" role="listitem">
 Assunção, Luís. 2023. <span>“Picking a Fantasy Football Team.”</span>
-September 21, 2023. <a href="https://assuncaolfi.github.io/blog/fantasy-football">https://assuncaolfi.github.io/blog/fantasy-football</a>.
+September 21, 2023. <a href="https://assuncaolfi.github.io/site/blog/fantasy-football">https://assuncaolfi.github.io/site/blog/fantasy-football</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -682,7 +430,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       toggleBodyColorMode(bsSheetEl);
     }
   }
-  toggleBodyColorPrimary();  
+  toggleBodyColorPrimary();
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -692,7 +440,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
+      if (clz.startsWith('code-annotation-')) {
         return true;
       }
     }
@@ -723,11 +471,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
       button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
+      tooltip = new bootstrap.Tooltip(button,
+        { trigger: "manual",
           customClass: "code-copy-button-tooltip",
           offset: [0, -8]});
-      tooltip.show();    
+      tooltip.show();
     }
     setTimeout(function() {
       if (tooltip) {
@@ -780,7 +528,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (codeDiv.classList.contains(fromCls)) {
           codeDiv.classList.remove(fromCls);
           codeDiv.classList.add(toCls);
-        } 
+        }
       }
       return false;
     }
@@ -816,7 +564,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     if (onUntriggerFn) {
       config.onUntrigger = onUntriggerFn;
     }
-    window.tippy(el, config); 
+    window.tippy(el, config);
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
   for (var i=0; i<noterefs.length; i++) {
@@ -842,15 +590,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -859,7 +620,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -867,7 +636,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     tippyHover(xref, undefined, function(instance) {
       instance.disable();
       let url = xref.getAttribute('href');
-      let hash = undefined; 
+      let hash = undefined;
       if (url.startsWith('#')) {
         hash = url;
       } else {
@@ -895,12 +664,35 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             if (note !== null) {
               const html = processXRef(id, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          }
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -936,7 +728,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             height = bottom - top;
           }
           if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
+            // cook up a div (if necessary) and position it
             let div = window.document.getElementById("code-annotation-line-highlight");
             if (div === null) {
               div = window.document.createElement("div");
@@ -976,7 +768,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -1019,43 +810,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           }
         });
       }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
-      });
-    }
-  }
 });
 </script>
 </div> <!-- /content -->
