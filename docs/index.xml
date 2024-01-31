@@ -10,7 +10,7 @@
 <atom:link href="https://assuncaolfi.github.io/site/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.543</generator>
-<lastBuildDate>Tue, 23 Jan 2024 03:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 31 Jan 2024 03:00:00 GMT</lastBuildDate>
 <item>
   <title>Additive aging curve</title>
   <link>https://assuncaolfi.github.io/site/blog/aging-curve/</link>
@@ -149,7 +149,7 @@ font-style: inherit;">3</span>).over(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"sample"</span>))</span>
 <span id="cb1-14">)</span>
-<span id="cb1-15">peak_performance <span class="op" style="color: #5E5E5E;
+<span id="cb1-15">peak <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> samples.group_by(<span class="st" style="color: #20794D;
 background-color: null;
@@ -164,8 +164,8 @@ font-style: inherit;">"smoothed_mean"</span>).arg_max())</span>
 <span id="cb1-17">)</span></code></pre></div>
 </div>
 <p>This yields the following bootstrap distribution of ages of peak performance:</p>
-<div id="cell-bootstrap-distribution" class="cell" data-execution_count="17">
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="cell-bootstrap-distribution" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <figure class="figure">
 <p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/bootstrap-distribution-output-1.png" id="bootstrap-distribution" width="599" height="445" class="figure-img"></p>
@@ -175,7 +175,7 @@ font-style: inherit;">"smoothed_mean"</span>).arg_max())</span>
 </div>
 <p>This distribution suggests two important things:</p>
 <ol type="1">
-<li>The most probable age of peak performance is, by far, 33;</li>
+<li>The most probable age of peak performance is 33;</li>
 <li>There is a non-negligible probability that the age of peak performance happens in the early 20s, but a negligible probability that it happens in the late 20s.</li>
 </ol>
 <p>Thing 2 certainly deserves attention. This is possibly caused by a confound variable or some measuring error, but I won’t investigate this any further. Instead, let’s get back to estimating curves. We will use the samples from step 4 to summarize the distribution of mean performances. For each age, we calculate the mean and 90% interquantile range, yielding a nonparametric curve:</p>
@@ -188,19 +188,20 @@ font-style: inherit;">"smoothed_mean"</span>).arg_max())</span>
 </div>
 </div>
 </div>
-<p>This figure is analogue to figure … in the paper. Since this is an entirely empirical curve, there isn’t much to interpret here (maybe unitary changes?). However, the curve shape indicates an aging-curve-likeness.</p>
+<p>This figure is analogue to figure 3a in the paper. This curve is entirely empirical, so there isn’t much to interpret here. It does indicate, however, the rising and falling behavior of an aging curve, with a steep increase from age 10 to 20, followed by a plateau between 20 and 30, and a slow decline beginning at 40.</p>
 </section>
-<section id="penalized-splines" class="level2">
+<section id="penalized-splines" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="penalized-splines">Penalized splines</h2>
 <p>Splines are wiggly curves…</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ag(x)%20&amp;=%20%5Calpha%20+%20Z%20%5Cbf%7Bb%7D%20%5C%5C%0Ay%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(g(x),%20%5Csigma)%20%5C%5C%0A%5Calpha%20&amp;%5Csim%20%5Cmathrm%7BStudent%7D(3,%200,%200.1)%20%5C%5C%0A%5Csigma%20&amp;%5Csim%20%5Cmathrm%7BHalfCauchy%7D(1)%0A%5Cend%7Balign%7D%0A"></p>
-<p>Polynomials have runge swings…</p>
-<p>We could make assumptions about the data generating process to help us pick the number of knots. Instead, let’s pick an arbitrary large number of knots (say, 15) and let the model itself learn how wiggly the curve should be.</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ab%20&amp;=%20%5Ctau%20%5Cbf%7Bz%7D%20%5C%5C%0A%5Ctau%20&amp;%5Csim%20%5Cmathrm%7BHalfCauchy%7D(1)%20%5C%5C%0A%5Cbf%7Bz%7D%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(0,%201)%0A%5Cend%7Balign%7D%0A"></p>
+<p>Polynomials… <span class="citation" data-cites="Kolassa2017">(Kolassa 2017)</span><br>
+Adaptive smoothing…</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Kolassa2017" class="csl-entry">
+Kolassa, Stephan. 2017. <span>“B-Splines VS High Order Polynomials in Regression.”</span> Cross Validated. <a href="https://stats.stackexchange.com/q/314878">https://stats.stackexchange.com/q/314878</a>.
+</div></div><p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ab%20&amp;=%20%5Ctau%20%5Cbf%7Bz%7D%20%5C%5C%0A%5Ctau%20&amp;%5Csim%20%5Cmathrm%7BHalfCauchy%7D(1)%20%5C%5C%0A%5Cbf%7Bz%7D%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(0,%201)%0A%5Cend%7Balign%7D%0A"></p>
 <p>https://www.pymc.io/projects/examples/en/latest/howto/spline.html<br>
-https://www.tjmahr.com/random-effects-penalized-splines-same-thing/<br>
-https://elevanth.org/blog/2017/09/07/metamorphosis-multilevel-model/</p>
-<div id="spline-model" class="cell" data-execution_count="7">
+https://www.tjmahr.com/random-effects-penalized-splines-same-thing/</p>
+<div id="spline-model" class="cell" data-scrolled="true" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> pymc <span class="im" style="color: #00769E;
@@ -277,47 +278,46 @@ font-style: inherit;">"y"</span>, μ, σ, observed<span class="op" style="color:
 background-color: null;
 font-style: inherit;">=</span>y)</span></code></pre></div>
 </div>
-<div id="spline-sample" class="cell" data-execution_count="8">
-<div class="cell-output cell-output-stderr">
-<pre><code>Auto-assigning NUTS sampler...
-Initializing NUTS using jitter+adapt_diag...
-Sequential sampling (4 chains in 1 job)
-NUTS: [α, τ, z, σ]
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 47 seconds.</code></pre>
-</div>
-</div>
-<p>::: {#cell-spline-plot .cell 0=‘s’ 1=‘p’ 2=‘l’ 3=‘i’ 4=‘n’ 5=‘e’ 6=‘-’ 7=‘p’ 8=‘l’ 9=‘o’ 10=‘t’ execution_count=9}</p>
+<p>When, where and how things change… https://www.youtube.com/watch?v=Zxokd_Eqrcg&amp;t=506s</p>
+<div id="cell-spline-curve" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/spline-plot-output-1.png" id="spline-plot" width="599" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/spline-curve-output-1.png" id="spline-curve" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
-<p>:::</p>
-<p>Splines are good interpolation tools…<br>
-“when, where and how things change”… https://www.youtube.com/watch?v=Zxokd_Eqrcg&amp;t=506s<br>
-However, it’s not a good idea to extrapolate…</p>
+</div>
+<div id="cell-spline-peak" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/spline-peak-output-1.png" id="spline-peak" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Twin peaks!</p>
 </section>
-<section id="two-component-function" class="level2">
-<h2 class="anchored" data-anchor-id="two-component-function">Two component function</h2>
-<p>All intervals are 80% credibility…</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ag_1(x)%20&amp;=%20%5Calpha_1%20+%20%5Cbeta_1%20%5Cexp(-%5Clambda_1%20x)%20%5C%5C%0Ag_2(x)%20&amp;=%20%5Calpha_2%20+%20%5Cbeta_2%20(1%20-%20%5Cexp(-%5Clambda_2%20x))%20%5C%5C%0Ag(x)%20&amp;=%20g_1(x)%20+%20g_2(x)%20%5C%5C%0A%20%20%20%20%20&amp;=%20%5Calpha%20+%20%5Cbeta_1%20%5Cexp(-%5Clambda_1%20x)%20+%20%5Cbeta_2%20(1%20-%20%5Cexp(-%5Clambda_2%20x))%0A%5Cend%7Balign%7D%0A"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ay%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(g(x),%20%5Csigma)%20%5C%5C%0A%5Calpha%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(0,%202)%20%5C%5C%0A%5Clambda%20&amp;%5Csim%20%5Cmathrm%7BExponential%7D(0.01)%20%5C%5C%0A%5Csigma%20&amp;%5Csim%20%5Cmathrm%7BExponential%7D(1)%20%5C%5C%0A%5Cend%7Balign%7D%0A"></p>
-<div id="decomposable-models-additive" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
+<section id="additive-function" class="level2">
+<h2 class="anchored" data-anchor-id="additive-function">Additive function</h2>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Ag_1(x)%20&amp;=%20%5Calpha%20+%20%5Cbeta_1%20%5Cexp(-%5Clambda_1%20x)%20%5C%5C%0Ag_2(x)%20&amp;=%20%5Cbeta_2%20%5Cexp(%5Clambda_2%20x)%20%5C%5C%0A%5C%5C%0Ag(x)%20&amp;=%20g_1(x)%20+%20g_2(x)%20%5C%5C%0A&amp;=%20%5Calpha%20+%20%5Cbeta_1%20%5Cexp(-%5Clambda_1%20x)%20+%20%5Cbeta_2%20%5Cexp(%5Clambda_2%20x)%20%5C%5C%0A%5C%5C%0Ay%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(g(x),%20%5Csigma)%20%5C%5C%0A%5Calpha%20&amp;%5Csim%20%5Cmathrm%7BNormal%7D(0,%202)%20%5C%5C%0A%5Clambda%20&amp;%5Csim%20%5Cmathrm%7BExponential%7D(0.01)%20%5C%5C%0A%5Csigma%20&amp;%5Csim%20%5Cmathrm%7BExponential%7D(1)%20%5C%5C%0A%5Cend%7Balign%7D%0A"></p>
+<div id="additive-model" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> pymc <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> pm</span>
-<span id="cb4-2"></span>
-<span id="cb4-3"></span>
-<span id="cb4-4"><span class="kw" style="color: #003B4F;
+<span id="cb3-2"></span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">def</span> g(x):</span>
-<span id="cb4-5">    y <span class="op" style="color: #5E5E5E;
+font-style: inherit;">def</span> g_1(x):</span>
+<span id="cb3-5">    <span class="cf" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">=</span> α[<span class="dv" style="color: #AD0000;
+font-style: inherit;">return</span> α <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> β[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -327,81 +327,93 @@ font-style: inherit;">-</span>λ[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">*</span> x) <span class="op" style="color: #5E5E5E;
+font-style: inherit;">*</span> x)</span>
+<span id="cb3-6"></span>
+<span id="cb3-7"></span>
+<span id="cb3-8"><span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">+</span> α[<span class="dv" style="color: #AD0000;
+font-style: inherit;">def</span> g_2(x):</span>
+<span id="cb3-9">    <span class="cf" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> α[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> pm.math.exp(<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>λ[<span class="dv" style="color: #AD0000;
+font-style: inherit;">return</span> β[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">*</span> x))</span>
-<span id="cb4-6">    <span class="cf" style="color: #003B4F;
+font-style: inherit;">*</span> pm.math.exp(λ[<span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">return</span> y</span>
-<span id="cb4-7"></span>
-<span id="cb4-8"></span>
-<span id="cb4-9"><span class="cf" style="color: #003B4F;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x)</span>
+<span id="cb3-10"></span>
+<span id="cb3-11"></span>
+<span id="cb3-12"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> g(x):</span>
+<span id="cb3-13">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> g_1(x) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> g_2(x)</span>
+<span id="cb3-14"></span>
+<span id="cb3-15"></span>
+<span id="cb3-16"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">with</span> pm.Model() <span class="im" style="color: #00769E;
 background-color: null;
-font-style: inherit;">as</span> model:</span>
-<span id="cb4-10">    x <span class="op" style="color: #5E5E5E;
+font-style: inherit;">as</span> additive:</span>
+<span id="cb3-17">    x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pm.ConstantData(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"x"</span>, x)</span>
-<span id="cb4-11">    α <span class="op" style="color: #5E5E5E;
+<span id="cb3-18">    α <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pm.Normal(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"alpha"</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">"α"</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">2</span>, size<span class="op" style="color: #5E5E5E;
+font-style: inherit;">1</span>)</span>
+<span id="cb3-19">    β <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+font-style: inherit;">=</span> pm.Normal(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">3</span>)</span>
-<span id="cb4-12">    λ <span class="op" style="color: #5E5E5E;
+font-style: inherit;">"β"</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">=</span> pm.HalfNormal(<span class="st" style="color: #20794D;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">"lambda"</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.01</span>, size<span class="op" style="color: #5E5E5E;
+font-style: inherit;">1</span>, size<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>)</span>
-<span id="cb4-13">    μ <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> pm.Deterministic(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"mu"</span>, g(x))</span>
-<span id="cb4-14">    σ <span class="op" style="color: #5E5E5E;
+<span id="cb3-20">    λ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pm.HalfNormal(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"sigma"</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">"λ"</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.004</span>, size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb3-21">    μ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.Deterministic(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"μ"</span>, g(x))</span>
+<span id="cb3-22">    σ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pm.HalfNormal(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"σ"</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span>
-<span id="cb4-15">    pm.Normal(<span class="st" style="color: #20794D;
+<span id="cb3-23">    pm.Normal(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"observed"</span>, mu<span class="op" style="color: #5E5E5E;
+font-style: inherit;">"y"</span>, mu<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>μ, sigma<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -409,21 +421,29 @@ font-style: inherit;">=</span>σ, observed<span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">=</span>y)</span></code></pre></div>
 </div>
-<div id="cell-decomposable-models-additive-draws" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div id="cell-additive-curve" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/decomposable-models-additive-draws-output-1.png" id="decomposable-models-additive-draws" width="599" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/additive-curve-output-1.png" id="additive-curve" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><img src="https://latex.codecogs.com/png.latex?d/dx%20g(x)%20=%20a_2%20b_2%20e%5E(b_2%20(-x))%20-%20a_1%20b_1%20e%5E(b_1%20(-x))"> <img src="https://latex.codecogs.com/png.latex?x%20=%20%5Cfrac%7B%5Clog(%5Cfrac%7Ba_1%20b_1%7D%7Ba_2%20b_2%7D)%7D%7Bb_1%20-%20b_2%7D"></p>
-<div id="cell-decomposable-models-peak" class="cell" data-execution_count="15">
+<div id="cell-additive-curve-facet" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+<figure class="figure">
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/additive-curve-facet-output-1.png" id="additive-curve-facet" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-additive-peak" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 <figure class="figure">
-<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/decomposable-models-peak-output-1.png" id="decomposable-models-peak" width="599" height="445" class="figure-img"></p>
+<p><img src="https://assuncaolfi.github.io/site/blog/aging-curve/index_files/figure-html/additive-peak-output-1.png" id="additive-peak" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -436,16 +456,16 @@ font-style: inherit;">=</span>y)</span></code></pre></div>
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2024,
   author = {Assunção, Luís},
   title = {Additive Aging Curve},
-  date = {2024-01-23},
+  date = {2024-01-31},
   url = {https://assuncaolfi.github.io/site/blog/aging-curve},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2024" class="csl-entry quarto-appendix-citeas">
-Assunção, Luís. 2024. <span>“Additive Aging Curve.”</span> January 23,
+Assunção, Luís. 2024. <span>“Additive Aging Curve.”</span> January 31,
 2024. <a href="https://assuncaolfi.github.io/site/blog/aging-curve">https://assuncaolfi.github.io/site/blog/aging-curve</a>.
 </div></div></section></div> ]]></description>
   <guid>https://assuncaolfi.github.io/site/blog/aging-curve/</guid>
-  <pubDate>Tue, 23 Jan 2024 03:00:00 GMT</pubDate>
+  <pubDate>Wed, 31 Jan 2024 03:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Drafting a fantasy football team</title>

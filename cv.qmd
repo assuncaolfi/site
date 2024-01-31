@@ -1,6 +1,7 @@
 ---
 title: Curriculum Vitae
 subtitle: Luís Assunção
+date-modified: today
 format:
   html:
     toc: true
@@ -11,6 +12,9 @@ format:
 [{{< bi github >}} GitHub]({{< var github >}}) /
 [{{< bi linkedin >}} LinkedIn]({{< var linkedin >}}) /
 [{{< bi globe-americas >}} Website]({{< var website >}})
+
+_The PDF version of this document might be outdated. Please see the [website
+version]({{< var website >}}/cv.html)._
 
 ## Employment
 
