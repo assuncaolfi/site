@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.548">
+<meta name="generator" content="quarto-1.5.6">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-01-23">
+<meta name="dcterms.date" content="2024-01-31">
 
-<title>Luís Assunção - Additive aging curve</title>
+<title>Luís Assunção – Additive aging curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -169,14 +169,14 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 23, 2024</p>
+        <p class="date">January 31, 2024</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 23, 2024</p>
+        <p class="date-modified">January 31, 2024</p>
       </div>
     </div>
       
@@ -194,7 +194,7 @@ window.Quarto = {
   <li><a href="#the-digit-span-test" id="toc-the-digit-span-test" class="nav-link active" data-scroll-target="#the-digit-span-test">The Digit Span test</a></li>
   <li><a href="#bootstrap-estimates" id="toc-bootstrap-estimates" class="nav-link" data-scroll-target="#bootstrap-estimates">Bootstrap estimates</a></li>
   <li><a href="#penalized-splines" id="toc-penalized-splines" class="nav-link" data-scroll-target="#penalized-splines">Penalized splines</a></li>
-  <li><a href="#two-component-function" id="toc-two-component-function" class="nav-link" data-scroll-target="#two-component-function">Two component function</a></li>
+  <li><a href="#additive-function" id="toc-additive-function" class="nav-link" data-scroll-target="#additive-function">Additive function</a></li>
   </ul>
 </nav>
     </div>
@@ -278,13 +278,13 @@ Germine, Laura, and Joshua K Hartshorne. 2016. <span>“Hartshorne &amp; Germine
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"sample"</span>, <span class="st">"age"</span>)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    .with_columns(smoothed_mean<span class="op">=</span>pl.col(<span class="st">"mean"</span>).rolling_mean(<span class="dv">3</span>).over(<span class="st">"sample"</span>))</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>peak_performance <span class="op">=</span> samples.group_by(<span class="st">"sample"</span>).agg(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>peak <span class="op">=</span> samples.group_by(<span class="st">"sample"</span>).agg(</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    age<span class="op">=</span>pl.col(<span class="st">"age"</span>).get(pl.col(<span class="st">"smoothed_mean"</span>).arg_max())</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This yields the following bootstrap distribution of ages of peak performance:</p>
-<div id="cell-bootstrap-distribution" class="cell" data-execution_count="17">
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="cell-bootstrap-distribution" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <figure class="figure">
 <p><img src="index_files/figure-html/bootstrap-distribution-output-1.png" id="bootstrap-distribution" width="599" height="445" class="figure-img"></p>
@@ -294,7 +294,7 @@ Germine, Laura, and Joshua K Hartshorne. 2016. <span>“Hartshorne &amp; Germine
 </div>
 <p>This distribution suggests two important things:</p>
 <ol type="1">
-<li>The most probable age of peak performance is, by far, 33;</li>
+<li>The most probable age of peak performance is 33;</li>
 <li>There is a non-negligible probability that the age of peak performance happens in the early 20s, but a negligible probability that it happens in the late 20s.</li>
 </ol>
 <p>Thing 2 certainly deserves attention. This is possibly caused by a confound variable or some measuring error, but I won’t investigate this any further. Instead, let’s get back to estimating curves. We will use the samples from step 4 to summarize the distribution of mean performances. For each age, we calculate the mean and 90% interquantile range, yielding a nonparametric curve:</p>
@@ -307,9 +307,9 @@ Germine, Laura, and Joshua K Hartshorne. 2016. <span>“Hartshorne &amp; Germine
 </div>
 </div>
 </div>
-<p>This figure is analogue to figure … in the paper. Since this is an entirely empirical curve, there isn’t much to interpret here (maybe unitary changes?). However, the curve shape indicates an aging-curve-likeness.</p>
+<p>This figure is analogue to figure 3a in the paper. This curve is entirely empirical, so there isn’t much to interpret here. It does indicate, however, the rising and falling behavior of an aging curve, with a steep increase from age 10 to 20, followed by a plateau between 20 and 30, and a slow decline beginning at 40.</p>
 </section>
-<section id="penalized-splines" class="level2">
+<section id="penalized-splines" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="penalized-splines">Penalized splines</h2>
 <p>Splines are wiggly curves…</p>
 <p><span class="math display">\[
@@ -320,9 +320,11 @@ y &amp;\sim \mathrm{Normal}(g(x), \sigma) \\
 \sigma &amp;\sim \mathrm{HalfCauchy}(1)
 \end{align}
 \]</span></p>
-<p>Polynomials have runge swings…</p>
-<p>We could make assumptions about the data generating process to help us pick the number of knots. Instead, let’s pick an arbitrary large number of knots (say, 15) and let the model itself learn how wiggly the curve should be.</p>
-<p><span class="math display">\[
+<p>Polynomials… <span class="citation" data-cites="Kolassa2017">(<a href="#ref-Kolassa2017" role="doc-biblioref">Kolassa 2017</a>)</span><br>
+Adaptive smoothing…</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Kolassa2017" class="csl-entry" role="listitem">
+Kolassa, Stephan. 2017. <span>“B-Splines VS High Order Polynomials in Regression.”</span> Cross Validated. <a href="https://stats.stackexchange.com/q/314878">https://stats.stackexchange.com/q/314878</a>.
+</div></div><p><span class="math display">\[
 \begin{align}
 b &amp;= \tau \bf{z} \\
 \tau &amp;\sim \mathrm{HalfCauchy}(1) \\
@@ -330,9 +332,8 @@ b &amp;= \tau \bf{z} \\
 \end{align}
 \]</span></p>
 <p>https://www.pymc.io/projects/examples/en/latest/howto/spline.html<br>
-https://www.tjmahr.com/random-effects-penalized-splines-same-thing/<br>
-https://elevanth.org/blog/2017/09/07/metamorphosis-multilevel-model/</p>
-<div id="spline-model" class="cell" data-execution_count="7">
+https://www.tjmahr.com/random-effects-penalized-splines-same-thing/</p>
+<div id="spline-model" class="cell" data-scrolled="true" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymc <span class="im">as</span> pm</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> spline:</span>
@@ -345,79 +346,91 @@ https://elevanth.org/blog/2017/09/07/metamorphosis-multilevel-model/</p>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    σ <span class="op">=</span> pm.HalfCauchy(<span class="st">"σ"</span>, <span class="dv">1</span>)</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    pm.Normal(<span class="st">"y"</span>, μ, σ, observed<span class="op">=</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="spline-sample" class="cell" data-execution_count="8">
-<div class="cell-output cell-output-stderr">
-<pre><code>Auto-assigning NUTS sampler...
-Initializing NUTS using jitter+adapt_diag...
-Sequential sampling (4 chains in 1 job)
-NUTS: [α, τ, z, σ]
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 47 seconds.</code></pre>
-</div>
-</div>
-<p>::: {#cell-spline-plot .cell 0=‘s’ 1=‘p’ 2=‘l’ 3=‘i’ 4=‘n’ 5=‘e’ 6=‘-’ 7=‘p’ 8=‘l’ 9=‘o’ 10=‘t’ execution_count=9}</p>
+<p>When, where and how things change… https://www.youtube.com/watch?v=Zxokd_Eqrcg&amp;t=506s</p>
+<div id="cell-spline-curve" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/spline-plot-output-1.png" id="spline-plot" width="599" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/spline-curve-output-1.png" id="spline-curve" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
-<p>:::</p>
-<p>Splines are good interpolation tools…<br>
-“when, where and how things change”… https://www.youtube.com/watch?v=Zxokd_Eqrcg&amp;t=506s<br>
-However, it’s not a good idea to extrapolate…</p>
+</div>
+<div id="cell-spline-peak" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/spline-peak-output-1.png" id="spline-peak" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Twin peaks!</p>
 </section>
-<section id="two-component-function" class="level2">
-<h2 class="anchored" data-anchor-id="two-component-function">Two component function</h2>
-<p>All intervals are 80% credibility…</p>
+<section id="additive-function" class="level2">
+<h2 class="anchored" data-anchor-id="additive-function">Additive function</h2>
 <p><span class="math display">\[
 \begin{align}
-g_1(x) &amp;= \alpha_1 + \beta_1 \exp(-\lambda_1 x) \\
-g_2(x) &amp;= \alpha_2 + \beta_2 (1 - \exp(-\lambda_2 x)) \\
+g_1(x) &amp;= \alpha + \beta_1 \exp(-\lambda_1 x) \\
+g_2(x) &amp;= \beta_2 \exp(\lambda_2 x) \\
+\\
 g(x) &amp;= g_1(x) + g_2(x) \\
-     &amp;= \alpha + \beta_1 \exp(-\lambda_1 x) + \beta_2 (1 - \exp(-\lambda_2 x))
-\end{align}
-\]</span></p>
-<p><span class="math display">\[
-\begin{align}
+&amp;= \alpha + \beta_1 \exp(-\lambda_1 x) + \beta_2 \exp(\lambda_2 x) \\
+\\
 y &amp;\sim \mathrm{Normal}(g(x), \sigma) \\
 \alpha &amp;\sim \mathrm{Normal}(0, 2) \\
 \lambda &amp;\sim \mathrm{Exponential}(0.01) \\
 \sigma &amp;\sim \mathrm{Exponential}(1) \\
 \end{align}
 \]</span></p>
-<div id="decomposable-models-additive" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymc <span class="im">as</span> pm</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> g(x):</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> α[<span class="dv">0</span>] <span class="op">*</span> pm.math.exp(<span class="op">-</span>λ[<span class="dv">0</span>] <span class="op">*</span> x) <span class="op">+</span> α[<span class="dv">1</span>] <span class="op">+</span> α[<span class="dv">2</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> pm.math.exp(<span class="op">-</span>λ[<span class="dv">1</span>] <span class="op">*</span> x))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> model:</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> pm.ConstantData(<span class="st">"x"</span>, x)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    α <span class="op">=</span> pm.Normal(<span class="st">"alpha"</span>, <span class="dv">0</span>, <span class="dv">2</span>, size<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    λ <span class="op">=</span> pm.HalfNormal(<span class="st">"lambda"</span>, <span class="fl">0.01</span>, size<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    μ <span class="op">=</span> pm.Deterministic(<span class="st">"mu"</span>, g(x))</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    σ <span class="op">=</span> pm.HalfNormal(<span class="st">"sigma"</span>, <span class="dv">1</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    pm.Normal(<span class="st">"observed"</span>, mu<span class="op">=</span>μ, sigma<span class="op">=</span>σ, observed<span class="op">=</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="additive-model" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymc <span class="im">as</span> pm</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> g_1(x):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> α <span class="op">+</span> β[<span class="dv">0</span>] <span class="op">*</span> pm.math.exp(<span class="op">-</span>λ[<span class="dv">0</span>] <span class="op">*</span> x)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> g_2(x):</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> β[<span class="dv">1</span>] <span class="op">*</span> pm.math.exp(λ[<span class="dv">1</span>] <span class="op">*</span> x)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> g(x):</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> g_1(x) <span class="op">+</span> g_2(x)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> additive:</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> pm.ConstantData(<span class="st">"x"</span>, x)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    α <span class="op">=</span> pm.Normal(<span class="st">"α"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    β <span class="op">=</span> pm.Normal(<span class="st">"β"</span>, <span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    λ <span class="op">=</span> pm.HalfNormal(<span class="st">"λ"</span>, <span class="fl">0.004</span>, size<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    μ <span class="op">=</span> pm.Deterministic(<span class="st">"μ"</span>, g(x))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    σ <span class="op">=</span> pm.HalfNormal(<span class="st">"σ"</span>, <span class="dv">1</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    pm.Normal(<span class="st">"y"</span>, mu<span class="op">=</span>μ, sigma<span class="op">=</span>σ, observed<span class="op">=</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-decomposable-models-additive-draws" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div id="cell-additive-curve" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/decomposable-models-additive-draws-output-1.png" id="decomposable-models-additive-draws" width="599" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/additive-curve-output-1.png" id="additive-curve" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="math display">\[d/dx g(x) = a_2 b_2 e^(b_2 (-x)) - a_1 b_1 e^(b_1 (-x))\]</span> <span class="math display">\[x = \frac{\log(\frac{a_1 b_1}{a_2 b_2})}{b_1 - b_2}\]</span></p>
-<div id="cell-decomposable-models-peak" class="cell" data-execution_count="15">
+<div id="cell-additive-curve-facet" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/additive-curve-facet-output-1.png" id="additive-curve-facet" width="599" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-additive-peak" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/decomposable-models-peak-output-1.png" id="decomposable-models-peak" width="599" height="445" class="figure-img"></p>
+<p><img src="index_files/figure-html/additive-peak-output-1.png" id="additive-peak" width="599" height="445" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -430,12 +443,12 @@ y &amp;\sim \mathrm{Normal}(g(x), \sigma) \\
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{assunção2024,
   author = {Assunção, Luís},
   title = {Additive Aging Curve},
-  date = {2024-01-23},
+  date = {2024-01-31},
   url = {https://assuncaolfi.github.io/site/blog/aging-curve},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-assunção2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Assunção, Luís. 2024. <span>“Additive Aging Curve.”</span> January 23,
+Assunção, Luís. 2024. <span>“Additive Aging Curve.”</span> January 31,
 2024. <a href="https://assuncaolfi.github.io/site/blog/aging-curve">https://assuncaolfi.github.io/site/blog/aging-curve</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

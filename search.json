@@ -4,7 +4,7 @@
     "href": "cv.html",
     "title": "Curriculum Vitae",
     "section": "",
-    "text": "Email /  GitHub /  LinkedIn /  Website"
+    "text": "Email /  GitHub /  LinkedIn /  Website\nThe PDF version of this document might be outdated. Please see the website version."
   },
   {
     "objectID": "cv.html#employment",
@@ -26,62 +26,6 @@
     "title": "Curriculum Vitae",
     "section": "Examples",
     "text": "Examples\n\nBlog\nPosts on data analysis using tools such as Python, polars, pymc, pulp, seaborn:\n\nDrafting a fantasy football team: In this post, I delve into the data for the 2022 season of a brazilian fantasy football league, formulate a mixed integer linear program to draft the optimal team; and present initial concepts for forecasting player scores using mixed effects linear models.\nAdditive aging curve: In this post, I compare empirical, semi-parametric and parametric approaches to modeling aging-curve-like non-monotonic relationships using data from a verbal working memory test.\n\n\n\nRepositories\n\nsite: My website and blog post codes using Quarto\nmldc2020: Recommendation system and 7th place solution to the Mercado Libre Data Challenge 2020\nrstanbtm: Biterm Topic Model implementation in Stan\nqlm: Generate predictive SQL queries from linear models in R\ntophat: Scheduled shell script to fetch and save fantasy football data\n\n\n\nOthers\n\nPod e Dev podcast episode, where I talk (in portuguese) about the challenges in pricing digital products and causal assumptions we made to overcome these challenges in our model at Hotmart. We also discuss good and bad use cases for large language models, as well as how models with 2 parameters can be as useful as models with 200 million parameters."
-  },
-  {
-    "objectID": "blog/aging-curve/index.html",
-    "href": "blog/aging-curve/index.html",
-    "title": "Additive aging curve",
-    "section": "",
-    "text": "Warning\n\n\n\nThis post is a draft.\nRecently, I helped design an experiment measuring a binary response against a continuous variable. If the user abandoned their cart at time zero, then we delayed for a variable number of minutes before reminding them to finish their purchase. The delay has a non-monotonic relationship to the response: as the delay increases, so does the purchase rate; then the rate peaks; and finally it decreases.\nCausally, we may decompose this process into two: as the delay increases, the user 1) becomes more available for and 2) loses interest in purchasing the product. This is a common phenomena in different time-based scenarios. In sports, the “aging curve” refers to how a player’s performance increases with age, then decreases. As the player gets older, they get 1) better at the sport and 2) physically weaker.\nAndrew Gelman wrote about this a couple of times in his blog: see his posts from 2018 and 2023, where Gelman suggests modeling these processes using an additive function like:\n\\[g(x) = g_1(x) + g_2(x),\\]\nwhere\n\\(g_1(x)\\) is a monotonically increasing function with a right asymptote; and\n\\(g_2(x)\\) is a monotonically decreasing function with a left asymptote.\nIn this post, we’ll analyse an experimental dataset by fitting and comparing three different models: a non-parametric bootstrap, a semi-parametric spline and a fully parametric decomposable curve like \\(g(x)\\)."
-  },
-  {
-    "objectID": "blog/aging-curve/index.html#the-digit-span-test",
-    "href": "blog/aging-curve/index.html#the-digit-span-test",
-    "title": "Additive aging curve",
-    "section": "The Digit Span test",
-    "text": "The Digit Span test\nThe motivation for Gelman’s 2018 post was a study relating age to peak cognitive functioning (Hartshorne and Germine 2015). According to the study, one of their experiments was a large scale online experimentation platform:\n\nHartshorne, Joshua K., and Laura T. Germine. 2015. “When Does Cognitive Functioning Peak? The Asynchronous Rise and Fall of Different Cognitive Abilities Across the Life Span.” Psychological Science 26 (4): 433–43. https://doi.org/10.1177/0956797614567339.\n\nParticipants in Experiment 2 (N = 10,394; age range = 10–69 years old) […] were visitors to TestMyBrain.org, who took part in experiments in order to contribute to scientific research and in exchange for performance-related feedback. […] We continued data collection for each experiment for approximately 1 year, sufficient to obtain around 10,000 participants, which allowed fine-grained age-of-peak-performance analysis.\n\nThe dataset for Experiment 2 is available online (Germine and Hartshorne 2016) and includes results of the Digit Span verbal working memory test, part of the Wechsler Adult Intelligence Scale (WAIS) and Wechsler Memory Scale (WMS) supertests. In the Digit Span test, subjects must repeat lists of digits, either in the same or reversed order.\n\nGermine, Laura, and Joshua K Hartshorne. 2016. “Hartshorne & Germine (2015) When Does Cognitive Functioning Peak?” OSF. osf.io/f2saj.\nLet’s plot the relationship between age and Digit Span performance:\n\n\n\n\n\n\n\n\n\nVisually, it’s still unclear if this relationship follows an aging curve, but we’ll get back to this matter in the next section."
-  },
-  {
-    "objectID": "blog/aging-curve/index.html#bootstrap-estimates",
-    "href": "blog/aging-curve/index.html#bootstrap-estimates",
-    "title": "Additive aging curve",
-    "section": "Bootstrap estimates",
-    "text": "Bootstrap estimates\nIn the original paper, the authors describe a bootstrap resampling procedure to estimate the distribution of ages of peak performance:\n\nEstimates and standard errors for age of peak performance were calculated using a bootstrap resampling procedure identical to the one used in Experiment 1 but applied to raw performance data. To dampen noise, we smoothed means for each age using a moving 3-year window prior to identifying age of peak performance in each sample. Other methods of dampening noise provide similar results.\n\nLet’s decompose this method (as I understand it) into steps:\n\nWith replacement, sample \\(n\\) observations from the dataset;\nCalculate the mean performance for each sample and age;\nRepeat steps 1 and 2 \\(m\\) times to get multiple samples;\nSort each sample by age and smooth age means using a 3-year rolling average;\nFind the age of peak performance for each sample.\n\n\nimport polars as pl\n\nn = experiment.height\nm = 10000\nnm = n * m\nseed = 37\nsamples = (\n    experiment.sample(nm, with_replacement=True, seed=seed)\n    .with_columns(sample=pl.arange(1, nm + 1) % m)\n    .group_by(\"sample\", \"age\")\n    .agg(mean=pl.col(\"y\").mean())\n    .sort(\"sample\", \"age\")\n    .with_columns(smoothed_mean=pl.col(\"mean\").rolling_mean(3).over(\"sample\"))\n)\npeak_performance = samples.group_by(\"sample\").agg(\n    age=pl.col(\"age\").get(pl.col(\"smoothed_mean\").arg_max())\n)\n\nThis yields the following bootstrap distribution of ages of peak performance:\n\n\n\n\n\n\n\n\n\nThis distribution suggests two important things:\n\nThe most probable age of peak performance is, by far, 33;\nThere is a non-negligible probability that the age of peak performance happens in the early 20s, but a negligible probability that it happens in the late 20s.\n\nThing 2 certainly deserves attention. This is possibly caused by a confound variable or some measuring error, but I won’t investigate this any further. Instead, let’s get back to estimating curves. We will use the samples from step 4 to summarize the distribution of mean performances. For each age, we calculate the mean and 90% interquantile range, yielding a nonparametric curve:\n\n\n\n\n\n\n\n\n\nThis figure is analogue to figure … in the paper. Since this is an entirely empirical curve, there isn’t much to interpret here (maybe unitary changes?). However, the curve shape indicates an aging-curve-likeness."
-  },
-  {
-    "objectID": "blog/aging-curve/index.html#penalized-splines",
-    "href": "blog/aging-curve/index.html#penalized-splines",
-    "title": "Additive aging curve",
-    "section": "Penalized splines",
-    "text": "Penalized splines\nSplines are wiggly curves…\n\\[\n\\begin{align}\ng(x) &= \\alpha + Z \\bf{b} \\\\\ny &\\sim \\mathrm{Normal}(g(x), \\sigma) \\\\\n\\alpha &\\sim \\mathrm{Student}(3, 0, 0.1) \\\\\n\\sigma &\\sim \\mathrm{HalfCauchy}(1)\n\\end{align}\n\\]\nPolynomials have runge swings…\nWe could make assumptions about the data generating process to help us pick the number of knots. Instead, let’s pick an arbitrary large number of knots (say, 15) and let the model itself learn how wiggly the curve should be.\n\\[\n\\begin{align}\nb &= \\tau \\bf{z} \\\\\n\\tau &\\sim \\mathrm{HalfCauchy}(1) \\\\\n\\bf{z} &\\sim \\mathrm{Normal}(0, 1)\n\\end{align}\n\\]\nhttps://www.pymc.io/projects/examples/en/latest/howto/spline.html\nhttps://www.tjmahr.com/random-effects-penalized-splines-same-thing/\nhttps://elevanth.org/blog/2017/09/07/metamorphosis-multilevel-model/\n\nimport pymc as pm\n\nwith pm.Model() as spline:\n    Z = pm.ConstantData(\"Z\", Z)\n    α = pm.StudentT(\"α\", 3, 0, sigma=0.1)\n    τ = pm.HalfCauchy(\"τ\", 1)\n    z = pm.Normal(\"z\", 0, 1, size=Z.shape[1])\n    b = pm.Deterministic(\"b\", τ * z)\n    μ = pm.Deterministic(\"μ\", α + pm.math.dot(Z, b.T))\n    σ = pm.HalfCauchy(\"σ\", 1)\n    pm.Normal(\"y\", μ, σ, observed=y)\n\n\n\nAuto-assigning NUTS sampler...\nInitializing NUTS using jitter+adapt_diag...\nSequential sampling (4 chains in 1 job)\nNUTS: [α, τ, z, σ]\nSampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 47 seconds.\n\n\n::: {#cell-spline-plot .cell 0=‘s’ 1=‘p’ 2=‘l’ 3=‘i’ 4=‘n’ 5=‘e’ 6=‘-’ 7=‘p’ 8=‘l’ 9=‘o’ 10=‘t’ execution_count=9}\n\n\n\n\n\n\n\n:::\nSplines are good interpolation tools…\n“when, where and how things change”… https://www.youtube.com/watch?v=Zxokd_Eqrcg&t=506s\nHowever, it’s not a good idea to extrapolate…"
-  },
-  {
-    "objectID": "blog/aging-curve/index.html#two-component-function",
-    "href": "blog/aging-curve/index.html#two-component-function",
-    "title": "Additive aging curve",
-    "section": "Two component function",
-    "text": "Two component function\nAll intervals are 80% credibility…\n\\[\n\\begin{align}\ng_1(x) &= \\alpha_1 + \\beta_1 \\exp(-\\lambda_1 x) \\\\\ng_2(x) &= \\alpha_2 + \\beta_2 (1 - \\exp(-\\lambda_2 x)) \\\\\ng(x) &= g_1(x) + g_2(x) \\\\\n     &= \\alpha + \\beta_1 \\exp(-\\lambda_1 x) + \\beta_2 (1 - \\exp(-\\lambda_2 x))\n\\end{align}\n\\]\n\\[\n\\begin{align}\ny &\\sim \\mathrm{Normal}(g(x), \\sigma) \\\\\n\\alpha &\\sim \\mathrm{Normal}(0, 2) \\\\\n\\lambda &\\sim \\mathrm{Exponential}(0.01) \\\\\n\\sigma &\\sim \\mathrm{Exponential}(1) \\\\\n\\end{align}\n\\]\n\nimport pymc as pm\n\n\ndef g(x):\n    y = α[0] * pm.math.exp(-λ[0] * x) + α[1] + α[2] * (1 - pm.math.exp(-λ[1] * x))\n    return y\n\n\nwith pm.Model() as model:\n    x = pm.ConstantData(\"x\", x)\n    α = pm.Normal(\"alpha\", 0, 2, size=3)\n    λ = pm.HalfNormal(\"lambda\", 0.01, size=2)\n    μ = pm.Deterministic(\"mu\", g(x))\n    σ = pm.HalfNormal(\"sigma\", 1)\n    pm.Normal(\"observed\", mu=μ, sigma=σ, observed=y)\n\n\n\n\n\n\n\n\n\n\n\\[d/dx g(x) = a_2 b_2 e^(b_2 (-x)) - a_1 b_1 e^(b_1 (-x))\\] \\[x = \\frac{\\log(\\frac{a_1 b_1}{a_2 b_2})}{b_1 - b_2}\\]"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Home",
-    "section": "",
-    "text": "Hello! I’m Luís1.\n1 I’m a statistician and data scientist – my goal is to help people make better decisions under uncertainty. To achieve this, I design experiments, model causal relationships, estimate probabilities, and more.\nI also enjoy hiking, music, and woodworking. I live with my partner and our ginger cat2 in Belo Horizonte, Brazil.\n2"
-  },
-  {
-    "objectID": "index.html#about",
-    "href": "index.html#about",
-    "title": "Home",
-    "section": "",
-    "text": "Hello! I’m Luís1.\n1 I’m a statistician and data scientist – my goal is to help people make better decisions under uncertainty. To achieve this, I design experiments, model causal relationships, estimate probabilities, and more.\nI also enjoy hiking, music, and woodworking. I live with my partner and our ginger cat2 in Belo Horizonte, Brazil.\n2"
-  },
-  {
-    "objectID": "index.html#blog",
-    "href": "index.html#blog",
-    "title": "Home",
-    "section": "Blog ",
-    "text": "Blog"
   },
   {
     "objectID": "blog/fantasy-football/index.html",
@@ -124,5 +68,61 @@
     "title": "Drafting a fantasy football team",
     "section": "Conclusion",
     "text": "Conclusion\nWe developed a comprehensive framework for the fantasy football team picking problem. There are more ideas we could explore to improve our chances of winning:\n\nenriching our data and models with player scouts;\nincluding more information in our priors;\ntesting strategies that balance predicted score and appreciation;\nfurther model diagnostics.\n\nHowever, I suppose expert human player predictions have a certain edge over those of hobbyist statistical models in fantasy leagues, due to the fact that there are all sorts of relevant data unavailable in public datasets.\nAt least, this seems to be the case for brazilian soccer, also known as “a little box of surprises”."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "Hello! I’m Luís1.\n1 I’m a statistician and data scientist – my goal is to help people make better decisions under uncertainty. To achieve this, I design experiments, model causal relationships, estimate probabilities, and more.\nI also enjoy hiking, music, and woodworking. I live with my partner and our ginger cat2 in Belo Horizonte, Brazil.\n2"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Home",
+    "section": "",
+    "text": "Hello! I’m Luís1.\n1 I’m a statistician and data scientist – my goal is to help people make better decisions under uncertainty. To achieve this, I design experiments, model causal relationships, estimate probabilities, and more.\nI also enjoy hiking, music, and woodworking. I live with my partner and our ginger cat2 in Belo Horizonte, Brazil.\n2"
+  },
+  {
+    "objectID": "index.html#blog",
+    "href": "index.html#blog",
+    "title": "Home",
+    "section": "Blog ",
+    "text": "Blog"
+  },
+  {
+    "objectID": "blog/aging-curve/index.html",
+    "href": "blog/aging-curve/index.html",
+    "title": "Additive aging curve",
+    "section": "",
+    "text": "Warning\n\n\n\nThis post is a draft.\nRecently, I helped design an experiment measuring a binary response against a continuous variable. If the user abandoned their cart at time zero, then we delayed for a variable number of minutes before reminding them to finish their purchase. The delay has a non-monotonic relationship to the response: as the delay increases, so does the purchase rate; then the rate peaks; and finally it decreases.\nCausally, we may decompose this process into two: as the delay increases, the user 1) becomes more available for and 2) loses interest in purchasing the product. This is a common phenomena in different time-based scenarios. In sports, the “aging curve” refers to how a player’s performance increases with age, then decreases. As the player gets older, they get 1) better at the sport and 2) physically weaker.\nAndrew Gelman wrote about this a couple of times in his blog: see his posts from 2018 and 2023, where Gelman suggests modeling these processes using an additive function like:\n\\[g(x) = g_1(x) + g_2(x),\\]\nwhere\n\\(g_1(x)\\) is a monotonically increasing function with a right asymptote; and\n\\(g_2(x)\\) is a monotonically decreasing function with a left asymptote.\nIn this post, we’ll analyse an experimental dataset by fitting and comparing three different models: a non-parametric bootstrap, a semi-parametric spline and a fully parametric decomposable curve like \\(g(x)\\)."
+  },
+  {
+    "objectID": "blog/aging-curve/index.html#the-digit-span-test",
+    "href": "blog/aging-curve/index.html#the-digit-span-test",
+    "title": "Additive aging curve",
+    "section": "The Digit Span test",
+    "text": "The Digit Span test\nThe motivation for Gelman’s 2018 post was a study relating age to peak cognitive functioning (Hartshorne and Germine 2015). According to the study, one of their experiments was a large scale online experimentation platform:\n\nHartshorne, Joshua K., and Laura T. Germine. 2015. “When Does Cognitive Functioning Peak? The Asynchronous Rise and Fall of Different Cognitive Abilities Across the Life Span.” Psychological Science 26 (4): 433–43. https://doi.org/10.1177/0956797614567339.\n\nParticipants in Experiment 2 (N = 10,394; age range = 10–69 years old) […] were visitors to TestMyBrain.org, who took part in experiments in order to contribute to scientific research and in exchange for performance-related feedback. […] We continued data collection for each experiment for approximately 1 year, sufficient to obtain around 10,000 participants, which allowed fine-grained age-of-peak-performance analysis.\n\nThe dataset for Experiment 2 is available online (Germine and Hartshorne 2016) and includes results of the Digit Span verbal working memory test, part of the Wechsler Adult Intelligence Scale (WAIS) and Wechsler Memory Scale (WMS) supertests. In the Digit Span test, subjects must repeat lists of digits, either in the same or reversed order.\n\nGermine, Laura, and Joshua K Hartshorne. 2016. “Hartshorne & Germine (2015) When Does Cognitive Functioning Peak?” OSF. osf.io/f2saj.\nLet’s plot the relationship between age and Digit Span performance:\n\n\n\n\n\n\n\n\n\nVisually, it’s still unclear if this relationship follows an aging curve, but we’ll get back to this matter in the next section."
+  },
+  {
+    "objectID": "blog/aging-curve/index.html#bootstrap-estimates",
+    "href": "blog/aging-curve/index.html#bootstrap-estimates",
+    "title": "Additive aging curve",
+    "section": "Bootstrap estimates",
+    "text": "Bootstrap estimates\nIn the original paper, the authors describe a bootstrap resampling procedure to estimate the distribution of ages of peak performance:\n\nEstimates and standard errors for age of peak performance were calculated using a bootstrap resampling procedure identical to the one used in Experiment 1 but applied to raw performance data. To dampen noise, we smoothed means for each age using a moving 3-year window prior to identifying age of peak performance in each sample. Other methods of dampening noise provide similar results.\n\nLet’s decompose this method (as I understand it) into steps:\n\nWith replacement, sample \\(n\\) observations from the dataset;\nCalculate the mean performance for each sample and age;\nRepeat steps 1 and 2 \\(m\\) times to get multiple samples;\nSort each sample by age and smooth age means using a 3-year rolling average;\nFind the age of peak performance for each sample.\n\n\nimport polars as pl\n\nn = experiment.height\nm = 10000\nnm = n * m\nseed = 37\nsamples = (\n    experiment.sample(nm, with_replacement=True, seed=seed)\n    .with_columns(sample=pl.arange(1, nm + 1) % m)\n    .group_by(\"sample\", \"age\")\n    .agg(mean=pl.col(\"y\").mean())\n    .sort(\"sample\", \"age\")\n    .with_columns(smoothed_mean=pl.col(\"mean\").rolling_mean(3).over(\"sample\"))\n)\npeak = samples.group_by(\"sample\").agg(\n    age=pl.col(\"age\").get(pl.col(\"smoothed_mean\").arg_max())\n)\n\nThis yields the following bootstrap distribution of ages of peak performance:\n\n\n\n\n\n\n\n\n\nThis distribution suggests two important things:\n\nThe most probable age of peak performance is 33;\nThere is a non-negligible probability that the age of peak performance happens in the early 20s, but a negligible probability that it happens in the late 20s.\n\nThing 2 certainly deserves attention. This is possibly caused by a confound variable or some measuring error, but I won’t investigate this any further. Instead, let’s get back to estimating curves. We will use the samples from step 4 to summarize the distribution of mean performances. For each age, we calculate the mean and 90% interquantile range, yielding a nonparametric curve:\n\n\n\n\n\n\n\n\n\nThis figure is analogue to figure 3a in the paper. This curve is entirely empirical, so there isn’t much to interpret here. It does indicate, however, the rising and falling behavior of an aging curve, with a steep increase from age 10 to 20, followed by a plateau between 20 and 30, and a slow decline beginning at 40."
+  },
+  {
+    "objectID": "blog/aging-curve/index.html#penalized-splines",
+    "href": "blog/aging-curve/index.html#penalized-splines",
+    "title": "Additive aging curve",
+    "section": "Penalized splines",
+    "text": "Penalized splines\nSplines are wiggly curves…\n\\[\n\\begin{align}\ng(x) &= \\alpha + Z \\bf{b} \\\\\ny &\\sim \\mathrm{Normal}(g(x), \\sigma) \\\\\n\\alpha &\\sim \\mathrm{Student}(3, 0, 0.1) \\\\\n\\sigma &\\sim \\mathrm{HalfCauchy}(1)\n\\end{align}\n\\]\nPolynomials… (Kolassa 2017)\nAdaptive smoothing…\n\nKolassa, Stephan. 2017. “B-Splines VS High Order Polynomials in Regression.” Cross Validated. https://stats.stackexchange.com/q/314878.\n\\[\n\\begin{align}\nb &= \\tau \\bf{z} \\\\\n\\tau &\\sim \\mathrm{HalfCauchy}(1) \\\\\n\\bf{z} &\\sim \\mathrm{Normal}(0, 1)\n\\end{align}\n\\]\nhttps://www.pymc.io/projects/examples/en/latest/howto/spline.html\nhttps://www.tjmahr.com/random-effects-penalized-splines-same-thing/\n\nimport pymc as pm\n\nwith pm.Model() as spline:\n    Z = pm.ConstantData(\"Z\", Z)\n    α = pm.StudentT(\"α\", 3, 0, sigma=0.1)\n    τ = pm.HalfCauchy(\"τ\", 1)\n    z = pm.Normal(\"z\", 0, 1, size=Z.shape[1])\n    b = pm.Deterministic(\"b\", τ * z)\n    μ = pm.Deterministic(\"μ\", α + pm.math.dot(Z, b.T))\n    σ = pm.HalfCauchy(\"σ\", 1)\n    pm.Normal(\"y\", μ, σ, observed=y)\n\nWhen, where and how things change… https://www.youtube.com/watch?v=Zxokd_Eqrcg&t=506s\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTwin peaks!"
+  },
+  {
+    "objectID": "blog/aging-curve/index.html#additive-function",
+    "href": "blog/aging-curve/index.html#additive-function",
+    "title": "Additive aging curve",
+    "section": "Additive function",
+    "text": "Additive function\n\\[\n\\begin{align}\ng_1(x) &= \\alpha + \\beta_1 \\exp(-\\lambda_1 x) \\\\\ng_2(x) &= \\beta_2 \\exp(\\lambda_2 x) \\\\\n\\\\\ng(x) &= g_1(x) + g_2(x) \\\\\n&= \\alpha + \\beta_1 \\exp(-\\lambda_1 x) + \\beta_2 \\exp(\\lambda_2 x) \\\\\n\\\\\ny &\\sim \\mathrm{Normal}(g(x), \\sigma) \\\\\n\\alpha &\\sim \\mathrm{Normal}(0, 2) \\\\\n\\lambda &\\sim \\mathrm{Exponential}(0.01) \\\\\n\\sigma &\\sim \\mathrm{Exponential}(1) \\\\\n\\end{align}\n\\]\n\nimport pymc as pm\n\n\ndef g_1(x):\n    return α + β[0] * pm.math.exp(-λ[0] * x)\n\n\ndef g_2(x):\n    return β[1] * pm.math.exp(λ[1] * x)\n\n\ndef g(x):\n    return g_1(x) + g_2(x)\n\n\nwith pm.Model() as additive:\n    x = pm.ConstantData(\"x\", x)\n    α = pm.Normal(\"α\", 0, 1)\n    β = pm.Normal(\"β\", 0, 1, size=2)\n    λ = pm.HalfNormal(\"λ\", 0.004, size=2)\n    μ = pm.Deterministic(\"μ\", g(x))\n    σ = pm.HalfNormal(\"σ\", 1)\n    pm.Normal(\"y\", mu=μ, sigma=σ, observed=y)"
   }
 ]
