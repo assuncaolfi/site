@@ -1,0 +1,8 @@
+- title: "savvi"
+  description: "{{< bi github >}} Python package for Safe Anytime Valid Inference"
+  date: 2024-06-17
+  path: "https://github.com/assuncaolfi/savvi/"
+- title: "tophat"
+  description: "{{< bi github >}} Historical database of Cartola, a fantasy football league"
+  date: 2022-05-15
+  path: "https://github.com/assuncaolfi/tophat/"

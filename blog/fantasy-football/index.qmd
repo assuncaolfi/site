@@ -1,0 +1,234 @@
+---
+title: Picking a fantasy football team
+description: "{{< bi journal-text >}} What's the optimal run in a season?"
+date: '2023-09-21'
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.16.2
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3
+---
+
+_This post is a work in progress._
+
+```{python}
+#| label: setup
+#| include: false
+%config InlineBackend.figure_formats = ["svg"]
+%load_ext jupyter_black
+
+from matplotlib import font_manager
+import matplotlib.pyplot as plt
+
+font_path = "../../assets/lmroman10-regular.otf"
+font_manager.fontManager.addfont(font_path)
+
+plt.rcParams["font.family"] = "Latin Modern Roman"
+plt.rcParams["mathtext.fontset"] = "cm"
+```
+
+[Cartola](https://cartola.globo.com) is a fantasy football league following the Brazilian Série A, where players assume the role of team managers. For the past couple of seasons, I've been collecting [historical data](https://github.com/assuncaolfi/tophat/tree/main) to attempt to answer the question: what's the optimal run in a given season?
+
+## The problem
+
+Before each round $t = 1, \dots, 38$, managers are presented with $N_t$ candidate players. Candidates have costs $\mathbf{c}_{t} \in \mathbb{R}_+^{N_t}$ and positions $\mathbf{p}_{t} \in \{1, \dots, 6\}^{N_t}$. For convenience, positions can be encoded as dummies $P_t \in \{0, 1\}^{N_t \times 6}$. There are $i = 1, \dots, 7$ valid formations $F \in \mathbb{N}^{7 \times 6}$, where $F_{ij}$ indicates exactly how many players of position $j$ are allowed in formation $i$. All formations include $11$ players and $1$ coach, or $\sum_{j=1}^6 F_{ij} = 12$ for all $i$. The manager begins each round with a budget $b_t \in \mathbb{R}_+$ and they must pick a team $\mathbf{x}_{t} \in \{0, 1\}^{N_t}$ following a formation $\mathbf{y}_{t} \in \{0, 1\}^{7}$. At the end of the round, players receive scores $\mathbf{s}_t \in \mathbb{R}^{N_t}$ according to their in-game performance. The manager's goal is to maximize the team score $\mathbf{s}_t^T \mathbf{x}_t$.
+
+Since the manager doesn't know the scores when picking their team, they must estimate score predictions $\hat{\mathbf{s}}_t \in \mathbb{R}^{N_t}$. However, predictions aren't always accurate. Also, scores of players from the same team are correlated. To minimize the risk of picking many players from a single team and having that team perform badly, the manager might want to include the covariance between players $S_t \in \mathbb{R}_+^{N_t, N_t}$ in the problem. One way to do this is to set a risk aversion $\gamma \in \mathbb{R}_+$ and maximize
+
+$$\hat{\mathbf{s}}_t^T \mathbf{x}_t - \gamma \mathbf{x}_t^T \Sigma_t \mathbf{x}_t.$$
+
+Finally, the team is subject to the constraints:
+
+1) Cost less or equal to the budget $\mapsto \mathbf{c}_t^T \mathbf{x}_t \leq b_t$
+2) Follow a single formation $\mapsto \mathbf{1}^T \mathbf{y}_t = 1$
+3) Follow a valid formation $\mapsto P_t^T \mathbf{x}_t = F^T \mathbf{y}_t$.
+
+This problem is similar to the problem of Modern Portfolio Theory [@e5a1bb8f-41b7-35c6-95cd-8b366d3e99bc].
+
+```{python}
+#| label: problem
+#| echo: true
+import cvxpy as cp
+
+
+def problem(predictions, covariance, costs, positions, budget, risk_aversion):
+    picks = cp.Variable(scores.size, "picks", boolean=True)
+    formation = cp.Variable(7, "formation", boolean=True)
+    objective = cp.Maximize(
+        predictions.T @ picks - risk_aversion * cp.quad_form(picks, covariance)
+    )
+    constraints = [
+        prices.T @ picks <= budget,
+        cp.sum(formation) == 1,
+        positions.T @ picks == formations.T @ formation,
+    ]
+    problem = cp.Problem(objective, constraints)
+    return problem
+```
+
+## Backtesting
+
+So far, I've simplified the manager's goal to maximize $\mathbf{s}_t^T \mathbf{x}_t$ for each round. The manager's true final goal is to maximize their total score at the end of the season $\sum_t \mathbf{s}_t^T \mathbf{x}_t$. These two objectives aren't necessarily the same, because players increase or decrease in valuation according to scores. Since $\mathbf{s}_t^T \mathbf{x}_t$ depends on the budget $b_t$, which depends on the scores $\mathbf{s}_{t - 1}^T \mathbf{x}_{t - 1}$, one could argue that it might be a good idea to maximize a balance between scoring and valuation. In the next section, I'll show that maximizing the score for each round is sufficient for maximizing the total score, given good enough predictions.
+
+For now, I'll define a function to simulate the manager's performance across an entire season. At the start of the season, the manager has a budget of $b_1 = 100$. Then, for each round $t$:
+
+1. Solve the team picking problem $\mapsto \mathbf{x}_t$
+3. Calculate the round score $\mapsto r_t = \mathbf{s}_t^T \mathbf{x}_t$
+4. If $t < 38$, update the budget $\mapsto b_{t + 1} = b_t + (\mathbf{c}_{t + 1} - \mathbf{c}_t)^T \mathbf{x}_t$
+
+```{python}
+#| label: backtest
+#| echo: true
+import numpy as np
+
+
+def backtest(
+    initial_budget,
+    scores,
+    predictions,
+    covariance,
+    costs,
+    appreciations,
+    positions,
+    risk_aversion,
+):
+    budget = initial_budget
+    rounds = len(predictions)
+    run = np.empty(rounds)
+    for t in range(rounds):
+        prob = problem(
+            predictions[t], covariance[t], costs[t], positions[t], budget, risk_aversion
+        )
+        prob.solve()
+        picks = problem.var_dict["picks"].value
+        run[t] = scores[t].T @ picks[t]
+        if t < 38:
+            budget += appreciations[t].T @ picks
+    return scores
+```
+
+```{python}
+#| label: data
+#| include: false
+from urllib import request
+import json
+import polars as pl
+
+rounds = 38
+base_url = "https://raw.githubusercontent.com/assuncaolfi/tophat/main/2022/"
+schema = {
+    "rodada_id": pl.Int64,
+    "atleta_id": pl.Int64,
+    "posicao_id": pl.Int64,
+    "preco_num": pl.Float64,
+    "jogos_num": pl.Int64,
+    "media_num": pl.Float64,
+    "pontos_num": pl.Float64,
+}
+players = [None] * rounds
+for round in range(rounds):
+    url = base_url + f"{round + 1:02}/atletas/mercado.json"
+    data = json.loads(request.urlopen(url).read())
+    players[round] = pl.from_dicts(data["atletas"], schema=schema).with_columns(
+        rodada_id=pl.lit(round)
+    )
+
+col_names = {
+    "rodada_id": "round",
+    "atleta_id": "player",
+    "posicao_id": "position",
+    "preco_num": "cost",
+    "jogos_num": "games",
+    "media_num": "average",
+    "pontos_num": "points",
+}
+players = (
+    pl.concat(players)
+    .rename(col_names)
+    .select(col_names.values())
+    # Keep only active players in the round
+    .filter(pl.col("games") != pl.col("games").shift(1).over("player").fill_null(-1))
+    .sort("round", "player")
+    .with_columns(
+        # Recover player scores using their averages
+        score=(
+            pl.col("average").shift(1).over("player").fill_null(0)
+            + pl.col("games")
+            * (
+                pl.col("average")
+                - pl.col("average").shift(1).over("player").fill_null(0)
+            )
+        ).round(1),
+        appreciation=pl.col("cost") - pl.col("cost").shift(1).over("player"),
+        round=pl.col("round") + 1,
+    )
+)
+print(players.filter(pl.col("player") == 42234))
+```
+
+```{python}
+#| label: formations
+#| include: false
+import numpy as np
+
+url = base_url + "01/esquemas.json"
+formations = json.loads(request.urlopen(url).read())
+positions = data["posicoes"].values()
+form = np.empty((len(formations), len(positions)), dtype=np.int64)
+for i, formation in enumerate(formations):
+    for j, position in enumerate(positions):
+        name = position["abreviacao"]
+        n = formation["posicoes"][name]
+        form[i, j] = n
+print(form)
+```
+
+```{python}
+#| include: false
+x = (
+    players.pivot(values="score", index="round", columns="player")
+    .drop("round")
+    .fill_null(0)
+    .to_numpy()
+)
+print(np.cov(x, rowvar=False))
+np.ma.cov(np.ma.masked_array(x), rowvar=False).filled(np.nan)
+```
+
+## Scenarios
+
+1. Perfect predictions $\mapsto \hat{\mathbf{s}}_t = \mathbf{s}_t, \gamma = 0$
+2. Perfect predictions and infinite budget $\mapsto \hat{\mathbf{s}}_t = \mathbf{s}_t, \gamma = 0, \mathbf{b}_1 \gg 100$
+3. Simple predictions and varying levels of risk aversion $\mapsto \hat{\mathbf{s}}_t = \bar{\mathbf{s}}_{1:(t - 1)}$[^1]$, \gamma \in \{0, 0.5, 1\}$
+4. Random predictions $\mapsto \hat{\mathbf{s}}_t \sim N(\mathbf{0}, I_{N_t}), \gamma = 0$
+
+[^1]: Explain that this is player-level...
+
+I'l plot... [^2]
+
+[^2]: Unfortunately, data for the 38th round is missing...
+
+```{python}
+#| label: scenarios
+#| include: false
+plt.plot([1, 2, 3], [1, 2, 3], label="Ar = 10 and $Ar = 10$")
+plt.plot([1, 2, 3], [1, 3, 2], label="B = 10")
+plt.plot([1, 2, 3], [2, 4, 4], label="B = 10")
+plt.legend()
+plt.show()
+```
+
+## Other ideas
+
+Consider valuation, improve predictions, team leader...
+
+Readings:
+
+- https://peterellisjones.com/posts/fantasy-machine-learning/
+- https://www.alexmolas.com/2024/07/15/fantasy-knapsack.html

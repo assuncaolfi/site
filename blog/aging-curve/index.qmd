@@ -1,0 +1,381 @@
+---
+title: Additive aging curve (draft)
+description: At what age does working memory peak?
+date: today
+draft: true
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.16.2
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3
+---
+
+::: {.callout-warning}
+This post is a work in progress.
+:::
+
+```{python}
+#| label: black
+#| include: false
+import jupyter_black
+
+jupyter_black.load(lab=False, line_length=79)
+```
+
+Recently, I was involved in designing an experiment where each participant
+received a treatment at a random time $t$, between 5 and 30 minutes. After the 
+treatment, each participant produced a binary response. Soon, we realized time 
+had more than one effect over the response rate: as $t$ increased, the rate of
+positive responses 1) increased; then 2) plateaued; and finally 3) decreased.
+
+This kind of non-monotonic relationship is common in cognitive and sports research, 
+particularly in the relationship between age and performance, where it's 
+called an aging curve. For an interesting review of aging curves, see [@Vaci2019],
+where the authors discuss modeling strategies and study the effect of aging over
+the performance of NBA players.
+
+Andrew Gelman wrote about this topic a couple of times in his blog: see his posts
+from [2018](https://statmodeling.stat.columbia.edu/2018/09/07/bothered-non-monotonicity-heres-one-quick-trick-make-happy/)
+and [2023](https://statmodeling.stat.columbia.edu/2023/01/01/how-to-model-a-non-monotonic-relation/), 
+where he suggests modeling these relationships using an additive function like
+
+$$g(t) = g_1(t) + g_2(t),$$
+
+where  
+$g_1(t)$ is a monotonically increasing function with a right asymptote; and  
+$g_2(t)$ is a monotonically decreasing function with a left asymptote.
+
+In this post, I'll analyze an experimental dataset by fitting and comparing
+two different models: a non-parametric bootstrap and two decomposable curves 
+like $g(t)$.
+
+## The Digit Span test
+
+The motivation for Gelman's post from 2018 was a study relating age to peak
+cognitive functioning [@Hartshorne2015]. According to the study, some of their
+experiments were conducted through a large scale online experimentation platform:
+
+> Participants in Experiment 2 (N = 10,394; age range = 10–69 years old)
+> [...] were visitors to TestMyBrain.org, who took part in experiments in
+> order to contribute to scientific research and in exchange for performance-
+> related feedback. [...] We continued data collection for each experiment for
+> approximately 1 year, sufficient to obtain around 10,000 participants, which
+> allowed fine-grained age-of-peak-performance analysis.
+
+The data produced by this experiment is available online [@Germine_Hartshorne_2016]. 
+This dataset contains results for multiple tests, but I'll focus on the Digit Span 
+test during this analysis. According to [Cambridge Cognition](https://cambridgecognition.com/digit-span-dgs/):
+
+> Digit Span (DGS) is a measure of verbal short term and working memory that can be used in two formats, Forward Digit Span and Reverse Digit Span. This is a verbal task, with stimuli presented auditorily, and responses spoken by the participant and scored automatically by the software. Participants are presented with a random series of digits, and are asked to repeat them in either the order presented (forward span) or in reverse order (backwards span). While superficially very similar tasks, forward and backwards span rely on somewhat separable cognitive capacities: the simpler forward span task requires verbal working memory and attention, while the backwards span task additionally tests cognitive control and executive function.
+
+Participants are scored according to their longest correctly repeated list of digits.
+
+```{python}
+#| label: digit-span
+#| echo: true
+import polars as pl
+
+digit_span = (
+    pl.read_csv("data/experiment-2.csv")
+    .filter(pl.col("age").is_between(10, 69))
+    .with_columns(
+        y=(pl.col("DigitSpan") - pl.col("DigitSpan").mean()) / pl.col("DigitSpan").std()
+    )
+)
+```
+
+The relationship between age and Digit Span performance for each participant is plotted below:
+
+```{python}
+#| label: digit-span-plot
+from blog import theme
+import seaborn.objects as so
+
+theme.set()
+(
+    so.Plot(digit_span, x="age", y="y")
+    .label(x="Age (years)", y="Performance (z-score)", title="Digit Span")
+    .add(so.Dots())
+)
+```
+
+Visually, it's still unclear if this relationship follows an aging curve, but
+we'll get back to this matter in the next section.
+
+## Bootstrap estimates
+
+In the original paper, the authors describe a bootstrap resampling procedure
+to estimate the distribution of ages of peak performance:
+
+> Estimates and standard errors for age of peak performance were calculated using
+> a bootstrap resampling procedure identical to the one used in Experiment 1
+> but applied to raw performance data. To dampen noise, we smoothed means for each
+> age using a moving 3-year window prior to identifying age of peak performance
+> in each sample. Other methods of dampening noise provide similar results.
+
+Let's decompose this method (as I understand it) into steps:
+
+1. Sample, with replacement, $n$ observations from the dataset;
+2. Calculate the mean performance for each age within the sample;
+3. Repeat steps 1 and 2 $m$ times;
+4. Sort each sample by age and smooth age means using a 3-year rolling average;
+5. Find the age of peak performance for each sample.
+
+```{python}
+#| label: bootstrap
+#| echo: true
+def sample_bootstrap(data: pl.DataFrame):
+    samples = (
+        data.sample(n * m, with_replacement=True, seed=seed)
+        .with_columns(sample=pl.arange(1, n * m + 1) % m)
+        .group_by("sample", "age")
+        .agg(mean=pl.col("y").mean())
+        .sort("sample", "age")
+        .with_columns(smoothed_mean=pl.col("mean").rolling_mean(3).over("sample"))
+    )
+    peak = samples.group_by("sample").agg(
+        age=pl.col("age").get(pl.col("smoothed_mean").arg_max())
+    )
+    return samples, peak
+
+
+n = digit_span.height
+m = 10000
+seed = 37
+samples, peak = sample_bootstrap(digit_span)
+```
+
+This algorithm yields the following bootstrap distribution of ages of peak performance:
+
+```{python}
+#| label: bootstrap-distribution
+def plot_bars(data: pl.DataFrame, title: str):
+    distribution = (
+        data.group_by("age")
+        .agg(count=pl.len())
+        .with_columns(p=pl.col("count") / pl.col("count").sum())
+    )
+    return (
+        so.Plot(distribution, x="age", y="p")
+        .add(so.Bars())
+        .label(
+            title=title,
+            x="Age of peak performance (years)",
+            y="Mass",
+        )
+    )
+
+
+plot_bars(peak, "Bootstrap distribution of smoothed means")
+```
+
+This distribution suggests two important things:
+
+1. The most probable age of peak performance is 33;
+2. Peak performance could happen anywhere between the early 20s and late 30s, except during the late 20s.
+
+Suggestion 2 is probably not true. In fact, this distribution seems like a mixture of two distributions, but I'll get back to this point in the next section. For now, I'll use our bootstrap estimates to replicate figure 3a from the original paper. Using the samples obtained in step 4, for each age mean, I calculated its median and 90% interquantile range, yielding a nonparametric curve:
+
+```{python}
+#| label: bootstrap-curve
+def agg_curve(samples: pl.DataFrame):
+    return samples.group_by("age").agg(
+        mean=pl.col("smoothed_mean").median(),
+        ymin=pl.col("smoothed_mean").quantile(0.05),
+        ymax=pl.col("smoothed_mean").quantile(0.9),
+    )
+
+
+def plot_bands(curve: pl.DataFrame, title: str):
+    return (
+        so.Plot(
+            data=curve,
+            x="age",
+            y="mean",
+            ymin="ymin",
+            ymax="ymax",
+        )
+        .add(so.Line())
+        .add(so.Band())
+        .label(
+            title=title,
+            x="Age (years)",
+            y="Performance (z-score)",
+        )
+    )
+
+
+curve = agg_curve(samples)
+plot_bands(curve, "Bootstrap curve of smoothed means")
+```
+
+Since this curve is empirical, there's not much more than meets the eye here. However, note that it follows the rising, plateauing and falling behavior of an aging curve. There's a steep increase during ages 10 to 20, followed by a plateau between 20 and 30, and a slow decline beginning at 40.
+
+### The language effect
+
+```{python}
+#| label: performance-language
+performance_language = (
+    digit_span.with_columns(
+        language=pl.when(pl.col("english") == 1)
+        .then(pl.lit("English"))
+        .otherwise(pl.lit("Others"))
+    )
+    .group_by("age", "language")
+    .agg(perf=pl.col("y").mean())
+)
+(
+    so.Plot(performance_language, x="age", y="perf", color="language")
+    .add(so.Line())
+    .label(
+        x="Age (years)",
+        y="Performance (z-score)",
+        color="Language",
+        title="Average performance per language",
+    )
+)
+```
+
+```{python}
+#| label: english-span
+english_span = digit_span.filter(pl.col("english") == 1)
+samples, _ = sample_bootstrap(english_span)
+curve = agg_curve(samples)
+plot_bands(curve, "Bootstrap curve of smoothed means (english)")
+```
+
+## Additive functions
+
+$$
+\begin{align}
+g(t) &= g_1(t) + g_2(t) \\
+y &\sim \mathrm{Normal}(g(t), \sigma) \\
+\end{align}
+$$
+
+### Double exponential
+
+$$
+\begin{align}
+g_1(t) &= \alpha + \beta_1 \exp(-\lambda_1 t) \\
+g_2(t) &= \beta_2 \exp(\lambda_2 t) \\
+\end{align}
+$$
+
+```{python}
+#| label: double-exponential
+#| echo: true
+import numpy as np
+import pymc as pm
+
+
+def g(x):
+    return g_1(x) + g_2(x)
+
+
+def g_1(x):
+    return α + β[0] * pm.math.exp(-λ[0] * x)
+
+
+def g_2(x):
+    return β[1] * pm.math.exp(λ[1] * x)
+
+
+age = english_span.get_column("age")
+y = english_span.get_column("y")
+age_range = np.arange(age.min(), age.max() + 1)
+with pm.Model() as double_exponential:
+    t = pm.Data("t", age)
+    α = pm.Normal("α", 0, 1)
+    β = pm.Normal("β", 0, 1, size=2)
+    λ = pm.HalfNormal("λ", 0.004, size=2)
+    μ = pm.Deterministic("μ", g(t))
+    σ = pm.HalfNormal("σ", 1)
+    pm.Normal("y", mu=μ, sigma=σ, observed=y)
+    curve = pm.Deterministic("curve", g(age_range))
+    samples = pm.sample(progressbar=False, target_accept=0.95, random_seed=seed)
+```
+
+```{python}
+#| label: double-exponential-curve
+import arviz as az
+
+
+def summarize_curve(samples: az.InferenceData, name: str = "") -> pl.DataFrame:
+    summary = az.summary(samples, hdi_prob=0.9)
+    summary = pl.DataFrame(summary).with_columns(
+        age=pl.lit(age_range),
+        ymin=pl.col("hdi_5%"),
+        ymax=pl.col("hdi_95%"),
+        name=pl.lit(name),
+    )
+    return summary
+
+
+curve = summarize_curve(samples.posterior.curve)
+plot_bands(curve, "Posterior curve (double exponential)")
+```
+
+```{python}
+#| label: double-exponential-peak
+def find_peaks(samples):
+    peak_ages = samples.posterior.curve.argmax(axis=2).to_numpy().flatten() + age.min()
+    peaks = pl.DataFrame({"age": peak_ages})
+    return peaks
+
+
+peaks = find_peaks(samples)
+plot_bars(peaks, "Posterior distribution (double exponential)")
+```
+
+### Double logistic
+
+[@Lipovetsky2010]
+
+$$
+\begin{align}
+g_1(t) &= \alpha_1 + \frac{\alpha_2 - \alpha_1}{1 + \exp(\beta_1 - \lambda_1 t)} \\
+g_2(t) &= \frac{\alpha_3 - \alpha_2}{1 + \exp(\beta_2 + \lambda_2 t)}
+\end{align}
+$$
+
+```{python}
+#| label: double-logistic
+#| echo: true
+
+
+def g_1(t):
+    return α[0] + (α[1] - α[0]) / (1 + pm.math.exp(β[0] - λ[0] * t))
+
+
+def g_2(t):
+    return (α[2] - α[1]) / (1 + pm.math.exp(β[1] + λ[1] * t))
+
+
+with pm.Model() as double_logistic:
+    t = pm.Data("t", age)
+    α = pm.Normal("α", 0, 1, size=3)
+    β = pm.Normal("β", 0, 1, size=2)
+    λ = pm.HalfNormal("λ", 1, size=2)
+    μ = pm.Deterministic("μ", g(t))
+    σ = pm.HalfNormal("σ", 1)
+    pm.Normal("y", mu=μ, sigma=σ, observed=y)
+    curve = pm.Deterministic("curve", g(age_range))
+    samples = pm.sample(progressbar=False, target_accept=0.95, random_seed=seed)
+```
+
+```{python}
+curve = summarize_curve(samples.posterior.curve)
+plot_bands(curve, "Posterior curve (double logistic)")
+```
+
+```{python}
+peaks = find_peaks(samples)
+plot_bars(peaks, "Posterior distribution (double logistic)")
+```

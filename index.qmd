@@ -1,31 +1,28 @@
 ---
-title: "Home"
-# about:
-#   template: solana
-#   image: assets/me.jpeg
-#   image-shape: rectangle
+title: "Hello!"
 format:
   html:
     anchor-sections: false
 listing:
-  contents: blog
+  contents: 
+    - blog
+    - repos.yml
   feed: true
   template: assets/gallery.ejs
+  sort: "date desc"
 ---
 
-## About [{{< bi envelope-at-fill >}}](mailto:assuncaolfi@gmail.com) [{{< bi github >}}](https://github.com/assuncaolfi) [{{< bi linkedin >}}](https://linkedin.com/in/assuncaolfi/en)
-
-Hello! I'm Luís[^1].
+I'm Luís[^1].
 
 [^1]: ![](assets/me.jpeg)
 
-I'm a statistician and data scientist -- my goal is to help people make better
-decisions under uncertainty. To achieve this, I design experiments, model causal
-relationships, estimate probabilities, and [more](cv.html).
+I'm a statistician and data scientist -- I help people make better decisions
+under uncertainty. To achieve this, I design experiments, model causal
+relationships, estimate probabilities, and [more](cv.qmd).
 
-I also enjoy hiking, music, and woodworking. I live with my partner and our
-ginger cat[^2] in Belo Horizonte, Brazil.
+I also enjoy hiking, music and [woodworking](woodworking.qmd). I live with my
+partner and our two cats[^2] in Belo Horizonte, Brazil.
 
-[^2]: ![](assets/cat.jpeg)
+[^2]: ![](assets/cats.jpeg)
 
-## Blog [{{< bi rss-fill >}}](blog.xml)
+## Blog [{{< bi rss >}}](blog.xml)

@@ -1,17 +1,16 @@
 ---
-title: Curriculum Vitae
+title: CV
 subtitle: Luís Assunção
 date-modified: today
 format:
-  html:
-    toc: true
+  html: default
   pdf: default
 ---
 
-[{{< bi envelope-at-fill >}} Email]({{< var email >}}) /
-[{{< bi github >}} GitHub]({{< var github >}}) /
-[{{< bi linkedin >}} LinkedIn]({{< var linkedin >}}) /
-[{{< bi globe-americas >}} Website]({{< var website >}})
+{{< bi envelope-at-fill >}} [Email]({{< var email >}}) /
+{{< bi github >}} [GitHub]({{< var github >}}) /
+{{< bi linkedin >}} [LinkedIn]({{< var linkedin >}}) /
+{{< bi globe-americas >}} [Website]({{< var website >}})
 
 _The PDF version of this document might be outdated. Please see the [website
 version]({{< var website >}}/cv.html)._
@@ -22,11 +21,13 @@ version]({{< var website >}}/cv.html)._
 
 **Staff Data Scientist | April 2020 - present**
 
-* Developed an in-house AB hierarchical testing framework with optional stopping
-* Consulted for and developed randomized controlled trials
-* Estimated causal effects in non-randomized experiments
+* Developed an experimentation platform with sequential testing to scale
+  conversion rate optimization
+* Designed experiments and causal graphs to estimate feature effects and
+  support decision making
 * Estimated pricing elasticity for digital products using multilevel models
-* Classified evergreen vs launching sales strategies using hidden state models
+* Enriched internal data by classifying evergreen vs launching sales strategies
+  for digital products using hidden state models
 * Improved quality of course assigments using Item Response Theory models
 
 ### [Oper](https://operdata.com.br)
@@ -63,8 +64,7 @@ cohort](https://pubmed.ncbi.nlm.nih.gov/36375382/)
 
 ### Blog
 
-Posts on data analysis using tools such as Python, `polars`, `pymc`, `pulp`,
-`seaborn`:
+Posts on statistical modeling and data analysis:
 
 * [Drafting a fantasy football team](https://assuncaolfi.github.io/site/blog/fantasy-football):
   In this post, I delve into the data for the 2022 season of a brazilian fantasy
@@ -73,29 +73,29 @@ Posts on data analysis using tools such as Python, `polars`, `pymc`, `pulp`,
   effects linear models.
 
 * [Additive aging curve](https://assuncaolfi.github.io/site/blog/aging-curve):
-  In this post, I compare empirical, semi-parametric and parametric approaches
-  to modeling aging-curve-like non-monotonic relationships using data from a
-  verbal working memory test.
+  In this post, I compare empirical and parametric approaches to modeling aging-
+  curve-like non-monotonic relationships using data from a verbal working memory
+  test.
 
+Some tools used in my blog: Python, `cvxpy`, `matplotlib`, `numpy`, `polars`,
+`pymc`.
 
 ### Repositories
 
 * [site](https://github.com/assuncaolfi/site): My website and blog post codes
-using Quarto
-* [mldc2020](https://github.com/assuncaolfi/mldc2020): Recommendation system and
-7th place solution to the Mercado Libre Data Challenge 2020
-* [rstanbtm](https://github.com/assuncaolfi/rstanbtm): Biterm Topic Model
-implementation in Stan
-* [qlm](https://github.com/assuncaolfi/qlm): Generate predictive SQL queries
-from linear models in R
-* [tophat](https://github.com/assuncaolfi/tophat): Scheduled shell script to
-fetch and save fantasy football data
+  using Quarto
+* [savvi](https://github.com/assuncaolfi/savvi): Python package for Safe
+  Anytime Valid Inference
+* [tophat](https://github.com/assuncaolfi/tophat): Historical database of
+  Cartola, a fantasy football league
+* [qlm](https://github.com/assuncaolfi/qlm): R package to generate predictive
+  SQL queries from linear models
 
 ### Others
 
-* [Pod e Dev podcast episode](https://podcasts.apple.com/br/podcast/evolu%C3%A7%C3%A3o-e-perspectivas-futuras-para-intelig%C3%AAncia-artificial/id1666875166?i=1000628439729&l=en-GB),
-where I talk (in portuguese) about the challenges in pricing digital products
-and causal assumptions we made to overcome these challenges in our model at
-Hotmart. We also discuss good and bad use cases for large language models, as
-well as how models with 2 parameters can be as useful as models with 200 million
-parameters.
+* [Pod & Dev podcast episode](https://podcasts.apple.com/br/podcast/evolu%C3%A7%C3%A3o-e-perspectivas-futuras-para-intelig%C3%AAncia-artificial/id1666875166?i=1000628439729&l=en-GB),
+  where I talk (in portuguese) about the challenges in pricing digital products
+  and causal assumptions we made to overcome these challenges in our model at
+  Hotmart. We also discuss good and bad use cases for large language models, as
+  well as how models with 2 parameters can be as useful as models with 200 million
+  parameters.

@@ -1,56 +1,22 @@
 /*-- scss:defaults --*/
 
-$white:    #fff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #f8f5f0 !default;
-$gray-300: #dfd7ca !default;
-$gray-400: #ced4da !default;
-$gray-500: #98978b !default;
-$gray-600: #8e8c84 !default;
-$gray-700: #495057 !default;
-$gray-800: #3e3f3a !default;
-$gray-900: #212529 !default;
-$black:    #000 !default;
-
-$blue:    #325d88 !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #d9534f !default;
-$orange:  #f47c3c !default;
-$yellow:  #ffc107 !default;
-$green:   #93c54b !default;
-$teal:    #20c997 !default;
-$cyan:    #29abe0 !default;
-
-$primary:       $blue !default;
-$secondary:     $gray-600 !default;
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $orange !default;
-$danger:        $red !default;
-$light:         $gray-200 !default;
-$dark:          $gray-800 !default;
-
-$btn-code-copy-color: $primary;
-$btn-code-copy-color-active: $primary;
-$code-bg: $light;
-$code-color: $dark;
-$link-color: $primary;
-$link-hover-color: $primary;
-$navbar-bg: $light;
-$navbar-fg: $dark;
-
-@import "https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap";
-
-$font-family-sans-serif: "Fira Sans";
-$font-family-monospace: "Fira Code";
-
-// $body-bg: $white !default;
-// $body-color: $dark !default;
-
-/*-- scss:rules --*/
-
-h1, h2, h3, h4, h5, h6, header, navbar, #TOC, table, td, th, tr  {
-  font-family: "Fira Code";
+@font-face {
+  font-family: "Iosevka Etoile";
+  src: url("assets/IosevkaEtoile/IosevkaEtoile-Regular.ttc");
 }
+
+@font-face {
+  font-family: "Latin Modern Roman";
+  src: url("assets/lmroman10-regular.otf");
+}
+
+@font-face {
+  font-family: "Latin Modern Mono";
+  src: url("assets/lmmono10-regular.otf");
+}
+
+.MathJax {
+  font-family: "Latin Modern" !important;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap');

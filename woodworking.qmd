@@ -1,0 +1,10 @@
+---
+title: Woodworking
+date-modified: today
+---
+
+## Andon Lamp
+
+![](assets/andon-lamp.jpeg){width=500}
+
+Pine, solid and plywood. Adapted from [this article](https://www.finewoodworking.com/2022/03/02/how-to-build-an-andon-lamp).

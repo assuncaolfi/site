@@ -4,12 +4,13 @@ project:
 
 website:
   site-url: https://assuncaolfi.github.io/site
-  navbar: true
+  navbar:
+    background: white
   repo-url: https://github.com/assuncaolfi/site
   # description: "My personal website"
   # favicon: assets/favicon.png
   search: false
-  title: "Luís Assunção"
+  title: "<"
 
 bibliography: references.bib
 
@@ -25,10 +26,15 @@ format:
     code-copy: hover
     code-tools:
       source: repo
-    highlight-style: assets/custom.theme.json
+    linkcolor: "#1f77b4"
+    link-external-icon: true
+    highlight-style: grayscale
+    html-math-method: webtex # webtex
     html-table-processing: none
+    mainfont: Latin Modern Roman
+    monofont: Latin Modern Mono
     reference-location: margin
     theme:
-      - sandstone
+      - default
       - assets/custom.scss
-    title-block-banner: true
+    title-block-banner: false

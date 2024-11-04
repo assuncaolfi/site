@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="435pt" height="308.1pt" viewBox="0 0 435 308.1" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2024-07-12T19:45:30.670953</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.9.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 308.1 
+L 435 308.1 
+L 435 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 37.2 284.4 
+L 427.8 284.4 
+L 427.8 7.2 
+L 37.2 7.2 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m3ec8337701" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m3ec8337701" x="54.954545" y="284.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <!-- 1.00 -->
+      <g transform="translate(43.454545 298.75) scale(0.1 -0.1)">
+       <defs>
+        <path id="Iosevka-Etoile-31" d="M 634 0 
+L 634 474 
+L 1702 474 
+L 1702 4077 
+L 870 3411 
+L 544 3782 
+L 1702 4704 
+L 2234 4704 
+L 2234 474 
+L 3206 474 
+L 3206 0 
+L 634 0 
+z
+" transform="scale(0.015625)"/>
+        <path id="Iosevka-Etoile-2e" d="M 1600 -51 
+Q 1498 -51 1402 -22 
+Q 1306 6 1232 80 
+Q 1158 154 1129 250 
+Q 1101 346 1101 448 
+Q 1101 550 1129 646 
+Q 1158 742 1232 816 
+Q 1306 890 1402 918 
+Q 1498 947 1600 947 
+Q 1702 947 1798 918 
+Q 1894 890 1968 816 
+Q 2042 742 2070 646 
+Q 2099 550 2099 448 
+Q 2099 346 2070 250 
+Q 2042 154 1968 80 
+Q 1894 6 1798 -22 
+Q 1702 -51 1600 -51 
+z
+" transform="scale(0.015625)"/>
+        <path id="Iosevka-Etoile-30" d="M 1920 -51 
+Q 1734 -51 1552 -19 
+Q 1370 13 1203 99 
+Q 1037 186 905 323 
+Q 774 461 694 627 
+Q 614 794 585 976 
+Q 557 1158 557 1344 
+L 557 3360 
+Q 557 3546 585 3728 
+Q 614 3910 694 4076 
+Q 774 4243 905 4380 
+Q 1037 4518 1203 4604 
+Q 1370 4691 1552 4723 
+Q 1734 4755 1920 4755 
+Q 2106 4755 2288 4723 
+Q 2470 4691 2636 4604 
+Q 2803 4518 2934 4380 
+Q 3066 4243 3146 4076 
+Q 3226 3910 3254 3728 
+Q 3283 3546 3283 3360 
+L 3283 1344 
+Q 3283 1158 3254 976 
+Q 3226 794 3146 627 
+Q 3066 461 2934 323 
+Q 2803 186 2636 99 
+Q 2470 13 2288 -19 
+Q 2106 -51 1920 -51 
+z
+M 1082 2086 
+L 2758 3194 
+L 2758 3360 
+Q 2758 3475 2739 3593 
+Q 2720 3712 2675 3821 
+Q 2630 3930 2553 4022 
+Q 2477 4115 2374 4176 
+Q 2272 4237 2153 4259 
+Q 2035 4282 1920 4282 
+Q 1805 4282 1686 4259 
+Q 1568 4237 1465 4176 
+Q 1363 4115 1286 4022 
+Q 1210 3930 1165 3821 
+Q 1120 3712 1101 3593 
+Q 1082 3475 1082 3360 
+L 1082 2086 
+z
+M 1920 422 
+Q 2035 422 2153 444 
+Q 2272 467 2374 528 
+Q 2477 589 2553 681 
+Q 2630 774 2675 883 
+Q 2720 992 2739 1110 
+Q 2758 1229 2758 1344 
+L 2758 2618 
+L 1082 1510 
+L 1082 1344 
+Q 1082 1229 1101 1110 
+Q 1120 992 1165 883 
+Q 1210 774 1286 681 
+Q 1363 589 1465 528 
+Q 1568 467 1686 444 
+Q 1805 422 1920 422 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#Iosevka-Etoile-31"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m3ec8337701" x="99.340909" y="284.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <!-- 1.25 -->
+      <g transform="translate(87.840909 298.75) scale(0.1 -0.1)">
+       <defs>
+        <path id="Iosevka-Etoile-32" d="M 608 0 
+L 608 6 
+Q 608 186 614 365 
+Q 621 544 649 723 
+Q 678 902 736 1072 
+Q 794 1242 883 1398 
+Q 973 1555 1088 1696 
+Q 1203 1837 1337 1955 
+Q 1472 2074 1622 2173 
+Q 1773 2272 1929 2361 
+Q 2086 2451 2236 2553 
+Q 2387 2656 2499 2793 
+Q 2611 2931 2672 3104 
+Q 2733 3277 2733 3462 
+Q 2733 3622 2685 3782 
+Q 2637 3942 2525 4060 
+Q 2413 4179 2253 4230 
+Q 2093 4282 1926 4282 
+Q 1773 4282 1625 4246 
+Q 1478 4211 1360 4112 
+Q 1242 4013 1181 3869 
+Q 1120 3725 1120 3578 
+L 1120 3552 
+L 595 3552 
+L 595 3590 
+Q 595 3757 636 3920 
+Q 678 4083 768 4224 
+Q 858 4365 989 4470 
+Q 1120 4576 1273 4640 
+Q 1427 4704 1593 4729 
+Q 1760 4755 1926 4755 
+Q 2106 4755 2278 4726 
+Q 2451 4698 2611 4621 
+Q 2771 4544 2902 4422 
+Q 3034 4301 3114 4144 
+Q 3194 3987 3226 3811 
+Q 3258 3635 3258 3462 
+Q 3258 3270 3213 3081 
+Q 3168 2893 3069 2729 
+Q 2970 2566 2832 2432 
+Q 2694 2298 2537 2186 
+Q 2381 2074 2217 1974 
+Q 2054 1875 1904 1756 
+Q 1754 1638 1619 1497 
+Q 1485 1357 1389 1193 
+Q 1293 1030 1232 844 
+Q 1171 659 1152 467 
+L 2707 467 
+L 2707 928 
+L 3232 928 
+L 3232 0 
+L 608 0 
+z
+" transform="scale(0.015625)"/>
+        <path id="Iosevka-Etoile-35" d="M 1933 -51 
+Q 1766 -51 1600 -25 
+Q 1434 0 1283 64 
+Q 1133 128 1001 237 
+Q 870 346 780 486 
+Q 691 627 646 790 
+Q 602 954 595 1120 
+L 1120 1120 
+Q 1133 966 1193 825 
+Q 1254 685 1369 592 
+Q 1485 499 1635 460 
+Q 1786 422 1933 422 
+Q 2061 422 2185 457 
+Q 2310 493 2412 573 
+Q 2515 653 2582 765 
+Q 2650 877 2688 998 
+Q 2726 1120 2742 1248 
+Q 2758 1376 2758 1504 
+Q 2758 1632 2742 1760 
+Q 2726 1888 2691 2009 
+Q 2656 2131 2589 2243 
+Q 2522 2355 2426 2435 
+Q 2330 2515 2208 2553 
+Q 2086 2592 1958 2592 
+Q 1830 2592 1702 2569 
+Q 1574 2547 1462 2486 
+Q 1350 2426 1273 2317 
+Q 1197 2208 1190 2080 
+L 659 2080 
+L 659 4704 
+L 3104 4704 
+L 3104 3776 
+L 2573 3776 
+L 2573 4237 
+L 1190 4237 
+L 1190 2899 
+Q 1363 2995 1561 3027 
+Q 1760 3059 1958 3059 
+Q 2150 3059 2342 3017 
+Q 2534 2976 2694 2867 
+Q 2854 2758 2972 2601 
+Q 3091 2445 3161 2265 
+Q 3232 2086 3257 1894 
+Q 3283 1702 3283 1504 
+Q 3283 1312 3257 1117 
+Q 3232 922 3158 739 
+Q 3085 557 2963 400 
+Q 2842 243 2678 140 
+Q 2515 38 2323 -6 
+Q 2131 -51 1933 -51 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#Iosevka-Etoile-31"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-32" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m3ec8337701" x="143.727273" y="284.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <!-- 1.50 -->
+      <g transform="translate(132.227273 298.75) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-31"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m3ec8337701" x="188.113636" y="284.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <!-- 1.75 -->
+      <g transform="translate(176.613636 298.75) scale(0.1 -0.1)">
+       <defs>
+        <path id="Iosevka-Etoile-37" d="M 1741 0 
+L 1184 0 
+L 2682 4237 
+L 1133 4237 
+L 1133 3776 
+L 608 3776 
+L 608 4704 
+L 3232 4704 
+L 3232 4237 
+L 1741 0 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#Iosevka-Etoile-31"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-37" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m3ec8337701" x="232.5" y="284.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <!-- 2.00 -->
+      <g transform="translate(221 298.75) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-32"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m3ec8337701" x="276.886364" y="284.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <!-- 2.25 -->
+      <g transform="translate(265.386364 298.75) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-32"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-32" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m3ec8337701" x="321.272727" y="284.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <!-- 2.50 -->
+      <g transform="translate(309.772727 298.75) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-32"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m3ec8337701" x="365.659091" y="284.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <!-- 2.75 -->
+      <g transform="translate(354.159091 298.75) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-32"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-37" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#m3ec8337701" x="410.045455" y="284.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <!-- 3.00 -->
+      <g transform="translate(398.545455 298.75) scale(0.1 -0.1)">
+       <defs>
+        <path id="Iosevka-Etoile-33" d="M 1939 -51 
+Q 1766 -51 1596 -28 
+Q 1427 -6 1267 58 
+Q 1107 122 969 227 
+Q 832 333 736 477 
+Q 640 621 592 787 
+Q 544 954 544 1126 
+L 544 1152 
+L 1069 1152 
+L 1069 1133 
+Q 1069 979 1139 828 
+Q 1210 678 1338 585 
+Q 1466 493 1622 457 
+Q 1779 422 1939 422 
+Q 2106 422 2272 470 
+Q 2438 518 2563 633 
+Q 2688 749 2749 912 
+Q 2810 1075 2810 1242 
+Q 2810 1382 2768 1520 
+Q 2726 1658 2649 1776 
+Q 2573 1894 2461 1984 
+Q 2349 2074 2214 2122 
+Q 2080 2170 1939 2182 
+Q 1798 2195 1658 2195 
+L 1658 2662 
+Q 1786 2662 1917 2672 
+Q 2048 2682 2166 2726 
+Q 2285 2771 2390 2854 
+Q 2496 2938 2566 3046 
+Q 2637 3155 2672 3280 
+Q 2707 3405 2707 3533 
+Q 2707 3686 2656 3833 
+Q 2605 3981 2496 4086 
+Q 2387 4192 2240 4237 
+Q 2093 4282 1939 4282 
+Q 1792 4282 1648 4243 
+Q 1504 4205 1395 4105 
+Q 1286 4006 1228 3865 
+Q 1171 3725 1171 3578 
+L 1171 3552 
+L 646 3552 
+L 646 3597 
+Q 646 3757 688 3917 
+Q 730 4077 813 4217 
+Q 896 4358 1024 4467 
+Q 1152 4576 1299 4640 
+Q 1446 4704 1609 4729 
+Q 1773 4755 1939 4755 
+Q 2106 4755 2272 4729 
+Q 2438 4704 2588 4630 
+Q 2739 4557 2864 4445 
+Q 2989 4333 3072 4185 
+Q 3155 4038 3196 3875 
+Q 3238 3712 3238 3546 
+Q 3238 3366 3190 3196 
+Q 3142 3027 3046 2876 
+Q 2950 2726 2812 2614 
+Q 2675 2502 2509 2432 
+Q 2694 2368 2851 2246 
+Q 3008 2125 3117 1965 
+Q 3226 1805 3283 1616 
+Q 3341 1427 3341 1235 
+Q 3341 1056 3296 880 
+Q 3251 704 3161 550 
+Q 3072 397 2934 275 
+Q 2797 154 2633 80 
+Q 2470 6 2294 -22 
+Q 2118 -51 1939 -51 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#Iosevka-Etoile-33"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_10">
+      <defs>
+       <path id="mcfc8712fb7" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mcfc8712fb7" x="37.2" y="271.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <!-- 1.00 -->
+      <g transform="translate(7.2 275.475) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-31"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#mcfc8712fb7" x="37.2" y="240.3" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <!-- 1.25 -->
+      <g transform="translate(7.2 243.975) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-31"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-32" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#mcfc8712fb7" x="37.2" y="208.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <!-- 1.50 -->
+      <g transform="translate(7.2 212.475) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-31"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#mcfc8712fb7" x="37.2" y="177.3" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <!-- 1.75 -->
+      <g transform="translate(7.2 180.975) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-31"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-37" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#mcfc8712fb7" x="37.2" y="145.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <!-- 2.00 -->
+      <g transform="translate(7.2 149.475) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-32"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#mcfc8712fb7" x="37.2" y="114.3" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <!-- 2.25 -->
+      <g transform="translate(7.2 117.975) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-32"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-32" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#mcfc8712fb7" x="37.2" y="82.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <!-- 2.50 -->
+      <g transform="translate(7.2 86.475) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-32"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#mcfc8712fb7" x="37.2" y="51.3" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <!-- 2.75 -->
+      <g transform="translate(7.2 54.975) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-32"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-37" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-35" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#mcfc8712fb7" x="37.2" y="19.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_18">
+      <!-- 3.00 -->
+      <g transform="translate(7.2 23.475) scale(0.1 -0.1)">
+       <use xlink:href="#Iosevka-Etoile-33"/>
+       <use xlink:href="#Iosevka-Etoile-2e" x="59.999985"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="109.999969"/>
+       <use xlink:href="#Iosevka-Etoile-30" x="169.999954"/>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_19">
+    <path d="M 54.954545 271.8 
+L 232.5 145.8 
+L 410.045455 19.8 
+" clip-path="url(#pe763c8eb2b)" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_20">
+    <path d="M 54.954545 271.8 
+L 232.5 19.8 
+L 410.045455 145.8 
+" clip-path="url(#pe763c8eb2b)" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 37.2 284.4 
+L 37.2 7.2 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 427.8 284.4 
+L 427.8 7.2 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 37.2 284.4 
+L 427.8 284.4 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 37.2 7.2 
+L 427.8 7.2 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="legend_1">
+    <g id="patch_7">
+     <path d="M 44.2 44.2 
+L 82.2 44.2 
+Q 84.2 44.2 84.2 42.2 
+L 84.2 14.2 
+Q 84.2 12.2 82.2 12.2 
+L 44.2 12.2 
+Q 42.2 12.2 42.2 14.2 
+L 42.2 42.2 
+Q 42.2 44.2 44.2 44.2 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="line2d_21">
+     <path d="M 46.2 20.05 
+L 56.2 20.05 
+L 66.2 20.05 
+" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_19">
+     <!-- A -->
+     <g transform="translate(74.2 23.55) scale(0.1 -0.1)">
+      <defs>
+       <path id="Iosevka-Etoile-41" d="M 243 0 
+L 243 474 
+L 576 474 
+L 1613 4704 
+L 2227 4704 
+L 3264 467 
+L 3597 467 
+L 3597 0 
+L 2342 0 
+L 2342 474 
+L 2720 474 
+L 2483 1498 
+L 1357 1498 
+L 1120 474 
+L 1498 474 
+L 1498 0 
+L 243 0 
+z
+M 2374 1971 
+L 2106 3136 
+Q 2061 3341 2013 3549 
+Q 1965 3757 1920 3968 
+Q 1875 3757 1827 3549 
+Q 1779 3341 1734 3136 
+L 1466 1971 
+L 2374 1971 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#Iosevka-Etoile-41"/>
+     </g>
+    </g>
+    <g id="line2d_22">
+     <path d="M 46.2 34.55 
+L 56.2 34.55 
+L 66.2 34.55 
+" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_20">
+     <!-- B -->
+     <g transform="translate(74.2 38.05) scale(0.1 -0.1)">
+      <defs>
+       <path id="Iosevka-Etoile-42" d="M 243 0 
+L 243 474 
+L 608 474 
+L 608 4237 
+L 243 4237 
+L 243 4704 
+L 1779 4704 
+Q 1952 4704 2128 4678 
+Q 2304 4653 2464 4585 
+Q 2624 4518 2761 4403 
+Q 2899 4288 2988 4137 
+Q 3078 3987 3116 3814 
+Q 3155 3642 3155 3462 
+Q 3155 3302 3120 3145 
+Q 3085 2989 3001 2854 
+Q 2918 2720 2790 2617 
+Q 2662 2515 2515 2451 
+Q 2694 2387 2854 2284 
+Q 3014 2182 3126 2032 
+Q 3238 1882 3286 1696 
+Q 3334 1510 3334 1325 
+Q 3334 1133 3289 941 
+Q 3245 749 3139 589 
+Q 3034 429 2874 310 
+Q 2714 192 2534 121 
+Q 2355 51 2163 25 
+Q 1971 0 1779 0 
+L 243 0 
+z
+M 1133 2669 
+L 1779 2669 
+Q 1888 2669 1997 2688 
+Q 2106 2707 2205 2748 
+Q 2304 2790 2387 2864 
+Q 2470 2938 2524 3034 
+Q 2579 3130 2601 3238 
+Q 2624 3347 2624 3456 
+Q 2624 3565 2601 3673 
+Q 2579 3782 2524 3875 
+Q 2470 3968 2387 4041 
+Q 2304 4115 2205 4156 
+Q 2106 4198 1997 4217 
+Q 1888 4237 1779 4237 
+L 1133 4237 
+L 1133 2669 
+z
+M 1133 474 
+L 1779 474 
+Q 1907 474 2032 490 
+Q 2157 506 2275 550 
+Q 2394 595 2499 668 
+Q 2605 742 2675 848 
+Q 2746 954 2778 1082 
+Q 2810 1210 2810 1331 
+Q 2810 1459 2778 1587 
+Q 2746 1715 2675 1820 
+Q 2605 1926 2502 2003 
+Q 2400 2080 2278 2125 
+Q 2157 2170 2032 2186 
+Q 1907 2202 1779 2202 
+L 1133 2202 
+L 1133 474 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#Iosevka-Etoile-42"/>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe763c8eb2b">
+   <rect x="37.2" y="7.2" width="390.6" height="277.2"/>
+  </clipPath>
+ </defs>
+</svg>

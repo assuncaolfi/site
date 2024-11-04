@@ -1,7 +1,9 @@
 citation:
-  author: Luís Assunção
+  author:
+    Luís Assunção
 format:
   html:
     date-modified: today
-    toc: true
-    toc-title: Contents
+    # toc: false
+    # toc-location: left
+    # toc-title: " "

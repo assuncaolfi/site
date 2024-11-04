@@ -5,3 +5,4 @@ quarto-required: ">=1.2.0"
 contributes:
   shortcodes:
     - bsicons.lua
+
